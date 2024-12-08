@@ -28,7 +28,7 @@ resource "proxmox_virtual_environment_vm" "this" {
     ssd          = true
     file_format  = "raw"
     size         = each.value.disk_gb
-    file_id      = proxmox_virtual_environment_download_file.this[format("%s_%s", each.value.node_name, sha256(each.value.iso_download_url))].id
+    file_id      = proxmox_virtual_environment_download_file.this[each.value.node_name].id
   }
   operating_system {
     type = "l26"
@@ -43,26 +43,13 @@ resource "proxmox_virtual_environment_vm" "this" {
   }
 }
 
-locals {
-  deduped_download_files = distinct([
-    for vm in var.vms : {
-      node_name = vm.node_name
-      url       = vm.iso_download_url
-      file_name = vm.iso_file_name
-    }
-  ])
-  download_files_map = {
-    for ddf in local.deduped_download_files : format("%s_%s", ddf.node_name, sha256(ddf.url)) => ddf
-  }
-}
-
 resource "proxmox_virtual_environment_download_file" "this" {
-  for_each            = local.download_files_map
-  node_name           = each.value.node_name
+  for_each            = toset(values(var.vms)[*].node_name)
+  node_name           = each.value
   content_type        = "iso"
   datastore_id        = "local"
-  url                 = each.value.url
-  file_name           = each.value.file_name
+  url                 = data.talos_image_factory_urls.this.urls.iso
+  file_name           = format("talos_%s_%s_%s.iso", var.release, var.platform, var.architecture)
   overwrite           = true
   overwrite_unmanaged = true
 }
