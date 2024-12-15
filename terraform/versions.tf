@@ -15,6 +15,10 @@ terraform {
       source  = "siderolabs/talos"
       version = "0.6.1"
     }
+    tailscale = {
+      source  = "tailscale/tailscale"
+      version = "0.17.2"
+    }
   }
 }
 
@@ -26,4 +30,10 @@ provider "proxmox" {
   ssh {
     agent = true
   }
+}
+
+provider "tailscale" {
+  oauth_client_id     = var.tailscale_oauth_client_id
+  oauth_client_secret = var.tailscale_oauth_client_secret
+  scopes              = []
 }

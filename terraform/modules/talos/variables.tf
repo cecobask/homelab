@@ -1,33 +1,32 @@
-variable "release" {
-  type        = string
-  description = "The release version of the Talos image"
+variable "cluster" {
+  type = object({
+    name        = string
+    gateway     = string
+    tailnet_key = string
+  })
+  description = "The Talos cluster configuration"
 }
 
-variable "extensions" {
-  type        = list(string)
-  description = "The list of extensions to be used for the Talos image"
-}
-
-variable "architecture" {
-  type        = string
-  default     = "amd64"
-  description = "The architecture to be used for the Talos image"
-}
-
-variable "platform" {
-  type        = string
-  default     = "metal"
-  description = "The platform to be used for the Talos image"
+variable "image" {
+  type = object({
+    version      = string
+    platform     = optional(string, "nocloud")
+    architecture = optional(string, "amd64")
+    extensions   = list(string)
+  })
+  description = "The Talos image factory configuration"
 }
 
 variable "vms" {
   type = map(object({
-    node_name   = string
-    vm_id       = number
-    cpu_cores   = number
-    ram_mb      = number
-    disk_gb     = number
-    mac_address = string
+    node_name    = string
+    vm_id        = number
+    cpu_cores    = number
+    ram_mb       = number
+    disk_gb      = number
+    ip_address   = string
+    mac_address  = string
+    machine_type = string
   }))
-  description = "Virtual machine configurations"
+  description = "The Talos virtual machines configuration"
 }

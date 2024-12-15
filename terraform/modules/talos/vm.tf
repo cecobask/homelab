@@ -5,13 +5,16 @@ resource "proxmox_virtual_environment_vm" "this" {
   vm_id         = each.value.vm_id
   machine       = "q35"
   scsi_hardware = "virtio-scsi-single"
-  boot_order    = ["scsi0"]
+  boot_order = [
+    "scsi0",
+    "ide0",
+  ]
   agent {
     enabled = true
   }
   cpu {
     cores = each.value.cpu_cores
-    type  = "host"
+    type  = "x86-64-v2-AES"
   }
   memory {
     dedicated = each.value.ram_mb
@@ -28,16 +31,21 @@ resource "proxmox_virtual_environment_vm" "this" {
     ssd          = true
     file_format  = "raw"
     size         = each.value.disk_gb
-    file_id      = proxmox_virtual_environment_download_file.this[each.value.node_name].id
   }
   operating_system {
     type = "l26"
+  }
+  cdrom {
+    enabled   = true
+    interface = "ide0"
+    file_id   = proxmox_virtual_environment_download_file.this[each.value.node_name].id
   }
   initialization {
     datastore_id = "local-lvm"
     ip_config {
       ipv4 {
-        address = "dhcp"
+        address = format("%s/24", each.value.ip_address)
+        gateway = var.cluster.gateway
       }
     }
   }
@@ -49,7 +57,7 @@ resource "proxmox_virtual_environment_download_file" "this" {
   content_type        = "iso"
   datastore_id        = "local"
   url                 = data.talos_image_factory_urls.this.urls.iso
-  file_name           = format("talos_%s_%s_%s.iso", var.release, var.platform, var.architecture)
+  file_name           = format("talos_%s_%s_%s.iso", var.image.version, var.image.platform, var.image.architecture)
   overwrite           = true
   overwrite_unmanaged = true
 }

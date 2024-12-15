@@ -1,7 +1,7 @@
 data "talos_image_factory_extensions_versions" "this" {
-  talos_version = var.release
+  talos_version = var.image.version
   filters = {
-    names = var.extensions
+    names = var.image.extensions
   }
 }
 
@@ -18,8 +18,8 @@ resource "talos_image_factory_schematic" "this" {
 }
 
 data "talos_image_factory_urls" "this" {
-  talos_version = var.release
+  talos_version = var.image.version
   schematic_id  = talos_image_factory_schematic.this.id
-  architecture  = var.architecture
-  platform      = var.platform
+  architecture  = var.image.architecture
+  platform      = var.image.platform
 }

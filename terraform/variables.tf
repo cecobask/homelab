@@ -14,3 +14,15 @@ variable "proxmox_password" {
   sensitive   = true
   description = "The password for the Proxmox Virtual Environment API"
 }
+
+variable "tailscale_oauth_client_id" {
+  type        = string
+  sensitive   = true
+  description = "The Tailscale OAuth client ID"
+}
+
+variable "tailscale_oauth_client_secret" {
+  type        = string
+  sensitive   = true
+  description = "The Tailscale OAuth client secret"
+}
