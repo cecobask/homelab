@@ -1,3 +1,10 @@
 machine:
   install:
+    disk: /dev/sda
     image: ${installer_url}
+  network:
+    hostname: ${hostname}
+  kubelet:
+    nodeIP:
+      validSubnets:
+        - 100.64.0.0/10

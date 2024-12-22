@@ -16,7 +16,6 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_tailscale"></a> [tailscale](#module\_tailscale) | ./modules/tailscale | n/a |
 | <a name="module_talos"></a> [talos](#module\_talos) | ./modules/talos | n/a |
 
 ## Resources
@@ -35,5 +34,9 @@ No resources.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_kubeconfig"></a> [kubeconfig](#output\_kubeconfig) | n/a |
+| <a name="output_secrets"></a> [secrets](#output\_secrets) | n/a |
+| <a name="output_talosconfig"></a> [talosconfig](#output\_talosconfig) | n/a |
 <!-- END_TF_DOCS -->

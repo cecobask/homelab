@@ -9,5 +9,9 @@ terraform {
       source  = "bpg/proxmox"
       version = "0.68.1"
     }
+    tailscale = {
+      source  = "tailscale/tailscale"
+      version = "0.17.2"
+    }
   }
 }

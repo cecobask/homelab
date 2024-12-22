@@ -1,6 +1,9 @@
 .PHONY: *
 
-all-checks: fmt lint docs
+TALOS_DIR=$(HOME)/.talos
+
+mkdir-talos:
+	@mkdir -p $(TALOS_DIR)
 
 docs:
 	@terraform-docs .
@@ -10,6 +13,19 @@ fmt:
 
 lint:
 	@tflint --recursive
+
+all-checks: fmt lint docs
+
+gen-talosconfig: mkdir-talos
+	@terraform output -raw talosconfig > $(TALOS_DIR)/config
+
+gen-kubeconfig: mkdir-talos
+	@terraform output -raw kubeconfig > $(TALOS_DIR)/kubeconfig
+
+gen-secrets: mkdir-talos
+	@terraform output -raw secrets > $(TALOS_DIR)/secrets.yaml
+
+all-configs: gen-talosconfig gen-kubeconfig gen-secrets
 
 clean-state:
 	@terraform state pull | jq '.serial=(.serial+1) | .resources=[] | .outputs={}' > terraform.tfstate.purged
