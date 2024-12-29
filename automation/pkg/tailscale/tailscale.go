@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/cecobask/homelab/automation/pkg/logger"
 	"io"
 	"log/slog"
 	"net/http"
@@ -34,17 +33,16 @@ type DeviceFilters struct {
 }
 
 const (
-	baseURL              = "https://api.tailscale.com/api/v2/"
-	listDevicesEndpoint  = "tailnet/-/devices"
-	deleteDeviceEndpoint = "device/%s"
+	endpointListDevices  = "/tailnet/%s/devices"
+	endpointDeleteDevice = "/device/%s"
 )
 
-func NewClient() *Client {
+func NewClient(baseURL string, logger *slog.Logger) *Client {
 	return &Client{
-		client:  &http.Client{},
+		client:  http.DefaultClient,
 		baseURL: baseURL,
 		token:   os.Getenv("TAILSCALE_TOKEN"),
-		logger:  logger.NewLogger(os.Stdout).With(slog.String("scope", "tailscale")),
+		logger:  logger.With(slog.String("scope", "tailscale")),
 	}
 }
 
@@ -56,22 +54,23 @@ func NewDeviceFilters(ids, hostnames, tags []string) *DeviceFilters {
 	}
 }
 
-func (ts *Client) GetDevices(ctx context.Context, filters DeviceFilters) (Devices, error) {
-	req, err := ts.request(ctx, http.MethodGet, listDevicesEndpoint, nil)
+func (ts *Client) ListDevices(ctx context.Context, tailnetName string, filters DeviceFilters) (Devices, error) {
+	req, err := ts.request(ctx, http.MethodGet, fmt.Sprintf(endpointListDevices, tailnetName), nil)
 	if err != nil {
 		return nil, err
 	}
 	resp, err := ts.client.Do(req)
 	if err != nil {
-		return nil, fmt.Errorf("failed to get devices: %w", err)
+		return nil, fmt.Errorf("failed to list devices: %w", err)
 	}
 	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("failed to get devices: status code is %d", resp.StatusCode)
-	}
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read response body: %w", err)
+	}
+	if resp.StatusCode != http.StatusOK {
+		ts.logger.Error("failed to list devices", slog.String("status", resp.Status))
+		return nil, fmt.Errorf("received unhealthy http response status code")
 	}
 	var result struct {
 		Devices Devices `json:"devices"`
@@ -84,7 +83,7 @@ func (ts *Client) GetDevices(ctx context.Context, filters DeviceFilters) (Device
 
 func (ts *Client) DeleteDevice(ctx context.Context, id string) error {
 	ts.logger.Debug("deleting device", slog.String("id", id))
-	req, err := ts.request(ctx, http.MethodDelete, fmt.Sprintf(deleteDeviceEndpoint, id), nil)
+	req, err := ts.request(ctx, http.MethodDelete, fmt.Sprintf(endpointDeleteDevice, id), nil)
 	if err != nil {
 		return err
 	}
@@ -94,8 +93,10 @@ func (ts *Client) DeleteDevice(ctx context.Context, id string) error {
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("failed to delete device: status code is %d", resp.StatusCode)
+		ts.logger.Error("failed to delete device", slog.String("status", resp.Status))
+		return fmt.Errorf("received unhealthy http response status code")
 	}
+	ts.logger.Info("deleted device", slog.String("id", id))
 	return nil
 }
 
@@ -104,7 +105,6 @@ func (ts *Client) DeleteDevices(ctx context.Context, ids []string) error {
 		if err := ts.DeleteDevice(ctx, id); err != nil {
 			return err
 		}
-		ts.logger.Info("deleted device", slog.String("id", id))
 	}
 	return nil
 }

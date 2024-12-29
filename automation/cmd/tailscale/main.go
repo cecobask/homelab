@@ -7,13 +7,14 @@ import (
 	"github.com/cecobask/homelab/automation/pkg/tailscale"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
+	"log/slog"
 )
 
 type contextKey string
 
-const filtersContextKey = "filters"
+const contextKeyFilters = "filters"
 
-func NewCommand(ctx context.Context) *cobra.Command {
+func NewCommand(ctx context.Context, logger *slog.Logger) *cobra.Command {
 	command := &cobra.Command{
 		Use:     fmt.Sprintf("%s [command]", cmd.CommandNameTailscale),
 		Aliases: []string{cmd.CommandAliasTailscale},
@@ -24,24 +25,16 @@ func NewCommand(ctx context.Context) *cobra.Command {
 		SilenceUsage: true,
 	}
 	command.AddCommand(
-		deleteDevices(ctx),
-		listDevices(ctx),
+		deleteDevices(ctx, logger),
+		listDevices(ctx, logger),
 	)
+	command.PersistentFlags().String(cmd.FlagNameBaseURL, cmd.BaseURLTailscale, "base url for the tailscale api")
 	return command
 }
 
 func buildDeviceFilters(flags *pflag.FlagSet) (*tailscale.DeviceFilters, error) {
-	ids, err := flags.GetStringSlice(cmd.FlagNameIDs)
-	if err != nil {
-		return nil, err
-	}
-	hostnames, err := flags.GetStringSlice(cmd.FlagNameHostnames)
-	if err != nil {
-		return nil, err
-	}
-	tags, err := flags.GetStringSlice(cmd.FlagNameTags)
-	if err != nil {
-		return nil, err
-	}
+	ids, _ := flags.GetStringSlice(cmd.FlagNameIDs)
+	hostnames, _ := flags.GetStringSlice(cmd.FlagNameHostnames)
+	tags, _ := flags.GetStringSlice(cmd.FlagNameTags)
 	return tailscale.NewDeviceFilters(ids, hostnames, tags), nil
 }

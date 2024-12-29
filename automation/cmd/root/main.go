@@ -3,12 +3,14 @@ package root
 import (
 	"context"
 	"github.com/cecobask/homelab/automation/cmd"
+	"github.com/cecobask/homelab/automation/cmd/proxmox"
 	"github.com/cecobask/homelab/automation/cmd/tailscale"
 	"github.com/spf13/cobra"
+	"log/slog"
 	"os"
 )
 
-func NewCommand(ctx context.Context) *cobra.Command {
+func NewCommand(ctx context.Context, logger *slog.Logger) *cobra.Command {
 	command := &cobra.Command{
 		Use:     cmd.CommandNameRoot,
 		Aliases: []string{cmd.CommandAliasRoot},
@@ -29,7 +31,8 @@ func NewCommand(ctx context.Context) *cobra.Command {
 		Hidden: true,
 	})
 	command.AddCommand(
-		tailscale.NewCommand(ctx),
+		proxmox.NewCommand(ctx, logger),
+		tailscale.NewCommand(ctx, logger),
 	)
 	command.SetOut(os.Stdout)
 	command.SetErr(os.Stderr)
