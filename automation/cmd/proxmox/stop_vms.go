@@ -8,22 +8,22 @@ import (
 	"log/slog"
 )
 
-func shutdownVM(ctx context.Context, logger *slog.Logger) *cobra.Command {
+func stopVM(ctx context.Context, logger *slog.Logger) *cobra.Command {
 	command := &cobra.Command{
-		Use:     cmd.CommandNameShutdownVM,
-		Aliases: []string{cmd.CommandAliasShutdownVM},
-		Short:   "Shut down virtual machine",
+		Use:     cmd.CommandNameStopVMs,
+		Aliases: []string{cmd.CommandAliasStopVMs},
+		Short:   "Stop virtual machines",
 		RunE: func(c *cobra.Command, args []string) error {
 			baseURL, _ := c.Flags().GetString(cmd.FlagNameBaseURL)
 			client := proxmox.NewClient(baseURL, logger)
 			node, _ := c.Flags().GetString(cmd.FlagNameNode)
-			vmid, _ := c.Flags().GetString(cmd.FlagNameVMID)
-			return client.ShutdownVM(ctx, node, vmid)
+			vmids, _ := c.Flags().GetStringSlice(cmd.FlagNameVMIDs)
+			return client.StopVMs(ctx, node, vmids)
 		},
 	}
 	command.Flags().String(cmd.FlagNameNode, "", "cluster node name")
-	command.Flags().String(cmd.FlagNameVMID, "", "virtual machine id")
+	command.Flags().StringSlice(cmd.FlagNameVMIDs, nil, "virtual machine identifiers")
 	_ = command.MarkFlagRequired(cmd.FlagNameNode)
-	_ = command.MarkFlagRequired(cmd.FlagNameVMID)
+	_ = command.MarkFlagRequired(cmd.FlagNameVMIDs)
 	return command
 }

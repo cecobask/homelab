@@ -10,24 +10,24 @@ import (
 
 func destroyVM(ctx context.Context, logger *slog.Logger) *cobra.Command {
 	command := &cobra.Command{
-		Use:     cmd.CommandNameDestroyVM,
-		Aliases: []string{cmd.CommandAliasDestroyVM},
-		Short:   "Destroy virtual machine",
+		Use:     cmd.CommandNameDestroyVMs,
+		Aliases: []string{cmd.CommandAliasDestroyVMs},
+		Short:   "Destroy virtual machines",
 		RunE: func(c *cobra.Command, args []string) error {
 			baseURL, _ := c.Flags().GetString(cmd.FlagNameBaseURL)
 			client := proxmox.NewClient(baseURL, logger)
 			node, _ := c.Flags().GetString(cmd.FlagNameNode)
-			vmid, _ := c.Flags().GetString(cmd.FlagNameVMID)
+			vmids, _ := c.Flags().GetStringSlice(cmd.FlagNameVMIDs)
 			destroyUnreferencedDisks, _ := c.Flags().GetBool(cmd.FlagNameDestroyUnreferencedDisks)
 			purge, _ := c.Flags().GetBool(cmd.FlagNamePurge)
-			return client.DestroyVM(ctx, node, vmid, destroyUnreferencedDisks, purge)
+			return client.DestroyVMs(ctx, node, vmids, destroyUnreferencedDisks, purge)
 		},
 	}
 	command.Flags().String(cmd.FlagNameNode, "", "cluster node name")
-	command.Flags().String(cmd.FlagNameVMID, "", "virtual machine id")
+	command.Flags().StringSlice(cmd.FlagNameVMIDs, nil, "virtual machine identifiers")
 	command.Flags().Bool(cmd.FlagNameDestroyUnreferencedDisks, false, "additionally destroy all disks not referenced in the config but with a matching vmid from all enabled storages")
-	command.Flags().Bool(cmd.FlagNamePurge, false, "remove vmid from configurations, like backup & replication jobs and HA.")
+	command.Flags().Bool(cmd.FlagNamePurge, false, "remove vmid from configurations, like backup & replication jobs")
 	_ = command.MarkFlagRequired(cmd.FlagNameNode)
-	_ = command.MarkFlagRequired(cmd.FlagNameVMID)
+	_ = command.MarkFlagRequired(cmd.FlagNameVMIDs)
 	return command
 }

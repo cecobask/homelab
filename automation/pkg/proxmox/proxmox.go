@@ -81,6 +81,15 @@ func (pm *Client) DestroyVM(ctx context.Context, node, vmid string, destroyUnref
 	return nil
 }
 
+func (pm *Client) DestroyVMs(ctx context.Context, node string, vmids []string, destroyUnreferencedDisks, purge bool) error {
+	for _, vmid := range vmids {
+		if err := pm.DestroyVM(ctx, node, vmid, destroyUnreferencedDisks, purge); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func (pm *Client) ShutdownVM(ctx context.Context, node, vmid string) error {
 	pm.logger.Debug("shutting down vm", slog.String("node", node), slog.String("vmid", vmid))
 	req, err := pm.request(ctx, http.MethodPost, fmt.Sprintf(endpointShutdownVM, node, vmid), nil)
@@ -100,6 +109,15 @@ func (pm *Client) ShutdownVM(ctx context.Context, node, vmid string) error {
 	return nil
 }
 
+func (pm *Client) ShutdownVMs(ctx context.Context, node string, vmids []string) error {
+	for _, vmid := range vmids {
+		if err := pm.ShutdownVM(ctx, node, vmid); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func (pm *Client) StopVM(ctx context.Context, node, vmid string) error {
 	pm.logger.Debug("stopping vm", slog.String("node", node), slog.String("vmid", vmid))
 	req, err := pm.request(ctx, http.MethodPost, fmt.Sprintf(endpointStopVM, node, vmid), nil)
@@ -116,6 +134,15 @@ func (pm *Client) StopVM(ctx context.Context, node, vmid string) error {
 		return fmt.Errorf("received unhealthy http response status code")
 	}
 	pm.logger.Info("stopped vm", slog.String("node", node), slog.String("vmid", vmid))
+	return nil
+}
+
+func (pm *Client) StopVMs(ctx context.Context, node string, vmids []string) error {
+	for _, vmid := range vmids {
+		if err := pm.StopVM(ctx, node, vmid); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

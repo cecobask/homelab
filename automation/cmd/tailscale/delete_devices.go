@@ -41,8 +41,8 @@ func deleteDevices(ctx context.Context, logger *slog.Logger) *cobra.Command {
 		},
 	}
 	command.Flags().String(cmd.FlagNameTailnetName, "-", "tailnet name; '-' dash will reference the default tailnet")
-	command.Flags().StringSlice(cmd.FlagNameIDs, nil, "device ids filter")
-	command.Flags().StringSlice(cmd.FlagNameHostnames, nil, "device hostnames filter")
-	command.Flags().StringSlice(cmd.FlagNameTags, nil, "device tags filter")
+	command.Flags().StringSlice(cmd.FlagNameIDs, nil, "device identifiers")
+	command.Flags().StringSlice(cmd.FlagNameHostnames, nil, "device hostnames")
+	command.Flags().StringSlice(cmd.FlagNameTags, nil, "device tags")
 	return command
 }

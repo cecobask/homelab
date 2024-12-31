@@ -34,7 +34,5 @@ func NewCommand(ctx context.Context, logger *slog.Logger) *cobra.Command {
 		proxmox.NewCommand(ctx, logger),
 		tailscale.NewCommand(ctx, logger),
 	)
-	command.SetOut(os.Stdout)
-	command.SetErr(os.Stderr)
 	return command
 }
