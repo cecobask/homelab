@@ -55,7 +55,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_kubeconfig"></a> [kubeconfig](#output\_kubeconfig) | n/a |
-| <a name="output_secrets"></a> [secrets](#output\_secrets) | n/a |
-| <a name="output_talosconfig"></a> [talosconfig](#output\_talosconfig) | n/a |
+| <a name="output_kubeconfig"></a> [kubeconfig](#output\_kubeconfig) | Admin Kubernetes configuration file |
+| <a name="output_secrets"></a> [secrets](#output\_secrets) | Secrets bundle file which can later be used to generate a config |
+| <a name="output_talosconfig"></a> [talosconfig](#output\_talosconfig) | Talos configuration file for usage with talosctl |
 <!-- END_TF_DOCS -->
