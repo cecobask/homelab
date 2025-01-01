@@ -1,10 +1,11 @@
 resource "proxmox_virtual_environment_vm" "this" {
-  for_each      = var.vms
-  name          = each.key
-  node_name     = each.value.node_name
-  vm_id         = each.value.vm_id
-  machine       = "q35"
-  scsi_hardware = "virtio-scsi-single"
+  for_each        = var.vms
+  name            = each.key
+  node_name       = each.value.node_name
+  vm_id           = each.value.vm_id
+  machine         = "q35"
+  scsi_hardware   = "virtio-scsi-single"
+  stop_on_destroy = true
   boot_order = [
     "scsi0",
     "ide0",
@@ -44,7 +45,7 @@ resource "proxmox_virtual_environment_vm" "this" {
     datastore_id = "local-lvm"
     ip_config {
       ipv4 {
-        address = format("%s/24", each.value.ip_address)
+        address = format("%s/24", each.value.ipv4)
         gateway = var.cluster.gateway
       }
     }

@@ -32,7 +32,7 @@ variable "vms" {
     cpu_cores    = number
     ram_mb       = number
     disk_gb      = number
-    ip_address   = string
+    ipv4         = string
     mac_address  = string
     machine_type = string
   }))

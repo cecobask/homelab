@@ -49,7 +49,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_cluster"></a> [cluster](#input\_cluster) | The Talos cluster configuration | <pre>object({<br/>    name           = string<br/>    gateway        = string<br/>    bootstrap_node = string<br/>  })</pre> | n/a | yes |
 | <a name="input_image"></a> [image](#input\_image) | The Talos image factory configuration | <pre>object({<br/>    version      = string<br/>    platform     = optional(string, "nocloud")<br/>    architecture = optional(string, "amd64")<br/>    extensions   = list(string)<br/>  })</pre> | n/a | yes |
-| <a name="input_vms"></a> [vms](#input\_vms) | The Talos virtual machines configuration | <pre>map(object({<br/>    node_name    = string<br/>    vm_id        = number<br/>    cpu_cores    = number<br/>    ram_mb       = number<br/>    disk_gb      = number<br/>    ip_address   = string<br/>    mac_address  = string<br/>    machine_type = string<br/>  }))</pre> | n/a | yes |
+| <a name="input_vms"></a> [vms](#input\_vms) | The Talos virtual machines configuration | <pre>map(object({<br/>    node_name    = string<br/>    vm_id        = number<br/>    cpu_cores    = number<br/>    ram_mb       = number<br/>    disk_gb      = number<br/>    ipv4         = string<br/>    mac_address  = string<br/>    machine_type = string<br/>  }))</pre> | n/a | yes |
 
 ## Outputs
 

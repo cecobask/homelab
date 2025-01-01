@@ -20,7 +20,7 @@ module "talos" {
       cpu_cores    = 3
       ram_mb       = 1024 * 4
       disk_gb      = 100
-      ip_address   = "192.168.0.101"
+      ipv4         = "192.168.0.101"
       mac_address  = "00:00:00:00:01:01"
       machine_type = "controlplane"
     }
@@ -30,7 +30,7 @@ module "talos" {
       cpu_cores    = 3
       ram_mb       = 1024 * 4
       disk_gb      = 100
-      ip_address   = "192.168.0.102"
+      ipv4         = "192.168.0.102"
       mac_address  = "00:00:00:00:01:02"
       machine_type = "controlplane"
     }
@@ -40,7 +40,7 @@ module "talos" {
       cpu_cores    = 3
       ram_mb       = 1024 * 4
       disk_gb      = 100
-      ip_address   = "192.168.0.103"
+      ipv4         = "192.168.0.103"
       mac_address  = "00:00:00:00:01:03"
       machine_type = "controlplane"
     }
@@ -50,7 +50,7 @@ module "talos" {
       cpu_cores    = 2
       ram_mb       = 1024 * 4
       disk_gb      = 100
-      ip_address   = "192.168.0.104"
+      ipv4         = "192.168.0.104"
       mac_address  = "00:00:00:00:01:04"
       machine_type = "worker"
     }

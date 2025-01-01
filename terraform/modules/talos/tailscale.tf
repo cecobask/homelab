@@ -7,14 +7,19 @@ resource "tailscale_acl" "this" {
     }]
     tagOwners = {
       "tag:talos" = [
-        "autogroup:admin",
+        "group:admin",
       ],
       "tag:controlplane" = [
-        "autogroup:admin",
+        "group:admin",
       ],
       "tag:worker" = [
-        "autogroup:admin",
+        "group:admin",
       ]
+    }
+    groups = {
+      "group:admin" = [
+        "baskski@gmail.com",
+      ],
     }
   })
   overwrite_existing_content = true
@@ -24,7 +29,6 @@ resource "tailscale_tailnet_key" "controlplane" {
   depends_on = [
     tailscale_acl.this,
   ]
-  ephemeral     = true
   preauthorized = true
   reusable      = true
   tags = [
@@ -37,7 +41,6 @@ resource "tailscale_tailnet_key" "worker" {
   depends_on = [
     tailscale_acl.this,
   ]
-  ephemeral     = true
   preauthorized = true
   reusable      = true
   tags = [

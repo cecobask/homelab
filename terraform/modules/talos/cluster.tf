@@ -20,7 +20,7 @@ resource "talos_machine_secrets" "this" {
 data "talos_machine_configuration" "init" {
   for_each         = var.vms
   cluster_name     = var.cluster.name
-  cluster_endpoint = format("https://%s:6443", var.vms[var.cluster.bootstrap_node].ip_address)
+  cluster_endpoint = format("https://%s:6443", var.vms[var.cluster.bootstrap_node].ipv4)
   talos_version    = var.image.version
   machine_type     = each.value.machine_type
   machine_secrets  = talos_machine_secrets.this.machine_secrets
@@ -33,13 +33,13 @@ data "talos_machine_configuration" "init" {
       hostname    = each.key
       tailnet_key = each.value.machine_type == "controlplane" ? tailscale_tailnet_key.controlplane.key : tailscale_tailnet_key.worker.key
     }),
-    each.value.machine_type == "controlplane" ? [file(format("%s/templates/controlplane.tftpl", path.module))] : []
+    each.value.machine_type == "controlplane" ? [file(format("%s/templates/controlplane.tftpl", path.module))] : [],
   ])
 }
 
 resource "talos_machine_configuration_apply" "init" {
   for_each                    = data.talos_machine_configuration.init
-  node                        = var.vms[each.key].ip_address
+  node                        = var.vms[each.key].ipv4
   client_configuration        = talos_machine_secrets.this.client_configuration
   machine_configuration_input = each.value.machine_configuration
   lifecycle {
@@ -52,17 +52,9 @@ resource "talos_machine_configuration_apply" "init" {
   }
 }
 
-resource "talos_machine_bootstrap" "this" {
-  depends_on = [
-    talos_machine_configuration_apply.init,
-  ]
-  node                 = var.vms[var.cluster.bootstrap_node].ip_address
-  client_configuration = talos_machine_secrets.this.client_configuration
-}
-
 data "talos_machine_configuration" "final" {
   depends_on = [
-    talos_machine_bootstrap.this,
+    talos_machine_configuration_apply.init,
   ]
   for_each         = data.talos_machine_configuration.init
   cluster_name     = each.value.cluster_name
@@ -78,7 +70,14 @@ resource "talos_machine_configuration_apply" "final" {
   node                        = data.tailscale_device.this[each.key].addresses[0]
   client_configuration        = talos_machine_secrets.this.client_configuration
   machine_configuration_input = each.value.machine_configuration
-  apply_mode                  = "reboot"
+}
+
+resource "talos_machine_bootstrap" "this" {
+  depends_on = [
+    talos_machine_configuration_apply.final,
+  ]
+  node                 = local.bootstrap_node_ip
+  client_configuration = talos_machine_secrets.this.client_configuration
 }
 
 data "talos_client_configuration" "this" {
