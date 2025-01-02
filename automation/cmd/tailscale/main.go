@@ -32,7 +32,7 @@ func NewCommand(ctx context.Context, logger *slog.Logger) *cobra.Command {
 	return command
 }
 
-func buildDeviceFilters(flags *pflag.FlagSet) (*tailscale.DeviceFilters, error) {
+func buildFilters(flags *pflag.FlagSet) (*tailscale.DeviceFilters, error) {
 	ids, _ := flags.GetStringSlice(cmd.FlagNameIDs)
 	hostnames, _ := flags.GetStringSlice(cmd.FlagNameHostnames)
 	tags, _ := flags.GetStringSlice(cmd.FlagNameTags)

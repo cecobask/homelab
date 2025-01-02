@@ -10,6 +10,10 @@ resource "proxmox_virtual_environment_vm" "this" {
     "scsi0",
     "ide0",
   ]
+  tags = [
+    "talos",
+    each.value.machine_type,
+  ]
   agent {
     enabled = true
   }
@@ -49,6 +53,11 @@ resource "proxmox_virtual_environment_vm" "this" {
         gateway = var.cluster.gateway
       }
     }
+  }
+  lifecycle {
+    ignore_changes = [
+      tags,
+    ]
   }
 }
 

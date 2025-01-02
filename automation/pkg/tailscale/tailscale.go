@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"slices"
+	"strings"
 )
 
 type Client struct {
@@ -35,6 +36,7 @@ type DeviceFilters struct {
 const (
 	endpointListDevices  = "/tailnet/%s/devices"
 	endpointDeleteDevice = "/device/%s"
+	tagPrefix            = "tag:"
 )
 
 func NewClient(baseURL string, logger *slog.Logger) *Client {
@@ -47,6 +49,11 @@ func NewClient(baseURL string, logger *slog.Logger) *Client {
 }
 
 func NewDeviceFilters(ids, hostnames, tags []string) *DeviceFilters {
+	for i, tag := range tags {
+		if !strings.HasPrefix(tag, tagPrefix) {
+			tags[i] = tagPrefix + tag
+		}
+	}
 	return &DeviceFilters{
 		ids:       ids,
 		hostnames: hostnames,
@@ -125,7 +132,7 @@ func (df DeviceFilters) isZero() bool {
 func (d Devices) filter(filters DeviceFilters, logger *slog.Logger) Devices {
 	logger.Debug(fmt.Sprintf("found %d devices before filtering", len(d)))
 	if filters.isZero() {
-		logger.Info("skipping device filtering", slog.Any("result", d))
+		logger.Info("skipping device filtering")
 		return d
 	}
 	logger.Debug("applying device filters", slog.Group("filters",
@@ -153,8 +160,7 @@ func (d Devices) filter(filters DeviceFilters, logger *slog.Logger) Devices {
 			filtered = append(filtered, device)
 		}
 	}
-	message := fmt.Sprintf("found %d devices after filtering", len(filtered))
-	logger.Info(message, slog.Any("result", filtered))
+	logger.Info(fmt.Sprintf("found %d devices after filtering", len(filtered)))
 	return filtered
 }
 

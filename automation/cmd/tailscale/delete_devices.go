@@ -13,9 +13,9 @@ func deleteDevices(ctx context.Context, logger *slog.Logger) *cobra.Command {
 	command := &cobra.Command{
 		Use:     cmd.CommandNameDeleteDevices,
 		Aliases: []string{cmd.CommandAliasDeleteDevices},
-		Short:   "Delete devices w/ optional filters",
+		Short:   "Delete devices",
 		PreRunE: func(c *cobra.Command, args []string) error {
-			filters, err := buildDeviceFilters(c.Flags())
+			filters, err := buildFilters(c.Flags())
 			if err != nil {
 				return err
 			}

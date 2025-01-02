@@ -13,9 +13,9 @@ func listDevices(ctx context.Context, logger *slog.Logger) *cobra.Command {
 	command := &cobra.Command{
 		Use:     cmd.CommandNameListDevices,
 		Aliases: []string{cmd.CommandAliasListDevices},
-		Short:   "List devices w/ optional filters",
+		Short:   "List devices",
 		PreRunE: func(c *cobra.Command, args []string) error {
-			filters, err := buildDeviceFilters(c.Flags())
+			filters, err := buildFilters(c.Flags())
 			if err != nil {
 				return err
 			}
@@ -30,10 +30,11 @@ func listDevices(ctx context.Context, logger *slog.Logger) *cobra.Command {
 			if !ok {
 				return fmt.Errorf("no device filters found in context")
 			}
-			_, err := client.ListDevices(ctx, tailnetName, *filters)
+			devices, err := client.ListDevices(ctx, tailnetName, *filters)
 			if err != nil {
 				return err
 			}
+			logger.Info("devices", slog.Any("results", devices))
 			return nil
 		},
 	}
