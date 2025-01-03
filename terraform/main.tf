@@ -1,9 +1,10 @@
 module "talos" {
   source = "./modules/talos"
   cluster = {
-    name           = "homelab"
-    gateway        = "192.168.0.1"
-    bootstrap_node = "talos-ctrl-01"
+    name            = "homelab"
+    gateway         = "192.168.0.1"
+    bootstrap_node  = "talos-ctrl-01"
+    cloudflare_zone = "cecobask.com"
   }
   image = {
     version = "v1.9.0"

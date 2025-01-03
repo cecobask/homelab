@@ -1,9 +1,9 @@
 terraform {
   required_version = "~> 1.9.8"
   required_providers {
-    talos = {
-      source  = "siderolabs/talos"
-      version = "0.6.1"
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "4.49.1"
     }
     proxmox = {
       source  = "bpg/proxmox"
@@ -12,6 +12,10 @@ terraform {
     tailscale = {
       source  = "tailscale/tailscale"
       version = "0.17.2"
+    }
+    talos = {
+      source  = "siderolabs/talos"
+      version = "0.6.1"
     }
   }
 }

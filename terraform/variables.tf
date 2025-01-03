@@ -1,3 +1,9 @@
+variable "cloudflare_api_token" {
+  type        = string
+  sensitive   = true
+  description = "The Cloudflare API token"
+}
+
 variable "proxmox_endpoint" {
   type        = string
   description = "The endpoint for the Proxmox Virtual Environment API"

@@ -1,8 +1,9 @@
 variable "cluster" {
   type = object({
-    name           = string
-    gateway        = string
-    bootstrap_node = string
+    name            = string
+    gateway         = string
+    bootstrap_node  = string
+    cloudflare_zone = string
   })
   description = "The Talos cluster configuration"
   validation {

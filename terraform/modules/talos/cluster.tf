@@ -5,6 +5,9 @@ locals {
   controlplane_ips = [
     for d in data.tailscale_device.this : d.addresses[0] if contains(d.tags, "tag:controlplane")
   ]
+  controlplane_names = toset([
+    for vm_name, vm in var.vms : vm_name if vm.machine_type == "controlplane"
+  ])
   worker_ips = [
     for d in data.tailscale_device.this : d.addresses[0] if contains(d.tags, "tag:worker")
   ]
@@ -58,7 +61,7 @@ data "talos_machine_configuration" "final" {
   ]
   for_each         = data.talos_machine_configuration.init
   cluster_name     = each.value.cluster_name
-  cluster_endpoint = format("https://%s:6443", local.bootstrap_node_ip)
+  cluster_endpoint = format("https://talos.%s:6443", var.cluster.cloudflare_zone)
   talos_version    = each.value.talos_version
   machine_type     = each.value.machine_type
   machine_secrets  = each.value.machine_secrets
