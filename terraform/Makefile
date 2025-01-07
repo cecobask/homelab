@@ -31,13 +31,7 @@ save/kubeconfig: mkdir/talos
 save/secrets: mkdir/talos
 	@terraform output -raw secrets > $(TALOS_DIR)/secrets.yaml
 
-clean/state:
-	@terraform state pull | jq '.resources=null | .outputs=null | .check_results=null' > terraform.tfstate.clean
-	@terraform state push -force -lock=false terraform.tfstate.clean
-	@rm -f terraform.tfstate.clean
-	@terraform force-unlock -force cecobask/homelab || true
-
-clean/resources:
+purge:
 	@cd ../automation
 	@$(MAKE) build
 	@./build/automation tailscale delete-devices --tags=talos
@@ -45,3 +39,6 @@ clean/resources:
 	@sleep 5
 	@./build/automation proxmox destroy-vms --tags=talos --destroy-unreferenced-disks --purge
 	@./build/automation proxmox delete-volumes --storages=local --volumes=local:iso/talos_v1.9.0_nocloud_amd64.iso
+
+unlock:
+	@terraform force-unlock -force cecobask/homelab
