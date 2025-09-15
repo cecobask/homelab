@@ -7,13 +7,13 @@ data "tailscale_device" "this" {
 }
 
 data "cloudflare_zone" "this" {
-  name = var.cloudflare_zone
+  name = local.cloudflare_zone
 }
 
 resource "cloudflare_record" "this" {
   zone_id = data.cloudflare_zone.this.zone_id
   type    = "A"
-  name    = "haos"
+  name    = local.proxmox_vm_name
   content = data.tailscale_device.this.addresses[0]
   ttl     = 300
 }

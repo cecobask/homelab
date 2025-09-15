@@ -17,7 +17,6 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_home-assistant"></a> [home-assistant](#module\_home-assistant) | ./modules/home-assistant | n/a |
 | <a name="module_talos"></a> [talos](#module\_talos) | ./modules/talos | n/a |
 
 ## Resources

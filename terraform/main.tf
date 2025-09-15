@@ -1,17 +1,3 @@
-module "home-assistant" {
-  source          = "./modules/home-assistant"
-  haos_version    = "14.1"
-  cloudflare_zone = "cecobask.com"
-  vm = {
-    node_name   = "pve1"
-    vm_id       = "100"
-    cpu_cores   = 3
-    ram_mb      = 1024 * 4
-    disk_gb     = 128
-    mac_address = "00:00:00:00:01:00"
-  }
-}
-
 module "talos" {
   source = "./modules/talos"
   cluster = {

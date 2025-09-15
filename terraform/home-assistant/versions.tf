@@ -1,5 +1,11 @@
 terraform {
   required_version = "~> 1.9.8"
+  cloud {
+    organization = "cecobask"
+    workspaces {
+      name = "home-assistant"
+    }
+  }
   required_providers {
     cloudflare = {
       source  = "cloudflare/cloudflare"
@@ -15,3 +21,14 @@ terraform {
     }
   }
 }
+
+provider "cloudflare" {}
+
+provider "proxmox" {
+  insecure = true
+  ssh {
+    agent = true
+  }
+}
+
+provider "tailscale" {}
