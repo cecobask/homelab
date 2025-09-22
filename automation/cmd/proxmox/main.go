@@ -3,11 +3,12 @@ package proxmox
 import (
 	"context"
 	"fmt"
+	"log/slog"
+
 	"github.com/cecobask/homelab/automation/cmd"
 	"github.com/cecobask/homelab/automation/pkg/proxmox"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
-	"log/slog"
 )
 
 func NewCommand(ctx context.Context, logger *slog.Logger) *cobra.Command {
@@ -26,7 +27,7 @@ func NewCommand(ctx context.Context, logger *slog.Logger) *cobra.Command {
 		listVMs(ctx, logger),
 		stopVMs(ctx, logger),
 	)
-	command.PersistentFlags().String(cmd.FlagNameBaseURL, cmd.BaseURLProxmox, "base url for the proxmox api")
+	command.PersistentFlags().String(cmd.FlagNameBaseURL, cmd.ProxmoxBaseURL, "base url for the proxmox api")
 	return command
 }
 

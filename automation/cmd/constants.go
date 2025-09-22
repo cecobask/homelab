@@ -4,7 +4,7 @@ const (
 	CommandAliasRoot = "auto"
 	CommandNameRoot  = "automation"
 
-	BaseURLProxmox                   = "https://192.168.0.69:8006/api2/json"
+	ProxmoxBaseURL                   = "https://192.168.10.69:8006/api2/json"
 	CommandAliasDeleteVolumes        = "dv"
 	CommandAliasDestroyVMs           = "dvm"
 	CommandAliasListVMs              = "lvm"

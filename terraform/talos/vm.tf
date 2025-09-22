@@ -6,14 +6,8 @@ resource "proxmox_virtual_environment_vm" "this" {
   machine         = "q35"
   scsi_hardware   = "virtio-scsi-single"
   stop_on_destroy = true
-  boot_order = [
-    "scsi0",
-    "ide0",
-  ]
-  tags = [
-    "talos",
-    each.value.machine_type,
-  ]
+  boot_order      = ["scsi0", "ide0"]
+  tags            = ["talos", each.value.machine_type]
   agent {
     enabled = true
   }
@@ -55,9 +49,7 @@ resource "proxmox_virtual_environment_vm" "this" {
     }
   }
   lifecycle {
-    ignore_changes = [
-      tags,
-    ]
+    ignore_changes = [tags]
   }
 }
 

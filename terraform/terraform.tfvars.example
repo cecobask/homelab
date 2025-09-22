@@ -1,5 +1,0 @@
-proxmox_endpoint              = "https://192.168.0.69:8006"
-proxmox_username              = "user@pam"
-proxmox_password              = "s3cr3t_passw0rd"
-tailscale_oauth_client_id     = "z1a2enl6kkVlAtCPr"
-tailscale_oauth_client_secret = "tskey-client-z1a2enl6kkVlAtCPr-3gJNFRRrZLvBaaQRa5CuTXwLY41S2i1E"
