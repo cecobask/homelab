@@ -1,7 +1,14 @@
-locals {
-  cloudflare_zone = "cecobask.com"
-  haos_version    = "16.2"
-  proxmox_node    = "pve1"
-  proxmox_vm_id   = 100
-  proxmox_vm_name = "haos"
+variable "haos_version" {
+  type    = string
+  default = "16.2"
+}
+
+variable "proxmox_node_name" {
+  type    = string
+  default = "pve1"
+}
+
+variable "proxmox_vm_id" {
+  type    = number
+  default = 100
 }

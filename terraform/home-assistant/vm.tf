@@ -1,8 +1,8 @@
 resource "terraform_data" "this" {
   input = {
     url = format("https://github.com/home-assistant/operating-system/releases/download/%s/haos_ova-%s.qcow2.xz",
-      local.haos_version,
-      local.haos_version,
+      var.haos_version,
+      var.haos_version,
     )
     filename = "haos_ova.qcow2"
   }
@@ -17,19 +17,19 @@ resource "terraform_data" "this" {
 }
 
 resource "proxmox_virtual_environment_file" "this" {
-  node_name    = local.proxmox_node
+  node_name    = var.proxmox_node_name
   datastore_id = "local"
   content_type = "iso"
   source_file {
     path      = terraform_data.this.output.filename
-    file_name = format("haos_ova-%s.img", local.haos_version)
+    file_name = format("haos_ova-%s.img", var.haos_version)
   }
 }
 
 resource "proxmox_virtual_environment_vm" "this" {
-  name          = local.proxmox_vm_name
-  node_name     = local.proxmox_node
-  vm_id         = local.proxmox_vm_id
+  name          = "haos"
+  node_name     = var.proxmox_node_name
+  vm_id         = var.proxmox_vm_id
   machine       = "q35"
   scsi_hardware = "virtio-scsi-single"
   bios          = "ovmf"
