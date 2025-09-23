@@ -27,7 +27,7 @@ vms = {
     machine_type = "controlplane"
   }
   talos-ctrl-03 = {
-    node_name    = "pve3"
+    node_name    = "pve2"
     vm_id        = 203
     cpu_cores    = 3
     ram_mb       = 1024 * 4
