@@ -53,4 +53,6 @@ cluster = {
   gateway            = "192.168.10.1"
   bootstrap_node     = "talos-ctrl-01"
   kubernetes_version = "v1.34.1"
+  cilium_cli_version = "v0.18.7"
+  cilium_version     = "v1.18.2"
 }

@@ -21,6 +21,10 @@ data "talos_machine_configuration" "this" {
       HOSTNAME      = each.key
       INSTALLER_URL = data.talos_image_factory_urls.this.urls.installer
     }),
+    templatefile(format("%s/templates/cilium.tftpl", path.module), {
+      CILIUM_CLI_VERSION = var.cluster.cilium_cli_version
+      CILIUM_VERSION     = var.cluster.cilium_version
+    }),
   ])
 }
 

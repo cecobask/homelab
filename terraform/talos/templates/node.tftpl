@@ -1,7 +1,9 @@
 cluster:
   network:
     cni:
-      name: flannel
+      name: none
+  proxy:
+    disabled: true
 machine:
   install:
     disk: /dev/sda

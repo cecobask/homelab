@@ -26,5 +26,7 @@ variable "cluster" {
     gateway            = string
     bootstrap_node     = string
     kubernetes_version = string
+    cilium_cli_version = string
+    cilium_version     = string
   })
 }
