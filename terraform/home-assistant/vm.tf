@@ -49,6 +49,7 @@ resource "proxmox_virtual_environment_vm" "this" {
   network_device {
     bridge      = "vmbr0"
     mac_address = "00:00:00:00:01:00"
+    vlan_id     = 40
   }
   efi_disk {
     datastore_id = "local-lvm"

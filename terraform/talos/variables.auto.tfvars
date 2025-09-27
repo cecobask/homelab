@@ -12,7 +12,7 @@ vms = {
     cpu_cores    = 3
     ram_mb       = 1024 * 4
     disk_gb      = 100
-    ipv4         = "192.168.10.201"
+    ipv4         = "192.168.40.201"
     mac_address  = "00:00:00:00:02:01"
     machine_type = "controlplane"
   }
@@ -22,7 +22,7 @@ vms = {
     cpu_cores    = 3
     ram_mb       = 1024 * 4
     disk_gb      = 100
-    ipv4         = "192.168.10.202"
+    ipv4         = "192.168.40.202"
     mac_address  = "00:00:00:00:02:02"
     machine_type = "controlplane"
   }
@@ -32,7 +32,7 @@ vms = {
     cpu_cores    = 3
     ram_mb       = 1024 * 4
     disk_gb      = 100
-    ipv4         = "192.168.10.203"
+    ipv4         = "192.168.40.203"
     mac_address  = "00:00:00:00:02:03"
     machine_type = "controlplane"
   }
@@ -42,7 +42,7 @@ vms = {
     cpu_cores    = 2
     ram_mb       = 1024 * 4
     disk_gb      = 100
-    ipv4         = "192.168.10.211"
+    ipv4         = "192.168.40.211"
     mac_address  = "00:00:00:00:02:11"
     machine_type = "worker"
   }
@@ -50,7 +50,7 @@ vms = {
 
 cluster = {
   name               = "homelab"
-  gateway            = "192.168.10.1"
+  gateway            = "192.168.40.1"
   bootstrap_node     = "talos-ctrl-01"
   kubernetes_version = "v1.34.1"
   cilium_cli_version = "v0.18.7"
