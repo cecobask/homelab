@@ -1,8 +1,12 @@
 cluster:
+  network:
+    cni:
+      name: none
+  proxy:
+    disabled: true
   inlineManifests:
-  - name: "cilium"
+  - name: cilium
     contents: |
-      ---
       apiVersion: rbac.authorization.k8s.io/v1
       kind: ClusterRoleBinding
       metadata:

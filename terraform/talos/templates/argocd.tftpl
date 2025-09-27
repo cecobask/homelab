@@ -1,0 +1,10 @@
+cluster:
+  inlineManifests:
+  - name: argocd
+    contents: |
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: argocd
+  extraManifests:
+  - https://raw.githubusercontent.com/argoproj/argo-cd/refs/tags/${ARGOCD_VERSION}/manifests/install.yaml

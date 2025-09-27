@@ -25,6 +25,9 @@ data "talos_machine_configuration" "this" {
       CILIUM_CLI_VERSION = var.cluster.cilium_cli_version
       CILIUM_VERSION     = var.cluster.cilium_version
     }),
+    templatefile(format("%s/templates/argocd.tftpl", path.module), {
+      ARGOCD_VERSION = var.cluster.argocd_version
+    }),
   ])
 }
 
