@@ -40,29 +40,29 @@ cluster:
           spec:
             restartPolicy: OnFailure
             tolerations:
-              - operator: Exists
-              - effect: NoSchedule
-                operator: Exists
-              - effect: NoExecute
-                operator: Exists
-              - effect: PreferNoSchedule
-                operator: Exists
-              - key: node-role.kubernetes.io/control-plane
-                operator: Exists
-                effect: NoSchedule
-              - key: node-role.kubernetes.io/control-plane
-                operator: Exists
-                effect: NoExecute
-              - key: node-role.kubernetes.io/control-plane
-                operator: Exists
-                effect: PreferNoSchedule
+            - operator: Exists
+            - effect: NoSchedule
+              operator: Exists
+            - effect: NoExecute
+              operator: Exists
+            - effect: PreferNoSchedule
+              operator: Exists
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists
+              effect: NoSchedule
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists
+              effect: NoExecute
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists
+              effect: PreferNoSchedule
             affinity:
               nodeAffinity:
                 requiredDuringSchedulingIgnoredDuringExecution:
                   nodeSelectorTerms:
-                    - matchExpressions:
-                        - key: node-role.kubernetes.io/control-plane
-                          operator: Exists
+                  - matchExpressions:
+                    - key: node-role.kubernetes.io/control-plane
+                      operator: Exists
             serviceAccount: cilium-install
             serviceAccountName: cilium-install
             hostNetwork: true
@@ -78,22 +78,26 @@ cluster:
               - name: KUBERNETES_SERVICE_PORT
                 value: "6443"
               command:
-                - cilium
-                - install
-                - --version=${CILIUM_VERSION}
-                - --set
-                - ipam.mode=kubernetes
-                - --set
-                - kubeProxyReplacement=true
-                - --set
-                - securityContext.capabilities.ciliumAgent={CHOWN,KILL,NET_ADMIN,NET_RAW,IPC_LOCK,SYS_ADMIN,SYS_RESOURCE,DAC_OVERRIDE,FOWNER,SETGID,SETUID}
-                - --set
-                - securityContext.capabilities.cleanCiliumState={NET_ADMIN,SYS_ADMIN,SYS_RESOURCE}
-                - --set
-                - cgroup.autoMount.enabled=false
-                - --set
-                - cgroup.hostRoot=/sys/fs/cgroup
-                - --set
-                - k8sServiceHost=localhost
-                - --set
-                - k8sServicePort=7445
+              - cilium
+              - install
+              - --version=${CILIUM_VERSION}
+              - --set
+              - ipam.mode=kubernetes
+              - --set
+              - kubeProxyReplacement=true
+              - --set
+              - securityContext.capabilities.ciliumAgent={CHOWN,KILL,NET_ADMIN,NET_RAW,IPC_LOCK,SYS_ADMIN,SYS_RESOURCE,DAC_OVERRIDE,FOWNER,SETGID,SETUID}
+              - --set
+              - securityContext.capabilities.cleanCiliumState={NET_ADMIN,SYS_ADMIN,SYS_RESOURCE}
+              - --set
+              - cgroup.autoMount.enabled=false
+              - --set
+              - cgroup.hostRoot=/sys/fs/cgroup
+              - --set
+              - k8sServiceHost=localhost
+              - --set
+              - k8sServicePort=7445
+              - --set
+              - hubble.relay.enabled=true
+              - --set
+              - hubble.ui.enabled=true
