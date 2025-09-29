@@ -7,6 +7,12 @@ cluster:
   inlineManifests:
   - name: cilium
     contents: |
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: cilium-install
+        namespace: kube-system
+      ---
       apiVersion: rbac.authorization.k8s.io/v1
       kind: ClusterRoleBinding
       metadata:
@@ -17,12 +23,6 @@ cluster:
         name: cluster-admin
       subjects:
       - kind: ServiceAccount
-        name: cilium-install
-        namespace: kube-system
-      ---
-      apiVersion: v1
-      kind: ServiceAccount
-      metadata:
         name: cilium-install
         namespace: kube-system
       ---

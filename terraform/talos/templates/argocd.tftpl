@@ -6,5 +6,45 @@ cluster:
       kind: Namespace
       metadata:
         name: argocd
-  extraManifests:
-  - https://raw.githubusercontent.com/argoproj/argo-cd/refs/tags/${ARGOCD_VERSION}/manifests/install.yaml
+      ---
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: argocd-install
+        namespace: kube-system
+      ---
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: argocd-install
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-admin
+      subjects:
+      - kind: ServiceAccount
+        name: argocd-install
+        namespace: kube-system
+      ---
+      apiVersion: batch/v1
+      kind: Job
+      metadata:
+        name: argocd-install
+        namespace: kube-system
+      spec:
+        backoffLimit: 10
+        template:
+          metadata:
+            labels:
+              app: argocd-install
+          spec:
+            restartPolicy: OnFailure
+            serviceAccountName: argocd-install
+            containers:
+            - name: argocd-install
+              image: registry.k8s.io/kubectl:${KUBERNETES_VERSION}
+              command:
+              - kubectl
+              - apply
+              - --namespace=argocd
+              - --filename=https://raw.githubusercontent.com/argoproj/argo-cd/refs/tags/${ARGOCD_VERSION}/manifests/install.yaml
