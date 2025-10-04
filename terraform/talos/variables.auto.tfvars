@@ -55,6 +55,5 @@ cluster = {
   kubernetes_version  = "v1.34.1"
   cilium_cli_version  = "v0.18.7"
   cilium_version      = "v1.18.2"
-  argocd_version      = "v3.1.7"
   gateway_api_version = "v1.3.0"
 }

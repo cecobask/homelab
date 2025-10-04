@@ -28,7 +28,6 @@ variable "cluster" {
     kubernetes_version  = string
     cilium_cli_version  = string
     cilium_version      = string
-    argocd_version      = string
     gateway_api_version = string
   })
 }
