@@ -22,12 +22,13 @@ variable "vms" {
 
 variable "cluster" {
   type = object({
-    name               = string
-    gateway            = string
-    bootstrap_node     = string
-    kubernetes_version = string
-    cilium_cli_version = string
-    cilium_version     = string
-    argocd_version     = string
+    name                = string
+    gateway             = string
+    bootstrap_node      = string
+    kubernetes_version  = string
+    cilium_cli_version  = string
+    cilium_version      = string
+    argocd_version      = string
+    gateway_api_version = string
   })
 }

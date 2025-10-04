@@ -29,6 +29,9 @@ data "talos_machine_configuration" "this" {
       ARGOCD_VERSION     = var.cluster.argocd_version
       KUBERNETES_VERSION = var.cluster.kubernetes_version
     }),
+    templatefile(format("%s/templates/gatewayapi.tftpl", path.module), {
+      GATEWAY_API_VERSION = var.cluster.gateway_api_version
+    }),
   ])
 }
 
@@ -40,9 +43,6 @@ resource "talos_machine_configuration_apply" "this" {
   lifecycle {
     replace_triggered_by = [
       proxmox_virtual_environment_vm.this[each.key]
-    ]
-    ignore_changes = [
-      machine_configuration_input,
     ]
   }
 }
