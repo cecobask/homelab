@@ -6,10 +6,10 @@ metadata:
 spec:
   generators:
   - list:
-      elements:
-      - name: hello
-        namespace: hello
-        path: kubernetes/apps/hello
+      elements: []
+      # - name: app
+      #   namespace: app
+      #   path: kubernetes/apps/app
   template:
     metadata:
       name: '{{name}}'
