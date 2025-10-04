@@ -1,0 +1,10 @@
+global:
+  image:
+    tag: v3.1.8
+configs:
+  cm:
+    kustomize.buildOptions: --enable-helm
+dex:
+  enabled: false
+notifications:
+  enabled: false
