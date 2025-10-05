@@ -17,15 +17,11 @@ data "talos_machine_configuration" "this" {
   machine_type       = each.value.machine_type
   machine_secrets    = talos_machine_secrets.this.machine_secrets
   config_patches = flatten([
-    templatefile(format("%s/templates/machine.tftpl", path.module), {
-      HOSTNAME      = each.key
-      INSTALLER_URL = data.talos_image_factory_urls.this.urls.installer
-    }),
-    templatefile(format("%s/templates/cluster.tftpl", path.module), {
-      CILIUM_CLI_VERSION  = var.cluster.cilium_cli_version
-      CILIUM_VERSION      = var.cluster.cilium_version
+    templatefile(format("%s/templates/config.tftpl", path.module), {
+      HOSTNAME            = each.key
+      INSTALLER_URL       = data.talos_image_factory_urls.this.urls.installer
       GATEWAY_API_VERSION = var.cluster.gateway_api_version
-    }),
+    })
   ])
 }
 
