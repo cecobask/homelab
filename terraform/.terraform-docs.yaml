@@ -1,6 +1,0 @@
-version: "~> 0.20.0"
-formatter: "markdown table"
-output:
-  file: README.md
-recursive:
-  enabled: true

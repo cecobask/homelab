@@ -1,5 +1,5 @@
 image = {
-  version      = "v1.11.0"
+  version      = "v1.11.2"
   platform     = "nocloud"
   architecture = "amd64"
   extensions   = ["intel-ucode", "qemu-guest-agent"]

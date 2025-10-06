@@ -1,10 +1,7 @@
 resource "terraform_data" "this" {
   input = {
-    url = format("https://github.com/home-assistant/operating-system/releases/download/%s/haos_ova-%s.qcow2.xz",
-      var.haos_version,
-      var.haos_version,
-    )
-    filename = "haos_ova.qcow2"
+    url      = var.haos_download_url
+    filename = "haos.qcow2"
   }
   provisioner "local-exec" {
     when    = create
@@ -19,10 +16,9 @@ resource "terraform_data" "this" {
 resource "proxmox_virtual_environment_file" "this" {
   node_name    = var.proxmox_node_name
   datastore_id = "local"
-  content_type = "iso"
+  content_type = "import"
   source_file {
-    path      = terraform_data.this.output.filename
-    file_name = format("haos_ova-%s.img", var.haos_version)
+    path = terraform_data.this.output.filename
   }
 }
 
@@ -33,9 +29,7 @@ resource "proxmox_virtual_environment_vm" "this" {
   machine       = "q35"
   scsi_hardware = "virtio-scsi-single"
   bios          = "ovmf"
-  tags = [
-    "haos",
-  ]
+  tags          = ["haos"]
   agent {
     enabled = true
   }
@@ -57,12 +51,10 @@ resource "proxmox_virtual_environment_vm" "this" {
   }
   disk {
     datastore_id = "local-lvm"
-    file_id      = proxmox_virtual_environment_file.this.id
+    import_from  = proxmox_virtual_environment_file.this.id
     interface    = "scsi0"
     iothread     = true
     discard      = "on"
-    ssd          = true
-    file_format  = "raw"
     size         = 128
   }
   operating_system {
@@ -71,8 +63,5 @@ resource "proxmox_virtual_environment_vm" "this" {
   usb {
     host = "10c4:ea60"
     usb3 = true
-  }
-  lifecycle {
-    prevent_destroy = true
   }
 }
