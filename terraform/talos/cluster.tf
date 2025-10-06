@@ -11,16 +11,16 @@ resource "talos_machine_secrets" "this" {
 data "talos_machine_configuration" "this" {
   for_each           = var.vms
   cluster_name       = var.cluster.name
-  cluster_endpoint   = format("https://%s:6443", local.bootstrap_node_ip)
+  cluster_endpoint   = format("https://%s:6443", var.cluster.load_balancer_ip)
   talos_version      = var.image.version
   kubernetes_version = var.cluster.kubernetes_version
   machine_type       = each.value.machine_type
   machine_secrets    = talos_machine_secrets.this.machine_secrets
   config_patches = flatten([
-    templatefile(format("%s/templates/config.tftpl", path.module), {
-      HOSTNAME            = each.key
-      INSTALLER_URL       = data.talos_image_factory_urls.this.urls.installer
-      GATEWAY_API_VERSION = var.cluster.gateway_api_version
+    templatefile("config.tftpl", {
+      HOSTNAME         = each.key
+      INSTALLER_URL    = data.talos_image_factory_urls.this.urls.installer
+      LOAD_BALANCER_IP = var.cluster.load_balancer_ip
     })
   ])
 }
@@ -52,10 +52,9 @@ data "talos_client_configuration" "this" {
 
 resource "talos_cluster_kubeconfig" "this" {
   depends_on           = [talos_machine_bootstrap.this]
-  node                 = local.bootstrap_node_ip
-  endpoint             = local.bootstrap_node_ip
+  node                 = var.cluster.load_balancer_ip
   client_configuration = talos_machine_secrets.this.client_configuration
   timeouts = {
-    read = "10m"
+    read = "5m"
   }
 }

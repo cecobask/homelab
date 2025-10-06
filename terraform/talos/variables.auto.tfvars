@@ -49,9 +49,9 @@ vms = {
 }
 
 cluster = {
-  name                = "homelab"
-  gateway             = "192.168.40.1"
-  bootstrap_node      = "talos-ctrl-01"
-  kubernetes_version  = "v1.34.1"
-  gateway_api_version = "v1.3.0"
+  name               = "homelab"
+  bootstrap_node     = "talos-ctrl-01"
+  gateway            = "192.168.40.1"
+  kubernetes_version = "v1.34.1"
+  load_balancer_ip   = "192.168.40.200"
 }

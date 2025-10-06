@@ -5,7 +5,7 @@ cluster:
   proxy:
     disabled: true
   extraManifests:
-  - https://github.com/kubernetes-sigs/gateway-api/releases/download/${GATEWAY_API_VERSION}/standard-install.yaml
+  - https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.3.0/standard-install.yaml
 machine:
   install:
     disk: /dev/sda
@@ -15,3 +15,5 @@ machine:
     nameservers:
     - 1.1.1.1
     - 8.8.8.8
+  certSANs:
+  - ${LOAD_BALANCER_IP}

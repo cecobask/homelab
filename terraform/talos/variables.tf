@@ -22,10 +22,10 @@ variable "vms" {
 
 variable "cluster" {
   type = object({
-    name                = string
-    gateway             = string
-    bootstrap_node      = string
-    kubernetes_version  = string
-    gateway_api_version = string
+    name               = string
+    bootstrap_node     = string
+    gateway            = string
+    kubernetes_version = string
+    load_balancer_ip   = string
   })
 }
