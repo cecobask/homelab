@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app
+  name: root
   namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: https://github.com/cecobask/homelab.git
+  sources:
+  - repoURL: https://github.com/cecobask/homelab.git
     targetRevision: HEAD
-    path: kubernetes/apps
+    path: kubernetes/platform
   destination:
     name: in-cluster
   syncPolicy:
