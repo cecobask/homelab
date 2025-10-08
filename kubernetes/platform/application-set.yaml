@@ -12,12 +12,12 @@ spec:
       - path: kubernetes/platform/*
   template:
     metadata:
-      name: '{{.path.basename}}'
+      name: '{{ path.basename }}'
     spec:
       project: default
       source:
         repoURL: https://github.com/cecobask/homelab.git
-        path: '{{.path.path}}'
+        path: '{{ path }}'
         targetRevision: HEAD
       destination:
         name: in-cluster

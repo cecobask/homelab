@@ -3,19 +3,17 @@
 ## Cilium
 
 ```
-kubectl kustomize bootstrap/cilium --enable-helm | kubectl apply -f -
-rm -rf bootstrap/cilium/charts
+kubectl kustomize platform/cilium --enable-helm | kubectl apply -f -
 ```
 
 ## Argo CD
 
 ```
 kubectl kustomize bootstrap/argocd --enable-helm | kubectl apply -f -
-rm -rf bootstrap/argocd/charts
 ```
 
-## App of Apps
+## Applications
 
 ```
-kubectl apply -f bootstrap/application.yaml
+kubectl apply -f bootstrap/platform.yaml
 ```
