@@ -3,3 +3,8 @@ storageClass:
   storage: local-lvm
   reclaimPolicy: Retain
   fstype: ext4
+nodeSelector:
+  node-role.kubernetes.io/control-plane:
+tolerations:
+- key: node-role.kubernetes.io/control-plane
+  effect: NoSchedule
