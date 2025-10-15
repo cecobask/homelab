@@ -3,7 +3,7 @@
 ## Cilium
 
 ```
-kubectl kustomize platform/cilium --enable-helm | kubectl apply -f -
+kubectl kustomize bootstrap/cilium --enable-helm | kubectl apply -f -
 ```
 
 ## Argo CD
