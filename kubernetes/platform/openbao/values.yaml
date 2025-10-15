@@ -1,0 +1,4 @@
+injector:
+  enabled: false
+ui:
+  enabled: true
