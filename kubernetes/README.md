@@ -6,11 +6,10 @@
 kubectl kustomize bootstrap/cilium --enable-helm | kubectl apply -f -
 ```
 
-## Proxmox Container Storage Interface Plugin
+## Proxmox CSI Plugin
 
 ```
 kubectl kustomize bootstrap/csi-proxmox --enable-helm | kubectl apply -f -
-kubectl apply -f bootstrap/csi-proxmox/secret.yaml
 ```
 
 ## Argo CD
