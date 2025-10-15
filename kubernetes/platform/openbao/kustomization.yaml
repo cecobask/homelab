@@ -5,7 +5,7 @@ resources:
 helmCharts:
 - repo: oci://ghcr.io/openbao/charts
   name: openbao
-  version: v0.19.0
+  version: 0.19.0
   releaseName: openbao
   namespace: openbao
   valuesFile: values.yaml
