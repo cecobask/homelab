@@ -8,3 +8,4 @@ nodeSelector:
 tolerations:
 - key: node-role.kubernetes.io/control-plane
   effect: NoSchedule
+existingConfigSecret: csi-proxmox
