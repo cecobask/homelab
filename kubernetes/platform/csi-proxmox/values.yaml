@@ -1,0 +1,5 @@
+storageClass:
+- name: csi-proxmox
+  storage: local-lvm
+  reclaimPolicy: Retain
+  fstype: ext4

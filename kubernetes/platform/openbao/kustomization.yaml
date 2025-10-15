@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
 - namespace.yaml
 helmCharts:
-- repo: https://openbao.github.io/openbao-helm
+- repo: oci://ghcr.io/openbao/charts
   name: openbao
   version: v0.19.0
   releaseName: openbao
