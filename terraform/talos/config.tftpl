@@ -17,3 +17,6 @@ machine:
     - 8.8.8.8
   certSANs:
   - ${LOAD_BALANCER_IP}
+  nodeLabels:
+    topology.kubernetes.io/region: ${CLUSTER_NAME}
+    topology.kubernetes.io/zone: ${HOSTNAME}
