@@ -1,7 +1,0 @@
-injector:
-  enabled: false
-ui:
-  enabled: true
-server:
-  dataStorage:
-    storageClass: csi-proxmox
