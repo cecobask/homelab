@@ -1,16 +1,16 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: bitwarden
+  name: external-secrets-webhook
 spec:
-  commonName: cert-manager-bitwarden-tls
+  commonName: cert-manager-external-secrets-webhook-tls
   isCA: true
-  secretName: bitwarden-tls-certs
+  secretName: external-secrets-webhook-tls
   subject:
     organizations:
     - external-secrets.io
   dnsNames:
-  - bitwarden-sdk-server.external-secrets.svc.cluster.local
+  - external-secrets-webhook.external-secrets.svc.cluster.local
   - localhost
   ipAddresses:
   - 127.0.0.1
@@ -27,7 +27,7 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: bitwarden
+  name: external-secrets-webhook
 spec:
   ca:
-    secretName: bitwarden-tls-certs
+    secretName: external-secrets-webhook-tls

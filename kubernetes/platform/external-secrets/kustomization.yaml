@@ -4,6 +4,7 @@ namespace: external-secrets
 resources:
 - bitwarden-issuer.yaml
 - bitwarden-store.yaml
+- webhook-issuer.yaml
 helmCharts:
 - repo: https://charts.external-secrets.io
   name: external-secrets
