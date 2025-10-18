@@ -1,3 +1,2 @@
 terraform/**/*.qcow2
 kubernetes/bootstrap/**/charts
-kubernetes/bootstrap/csi-proxmox/config.yaml

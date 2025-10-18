@@ -18,10 +18,11 @@ data "talos_machine_configuration" "this" {
   machine_secrets    = talos_machine_secrets.this.machine_secrets
   config_patches = flatten([
     templatefile("config.tftpl", {
-      CLUSTER_NAME     = var.cluster.name
-      HOSTNAME         = each.key
-      INSTALLER_URL    = data.talos_image_factory_urls.this.urls.installer
-      LOAD_BALANCER_IP = var.cluster.load_balancer_ip
+      cluster_name     = var.cluster.name
+      hostname         = each.key
+      installer_url    = data.talos_image_factory_urls.this.urls.installer
+      load_balancer_ip = var.cluster.load_balancer_ip
+      node_name        = each.value.node_name
     })
   ])
 }

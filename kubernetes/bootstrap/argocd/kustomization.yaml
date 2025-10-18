@@ -9,3 +9,5 @@ helmCharts:
   version: 8.5.8
   releaseName: argocd
   valuesFile: values.yaml
+  apiVersions:
+  - monitoring.coreos.com/v1

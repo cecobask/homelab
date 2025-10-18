@@ -4,19 +4,17 @@ cluster:
       name: none
   proxy:
     disabled: true
-  extraManifests:
-  - https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.3.0/standard-install.yaml
 machine:
   install:
     disk: /dev/sda
-    image: ${INSTALLER_URL}
+    image: ${installer_url}
   network:
-    hostname: ${HOSTNAME}
+    hostname: ${hostname}
     nameservers:
     - 1.1.1.1
     - 8.8.8.8
   certSANs:
-  - ${LOAD_BALANCER_IP}
+  - ${load_balancer_ip}
   nodeLabels:
-    topology.kubernetes.io/region: ${CLUSTER_NAME}
-    topology.kubernetes.io/zone: ${HOSTNAME}
+    topology.kubernetes.io/region: ${cluster_name}
+    topology.kubernetes.io/zone: ${node_name}
