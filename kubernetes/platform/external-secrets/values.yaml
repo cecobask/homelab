@@ -6,5 +6,5 @@ webhook:
     enabled: true
     cert:
       issuerRef:
-        kind: ClusterIssuer
+        kind: Issuer
         name: external-secrets-webhook
