@@ -16,9 +16,8 @@ spec:
     encoding: PKCS8
     size: 2048
   issuerRef:
-    name: bitwarden-issuer
+    name: bitwarden
     kind: ClusterIssuer
-    group: cert-manager.io
 ---
 apiVersion: external-secrets.io/v1
 kind: ClusterSecretStore
