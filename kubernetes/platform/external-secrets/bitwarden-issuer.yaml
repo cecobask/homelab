@@ -1,4 +1,11 @@
 apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: bitwarden-bootstrap-issuer
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: bitwarden-bootstrap-certificate
@@ -10,7 +17,6 @@ spec:
     organizations:
     - external-secrets.io
   dnsNames:
-  - external-secrets-bitwarden-sdk-server.external-secrets.svc.cluster.local
   - bitwarden-sdk-server.external-secrets.svc.cluster.local
   - localhost
   ipAddresses:
@@ -21,7 +27,7 @@ spec:
     encoding: PKCS8
     size: 2048
   issuerRef:
-    name: self-signed
+    name: bitwarden-bootstrap-issuer
     kind: ClusterIssuer
     group: cert-manager.io
 ---
