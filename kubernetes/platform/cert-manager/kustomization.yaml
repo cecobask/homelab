@@ -5,7 +5,7 @@ resources:
 - bitwarden-issuer.yaml
 - namespace.yaml
 helmCharts:
-- repo: oci://quay.io/jetstack/charts/cert-manager
+- repo: oci://quay.io/jetstack/charts
   name: cert-manager
   version: v1.19.1
   releaseName: cert-manager
