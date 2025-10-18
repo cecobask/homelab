@@ -1,0 +1,3 @@
+installCRDs: false
+bitwarden-sdk-server:
+  enabled: true
