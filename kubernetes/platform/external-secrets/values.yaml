@@ -5,6 +5,4 @@ webhook:
   certManager:
     enabled: true
     cert:
-      issuerRef:
-        kind: Issuer
-        name: external-secrets-webhook
+      create: false
