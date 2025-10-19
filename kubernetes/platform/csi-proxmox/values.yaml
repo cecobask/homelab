@@ -1,0 +1,11 @@
+storageClass:
+- name: csi-proxmox
+  storage: local-lvm
+  reclaimPolicy: Delete
+  fstype: ext4
+nodeSelector:
+  node-role.kubernetes.io/control-plane: ""
+tolerations:
+- key: node-role.kubernetes.io/control-plane
+  effect: NoSchedule
+existingConfigSecret: csi-proxmox

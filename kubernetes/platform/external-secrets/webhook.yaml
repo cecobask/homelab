@@ -16,3 +16,4 @@ spec:
   issuerRef:
     name: internal-ca
     kind: ClusterIssuer
+  duration: 8760h
