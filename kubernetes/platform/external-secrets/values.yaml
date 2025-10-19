@@ -6,3 +6,4 @@ webhook:
     enabled: true
     cert:
       create: false
+  lookaheadInterval: 48h
