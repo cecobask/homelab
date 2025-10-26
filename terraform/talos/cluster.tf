@@ -1,6 +1,7 @@
 locals {
   bootstrap_node_ip = one([for vm_name, vm in var.vms : vm.ipv4 if vm_name == var.cluster.bootstrap_node])
   controlplane_ips  = [for vm_name, vm in var.vms : vm.ipv4 if vm.machine_type == "controlplane"]
+  worker_ips        = [for vm_name, vm in var.vms : vm.ipv4 if vm.machine_type == "worker"]
   node_ips          = [for vm_name, vm in var.vms : vm.ipv4]
 }
 
@@ -56,6 +57,18 @@ resource "talos_cluster_kubeconfig" "this" {
   depends_on           = [talos_machine_bootstrap.this]
   node                 = var.cluster.load_balancer_ip
   client_configuration = talos_machine_secrets.this.client_configuration
+  timeouts = {
+    read = "5m"
+  }
+}
+
+data "talos_cluster_health" "this" {
+  depends_on             = [talos_cluster_kubeconfig.this]
+  client_configuration   = data.talos_client_configuration.this.client_configuration
+  control_plane_nodes    = local.controlplane_ips
+  worker_nodes           = local.worker_ips
+  endpoints              = data.talos_client_configuration.this.endpoints
+  skip_kubernetes_checks = true
   timeouts = {
     read = "5m"
   }

@@ -1,3 +1,4 @@
+*.crt
+*.key
+kubernetes/**/charts
 terraform/**/*.qcow2
-kubernetes/bootstrap/**/charts
-kubernetes/bootstrap/external-secrets/bitwarden-token
