@@ -1,9 +1,0 @@
-installCRDs: false
-bitwarden-sdk-server:
-  enabled: true
-webhook:
-  certManager:
-    enabled: true
-    cert:
-      create: false
-  lookaheadInterval: 48h
