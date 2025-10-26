@@ -1,0 +1,19 @@
+providers:
+  kubernetesCRD:
+    enabled: false
+  kubernetesIngress:
+    enabled: false
+  kubernetesGateway:
+    enabled: true
+gateway:
+  name: traefik
+  listeners:
+    websecure:
+      port: 8443
+      protocol: HTTPS
+      certificateRefs:
+      - name: cecobask
+      namespacePolicy:
+        from: All
+service:
+  enabled: false
