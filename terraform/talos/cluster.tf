@@ -12,19 +12,22 @@ resource "talos_machine_secrets" "this" {
 data "talos_machine_configuration" "this" {
   for_each           = var.vms
   cluster_name       = var.cluster.name
-  cluster_endpoint   = format("https://%s:6443", var.cluster.load_balancer_ip)
+  cluster_endpoint   = format("https://%s:6443", var.cluster.vip)
   talos_version      = var.image.version
   kubernetes_version = var.cluster.kubernetes_version
   machine_type       = each.value.machine_type
   machine_secrets    = talos_machine_secrets.this.machine_secrets
   config_patches = flatten([
-    templatefile("config.tftpl", {
-      cluster_name     = var.cluster.name
-      hostname         = each.key
-      installer_url    = data.talos_image_factory_urls.this.urls.installer
-      load_balancer_ip = var.cluster.load_balancer_ip
-      node_name        = each.value.node_name
-    })
+    templatefile("config/common.tftpl", {
+      cluster_name  = var.cluster.name
+      hostname      = each.key
+      installer_url = data.talos_image_factory_urls.this.urls.installer
+      node_name     = each.value.node_name
+    }), each.value.machine_type == "controlplane" ?
+    templatefile("config/controlplane.tftpl", {
+      vip = var.cluster.vip
+    }) :
+    templatefile("config/worker.tftpl", {})
   ])
 }
 
@@ -55,7 +58,7 @@ data "talos_client_configuration" "this" {
 
 resource "talos_cluster_kubeconfig" "this" {
   depends_on           = [talos_machine_bootstrap.this]
-  node                 = var.cluster.load_balancer_ip
+  node                 = var.cluster.vip
   client_configuration = talos_machine_secrets.this.client_configuration
   timeouts = {
     read = "5m"

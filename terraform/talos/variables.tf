@@ -26,6 +26,6 @@ variable "cluster" {
     bootstrap_node     = string
     gateway            = string
     kubernetes_version = string
-    load_balancer_ip   = string
+    vip                = string
   })
 }

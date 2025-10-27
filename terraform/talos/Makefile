@@ -2,6 +2,15 @@ include ../Makefile
 
 .ONESHELL:
 
+.PHONY: apply
+apply: save
+	@terraform apply -auto-approve
+
+.PHONY: destroy
+destroy:
+	@terraform state rm $$(terraform state list | grep -E '(kubernetes_secret|kustomization_build|kustomization_resource)')
+	@terraform destroy -auto-approve
+
 TALOS_DIR := $(HOME)/.talos
 $(TALOS_DIR):
 	@mkdir -p "$@"
@@ -20,15 +29,6 @@ save/kubeconfig: | $(TALOS_DIR)
 .PHONY: save/secrets
 save/secrets: | $(TALOS_DIR)
 	@terraform output -raw secrets > $(TALOS_DIR)/secrets.yaml
-
-.PHONY: purge
-purge:
-	@cd ../../automation
-	@$(MAKE) build
-	@./build/automation proxmox stop-vms --tags=talos
-	@sleep 5
-	@./build/automation proxmox destroy-vms --tags=talos --destroy-unreferenced-disks --purge
-	@./build/automation proxmox delete-volumes --storages=local --volumes=local:iso/talos_v1.11.0_nocloud_amd64.iso
 
 .PHONY: unlock
 unlock:
