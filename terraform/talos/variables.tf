@@ -24,8 +24,8 @@ variable "cluster" {
   type = object({
     name               = string
     bootstrap_node     = string
-    gateway            = string
     kubernetes_version = string
+    gateway            = string
     vip                = string
   })
 }
