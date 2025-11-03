@@ -4,7 +4,17 @@ global:
 configs:
   cm:
     kustomize.buildOptions: --enable-helm
+  params:
+    server.insecure: true
 dex:
   enabled: false
 notifications:
   enabled: false
+server:
+  httproute:
+    enabled: true
+    parentRefs:
+    - name: traefik
+      namespace: traefik
+    hostnames:
+    - argocd.cecobask.com
