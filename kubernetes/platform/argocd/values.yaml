@@ -18,6 +18,3 @@ server:
       namespace: traefik
     hostnames:
     - argocd.cecobask.com
-  service:
-    annotations:
-      external-dns.alpha.kubernetes.io/hostname: argocd.cecobask.com
