@@ -21,6 +21,16 @@ resource "kustomization_resource" "cilium_p1" {
   }
 }
 
+data "kustomization_build" "gatewayapi" {
+  depends_on = [data.talos_cluster_health.this]
+  path       = "../../kubernetes/platform/gateway-api"
+}
+
+resource "kustomization_resource" "gatewayapi_p0" {
+  for_each = data.kustomization_build.gatewayapi.ids_prio[0]
+  manifest = data.kustomization_build.gatewayapi.manifests[each.value]
+}
+
 data "kustomization_build" "argocd" {
   depends_on = [data.talos_cluster_health.this]
   path       = "../../kubernetes/platform/argocd"
