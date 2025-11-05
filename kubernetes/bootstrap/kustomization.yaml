@@ -6,3 +6,4 @@ resources:
 - ../platform/cilium
 - ../platform/sealed-secrets
 - platform.yaml
+- workloads.yaml

@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: workloads
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/cecobask/homelab.git
+      revision: main
+      directories:
+      - path: kubernetes/workloads/*
+  template:
+    metadata:
+      name: '{{ path.basename }}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/cecobask/homelab.git
+        path: '{{ path }}'
+        targetRevision: HEAD
+      destination:
+        name: in-cluster
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
