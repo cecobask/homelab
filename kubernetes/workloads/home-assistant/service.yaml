@@ -3,5 +3,6 @@ kind: Service
 metadata:
   name: haos
 spec:
+  clusterIP: None
   ports:
   - port: 8123

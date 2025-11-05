@@ -1,12 +1,74 @@
-apiVersion: discovery.k8s.io/v1
-kind: EndpointSlice
+apiVersion: v1
+kind: ConfigMap
 metadata:
-  name: haos
-  labels:
-    kubernetes.io/service-name: haos
-addressType: IPv4
-ports:
-- port: 8123
-endpoints:
-- addresses:
-  - 192.168.40.100
+  name: endpointslice
+data:
+  manifest.yaml: |
+    apiVersion: discovery.k8s.io/v1
+    kind: EndpointSlice
+    metadata:
+      name: haos
+      labels:
+        kubernetes.io/service-name: haos
+    addressType: IPv4
+    ports:
+    - port: 8123
+    endpoints:
+    - addresses:
+      - 192.168.40.100
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: endpointslice
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: endpointslice
+rules:
+- apiGroups:
+  - discovery.k8s.io
+  resources:
+  - endpointslices
+  verbs:
+  - create
+  - patch
+  - update
+  - get
+  - list
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: endpointslice
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: endpointslice
+subjects:
+- kind: ServiceAccount
+  name: endpointslice
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: endpointslice
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      serviceAccountName: endpointslice
+      volumes:
+      - name: endpointslice
+        configMap:
+          name: endpointslice
+      containers:
+      - name: kubectl
+        image: registry.k8s.io/kubectl:v1.34.1
+        args:
+        - apply
+        - --filename=/endpointslice/manifest.yaml
+        volumeMounts:
+        - name: endpointslice
+          mountPath: /endpointslice
