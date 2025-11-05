@@ -2,8 +2,11 @@ include ../Makefile
 
 .ONESHELL:
 
+.PHONY: create
+create: apply save
+
 .PHONY: apply
-apply: save
+apply:
 	@terraform apply -auto-approve
 
 .PHONY: destroy

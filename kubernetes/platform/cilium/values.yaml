@@ -38,6 +38,8 @@ envoyConfig:
     create: false
 gatewayAPI:
   enabled: true
+  gatewayClass:
+    create: "false"
   secretsNamespace:
     create: false
     name: cilium
