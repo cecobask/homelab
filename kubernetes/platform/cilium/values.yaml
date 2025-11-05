@@ -27,3 +27,21 @@ k8sServiceHost: localhost
 k8sServicePort: 7445
 l2announcements:
   enabled: true
+ingressController:
+  secretsNamespace:
+    create: false
+bgpControlPlane:
+  secretsNamespace:
+    create: false
+envoyConfig:
+  secretsNamespace:
+    create: false
+gatewayAPI:
+  enabled: true
+  secretsNamespace:
+    create: false
+    name: cilium
+tls:
+  secretsNamespace:
+    create: false
+    name: cilium

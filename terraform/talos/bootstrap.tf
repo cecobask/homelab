@@ -1,3 +1,17 @@
+data "kustomization_build" "certmanager" {
+  depends_on = [data.talos_cluster_health.this]
+  path       = "../../kubernetes/platform/cert-manager"
+  kustomize_options {
+    enable_helm = true
+    helm_path   = "helm"
+  }
+}
+
+resource "kustomization_resource" "certmanager_p0" {
+  for_each = data.kustomization_build.certmanager.ids_prio[0]
+  manifest = data.kustomization_build.certmanager.manifests[each.value]
+}
+
 data "kustomization_build" "cilium" {
   depends_on = [data.talos_cluster_health.this]
   path       = "../../kubernetes/platform/cilium"
@@ -16,39 +30,6 @@ resource "kustomization_resource" "cilium_p1" {
   depends_on = [kustomization_resource.cilium_p0]
   for_each   = data.kustomization_build.cilium.ids_prio[1]
   manifest   = data.kustomization_build.cilium.manifests[each.value]
-  lifecycle {
-    ignore_changes = [manifest]
-  }
-}
-
-data "kustomization_build" "gatewayapi" {
-  depends_on = [data.talos_cluster_health.this]
-  path       = "../../kubernetes/platform/gateway-api"
-}
-
-resource "kustomization_resource" "gatewayapi_p0" {
-  for_each = data.kustomization_build.gatewayapi.ids_prio[0]
-  manifest = data.kustomization_build.gatewayapi.manifests[each.value]
-}
-
-data "kustomization_build" "argocd" {
-  depends_on = [data.talos_cluster_health.this]
-  path       = "../../kubernetes/platform/argocd"
-  kustomize_options {
-    enable_helm = true
-    helm_path   = "helm"
-  }
-}
-
-resource "kustomization_resource" "argocd_p0" {
-  for_each = data.kustomization_build.argocd.ids_prio[0]
-  manifest = data.kustomization_build.argocd.manifests[each.value]
-}
-
-resource "kustomization_resource" "argocd_p1" {
-  depends_on = [kustomization_resource.argocd_p0]
-  for_each   = data.kustomization_build.argocd.ids_prio[1]
-  manifest   = data.kustomization_build.argocd.manifests[each.value]
 }
 
 data "kustomization_build" "sealedsecrets" {

@@ -3,7 +3,7 @@ include ../Makefile
 .ONESHELL:
 
 .PHONY: apply
-apply:
+apply: save
 	@terraform apply -auto-approve
 
 .PHONY: destroy
