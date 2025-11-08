@@ -47,3 +47,8 @@ tls:
   secretsNamespace:
     create: false
     name: cilium
+hubble:
+  relay:
+    enabled: true
+  ui:
+    enabled: true
