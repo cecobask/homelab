@@ -3,8 +3,8 @@ kind: Service
 metadata:
   name: home-assistant
 spec:
-  clusterIP: None
-  ipFamilyPolicy: SingleStack
+  type: ExternalName
+  externalName: 192.168.40.100.sslip.io
   ports:
   - name: http
     port: 8123
