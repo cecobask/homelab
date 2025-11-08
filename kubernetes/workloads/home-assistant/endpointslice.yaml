@@ -1,18 +1,19 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: endpointslice
+  name: home-assistant
 data:
-  manifest.yaml: |
+  endpointslice.yaml: |
     apiVersion: discovery.k8s.io/v1
     kind: EndpointSlice
     metadata:
-      name: haos
+      name: home-assistant
       labels:
-        kubernetes.io/service-name: haos
+        kubernetes.io/service-name: home-assistant
     addressType: IPv4
     ports:
-    - port: 8123
+    - name: http
+      port: 8123
     endpoints:
     - addresses:
       - 192.168.40.100
@@ -20,12 +21,12 @@ data:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: endpointslice
+  name: home-assistant
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: endpointslice
+  name: home-assistant
 rules:
 - apiGroups:
   - discovery.k8s.io
@@ -41,34 +42,34 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: endpointslice
+  name: home-assistant
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: endpointslice
+  name: home-assistant
 subjects:
 - kind: ServiceAccount
-  name: endpointslice
+  name: home-assistant
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: endpointslice
+  name: home-assistant
 spec:
   template:
     spec:
       restartPolicy: Never
-      serviceAccountName: endpointslice
+      serviceAccountName: home-assistant
       volumes:
-      - name: endpointslice
+      - name: home-assistant
         configMap:
-          name: endpointslice
+          name: home-assistant
       containers:
       - name: kubectl
         image: registry.k8s.io/kubectl:v1.34.1
         args:
         - apply
-        - --filename=/endpointslice/manifest.yaml
+        - --filename=/home-assistant/endpointslice.yaml
         volumeMounts:
-        - name: endpointslice
-          mountPath: /endpointslice
+        - name: home-assistant
+          mountPath: /home-assistant

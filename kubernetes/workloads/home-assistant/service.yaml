@@ -1,8 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: haos
+  name: home-assistant
 spec:
   clusterIP: None
+  ipFamilyPolicy: SingleStack
   ports:
-  - port: 8123
+  - name: http
+    port: 8123
