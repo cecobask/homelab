@@ -4,8 +4,8 @@ metadata:
   name: home-assistant
 spec:
   parentRefs:
-  - name: cilium
-    namespace: cilium
+  - name: traefik
+    namespace: traefik
   hostnames:
   - haos.cecobask.com
   rules:
