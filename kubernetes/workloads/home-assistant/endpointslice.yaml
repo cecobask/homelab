@@ -17,7 +17,6 @@ data:
     endpoints:
     - addresses:
       - 192.168.40.100
-      conditions: {}
 ---
 apiVersion: v1
 kind: ServiceAccount

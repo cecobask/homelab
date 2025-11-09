@@ -14,7 +14,7 @@ server:
   httproute:
     enabled: true
     parentRefs:
-    - name: traefik
-      namespace: traefik
+    - name: cilium
+      namespace: cilium
     hostnames:
     - argocd.cecobask.com
