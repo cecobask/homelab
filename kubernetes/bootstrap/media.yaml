@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: workloads
+  name: media
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/cecobask/homelab.git
-    path: kubernetes/workloads
+    path: kubernetes/media
     targetRevision: HEAD
   destination:
     name: in-cluster

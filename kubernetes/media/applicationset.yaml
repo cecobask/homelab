@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: workloads
+  name: media
   namespace: argocd
 spec:
   generators:
@@ -9,7 +9,7 @@ spec:
       repoURL: https://github.com/cecobask/homelab.git
       revision: main
       directories:
-      - path: kubernetes/workloads/*
+      - path: kubernetes/media/*
   template:
     metadata:
       name: '{{ path.basename }}'
