@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: config
+  name: jellyfin
 spec:
   accessModes:
   - ReadWriteOnce
@@ -9,15 +9,3 @@ spec:
     requests:
       storage: 10Gi
   storageClassName: csi-proxmox
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: media
-spec:
-  accessModes:
-  - ReadWriteMany
-  resources:
-    requests:
-      storage: 100Gi
-  storageClassName: media

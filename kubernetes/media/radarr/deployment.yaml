@@ -30,7 +30,7 @@ spec:
       volumes:
       - name: config
         persistentVolumeClaim:
-          claimName: config
+          claimName: radarr
       - name: media
         persistentVolumeClaim:
           claimName: media
