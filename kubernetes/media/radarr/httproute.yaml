@@ -1,0 +1,14 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: radarr
+spec:
+  parentRefs:
+  - name: cilium
+    namespace: cilium
+  hostnames:
+  - radarr.cecobask.com
+  rules:
+  - backendRefs:
+    - name: radarr
+      port: 7878
