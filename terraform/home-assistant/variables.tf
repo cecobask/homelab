@@ -1,6 +1,6 @@
 variable "haos_download_url" {
   type    = string
-  default = "https://github.com/home-assistant/operating-system/releases/download/16.2/haos_ova-16.2.qcow2.xz"
+  default = "https://github.com/home-assistant/operating-system/releases/download/16.3/haos_ova-16.3.qcow2.xz"
 }
 
 variable "proxmox_node_name" {

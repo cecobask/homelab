@@ -34,11 +34,11 @@ resource "proxmox_virtual_environment_vm" "this" {
     enabled = true
   }
   cpu {
-    cores = 3
+    cores = 2
     type  = "x86-64-v2-AES"
   }
   memory {
-    dedicated = 1024 * 4
+    dedicated = 1024 * 2
   }
   network_device {
     bridge      = "vmbr0"
@@ -55,7 +55,7 @@ resource "proxmox_virtual_environment_vm" "this" {
     interface    = "scsi0"
     iothread     = true
     discard      = "on"
-    size         = 128
+    size         = 64
   }
   operating_system {
     type = "l26"
