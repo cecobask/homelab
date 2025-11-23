@@ -13,7 +13,7 @@ spec:
         app: radarr
     spec:
       nodeSelector:
-        topology.kubernetes.io/zone: pve1
+        topology.kubernetes.io/zone: pve2
       securityContext:
         runAsUser: 65534
         runAsGroup: 65534
