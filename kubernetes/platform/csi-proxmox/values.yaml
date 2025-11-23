@@ -1,7 +1,7 @@
 storageClass:
-- name: csi-proxmox
+- name: proxmox
   storage: local-lvm
-  reclaimPolicy: Delete
+  reclaimPolicy: Retain
   fstype: ext4
 nodeSelector:
   node-role.kubernetes.io/control-plane: ""
