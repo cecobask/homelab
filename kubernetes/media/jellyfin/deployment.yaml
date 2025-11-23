@@ -13,7 +13,7 @@ spec:
         app: jellyfin
     spec:
       nodeSelector:
-        topology.kubernetes.io/zone: pve1
+        topology.kubernetes.io/zone: pve2
       containers:
       - name: jellyfin
         image: ghcr.io/jellyfin/jellyfin:10.11.2
