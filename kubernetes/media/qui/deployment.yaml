@@ -1,0 +1,31 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: qui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qui
+  template:
+    metadata:
+      labels:
+        app: qui
+    spec:
+      nodeSelector:
+        topology.kubernetes.io/zone: pve2
+      containers:
+      - name: qui
+        image: ghcr.io/autobrr/qui:v1.7.0
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: media
+          mountPath: /media
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: qui
+      - name: media
+        persistentVolumeClaim:
+          claimName: media

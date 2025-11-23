@@ -1,0 +1,14 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: qui
+spec:
+  parentRefs:
+  - name: cilium
+    namespace: cilium
+  hostnames:
+  - qui.cecobask.com
+  rules:
+  - backendRefs:
+    - name: qui
+      port: 7476
