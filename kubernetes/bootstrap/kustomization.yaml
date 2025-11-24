@@ -5,8 +5,8 @@ resources:
 - ../platform/cert-manager
 - ../platform/cilium
 - ../platform/sealed-secrets
-- platform.yaml
-- media.yaml
+- ../platform
+- ../media
 secretGenerator:
 - name: sealed-secrets-key
   namespace: sealed-secrets
