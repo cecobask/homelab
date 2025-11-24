@@ -2,16 +2,16 @@ include ../Makefile
 
 .ONESHELL:
 
-.PHONY: create
-create: apply save
+.PHONY: up
+up: apply save bootstrap
 
 .PHONY: apply
 apply:
 	@terraform apply -auto-approve
 
-.PHONY: destroy
-destroy:
-	@terraform destroy -auto-approve -refresh=false
+.PHONY: bootstrap
+bootstrap:
+	@bash hack/bootstrap.sh
 
 TALOS_DIR := $(HOME)/.talos
 $(TALOS_DIR):
@@ -31,6 +31,13 @@ save/kubeconfig: | $(TALOS_DIR)
 .PHONY: save/secrets
 save/secrets: | $(TALOS_DIR)
 	@terraform output -raw secrets > $(TALOS_DIR)/secrets.yaml
+
+.PHONY: down
+down: destroy
+
+.PHONY: destroy
+destroy:
+	@terraform destroy -auto-approve -refresh=false
 
 .PHONY: unlock
 unlock:
