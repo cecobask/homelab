@@ -7,3 +7,12 @@ resources:
 - ../platform/sealed-secrets
 - platform.yaml
 - media.yaml
+secretGenerator:
+- name: sealed-secrets-key
+  namespace: sealed-secrets
+  options:
+    disableNameSuffixHash: true
+  type: kubernetes.io/tls
+  files:
+  - tls.crt
+  - tls.key

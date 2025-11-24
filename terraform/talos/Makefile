@@ -11,7 +11,6 @@ apply:
 
 .PHONY: destroy
 destroy:
-	@terraform state rm $$(terraform state list | grep -E '(kubernetes_secret|kustomization_build|kustomization_resource)')
 	@terraform destroy -auto-approve -refresh=false
 
 TALOS_DIR := $(HOME)/.talos
