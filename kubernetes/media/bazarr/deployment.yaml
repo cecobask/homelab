@@ -22,6 +22,12 @@ spec:
       containers:
       - name: bazarr
         image: ghcr.io/home-operations/bazarr:1.5.3
+        livenessProbe:
+          httpGet:
+            path: /api/system/ping
+            port: 6767
+          initialDelaySeconds: 30
+          timeoutSeconds: 10
         volumeMounts:
         - name: config
           mountPath: /config

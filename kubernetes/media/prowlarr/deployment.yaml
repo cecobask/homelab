@@ -22,6 +22,12 @@ spec:
       containers:
       - name: prowlarr
         image: ghcr.io/home-operations/prowlarr:2.3.0
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 9696
+          initialDelaySeconds: 30
+          timeoutSeconds: 10
         volumeMounts:
         - name: config
           mountPath: /config

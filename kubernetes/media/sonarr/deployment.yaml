@@ -22,6 +22,12 @@ spec:
       containers:
       - name: sonarr
         image: ghcr.io/home-operations/sonarr:4.0.16
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 8989
+          initialDelaySeconds: 30
+          timeoutSeconds: 10
         volumeMounts:
         - name: config
           mountPath: /config

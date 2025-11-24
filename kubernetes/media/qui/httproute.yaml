@@ -11,4 +11,4 @@ spec:
   rules:
   - backendRefs:
     - name: qui
-      port: 7476
+      port: 80

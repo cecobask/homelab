@@ -17,6 +17,12 @@ spec:
       containers:
       - name: jellyfin
         image: ghcr.io/jellyfin/jellyfin:10.11.2
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8096
+          initialDelaySeconds: 30
+          timeoutSeconds: 10
         volumeMounts:
         - name: config
           mountPath: /config

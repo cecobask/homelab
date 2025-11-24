@@ -11,4 +11,4 @@ spec:
   rules:
   - backendRefs:
     - name: prowlarr
-      port: 9696
+      port: 80

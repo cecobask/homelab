@@ -17,6 +17,12 @@ spec:
       containers:
       - name: qui
         image: ghcr.io/autobrr/qui:v1.7.0
+        livenessProbe:
+          httpGet:
+            path: /healthz/liveness
+            port: 7476
+          initialDelaySeconds: 30
+          timeoutSeconds: 10
         volumeMounts:
         - name: config
           mountPath: /config

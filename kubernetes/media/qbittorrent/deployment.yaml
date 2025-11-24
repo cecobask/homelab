@@ -22,6 +22,12 @@ spec:
       containers:
       - name: qbittorrent
         image: ghcr.io/home-operations/qbittorrent:5.1.3
+        livenessProbe:
+          httpGet:
+            path: /api/v2/app/version
+            port: 8080
+          initialDelaySeconds: 30
+          timeoutSeconds: 10
         volumeMounts:
         - name: config
           mountPath: /config

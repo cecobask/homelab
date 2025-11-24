@@ -6,4 +6,5 @@ spec:
   selector:
     app: qui
   ports:
-  - port: 7476
+  - port: 80
+    targetPort: 7476
