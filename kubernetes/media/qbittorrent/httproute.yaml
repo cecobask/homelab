@@ -4,8 +4,8 @@ metadata:
   name: qbittorrent
 spec:
   parentRefs:
-  - name: cilium
-    namespace: cilium
+  - name: envoy
+    namespace: envoy-gateway
   hostnames:
   - qbit.cecobask.com
   rules:

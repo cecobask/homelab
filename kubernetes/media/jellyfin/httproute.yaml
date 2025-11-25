@@ -4,8 +4,8 @@ metadata:
   name: jellyfin
 spec:
   parentRefs:
-  - name: cilium
-    namespace: cilium
+  - name: envoy
+    namespace: envoy-gateway
   hostnames:
   - jellyfin.cecobask.com
   rules:

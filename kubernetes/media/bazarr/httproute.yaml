@@ -4,8 +4,8 @@ metadata:
   name: bazarr
 spec:
   parentRefs:
-  - name: cilium
-    namespace: cilium
+  - name: envoy
+    namespace: envoy-gateway
   hostnames:
   - bazarr.cecobask.com
   rules:

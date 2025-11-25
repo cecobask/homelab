@@ -4,8 +4,8 @@ metadata:
   name: radarr
 spec:
   parentRefs:
-  - name: cilium
-    namespace: cilium
+  - name: envoy
+    namespace: envoy-gateway
   hostnames:
   - radarr.cecobask.com
   rules:

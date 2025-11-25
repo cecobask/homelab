@@ -4,8 +4,8 @@ metadata:
   name: prowlarr
 spec:
   parentRefs:
-  - name: cilium
-    namespace: cilium
+  - name: envoy
+    namespace: envoy-gateway
   hostnames:
   - prowlarr.cecobask.com
   rules:

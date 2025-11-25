@@ -4,8 +4,8 @@ metadata:
   name: sonarr
 spec:
   parentRefs:
-  - name: cilium
-    namespace: cilium
+  - name: envoy
+    namespace: envoy-gateway
   hostnames:
   - sonarr.cecobask.com
   rules:
