@@ -33,7 +33,11 @@ save/secrets: | $(TALOS_DIR)
 	@terraform output -raw secrets > $(TALOS_DIR)/secrets.yaml
 
 .PHONY: down
-down: destroy
+down: teardown destroy
+
+.PHONY: teardown
+teardown:
+	@bash hack/teardown.sh
 
 .PHONY: destroy
 destroy:
