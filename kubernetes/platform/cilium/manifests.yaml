@@ -111,6 +111,16 @@ rules:
   - list
   - watch
 - apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - create
+  - get
+  - update
+  - list
+  - delete
+- apiGroups:
   - apiextensions.k8s.io
   resources:
   - customresourcedefinitions
@@ -531,6 +541,7 @@ data:
   enable-ipv6-big-tcp: "false"
   enable-ipv6-masquerade: "true"
   enable-k8s-networkpolicy: "true"
+  enable-l2-announcements: "true"
   enable-l2-neigh-discovery: "false"
   enable-l7-proxy: "true"
   enable-lb-ipam: "true"
@@ -1371,3 +1382,23 @@ spec:
     rollingUpdate:
       maxUnavailable: 2
     type: RollingUpdate
+---
+apiVersion: cilium.io/v2
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: default
+spec:
+  blocks:
+  - start: 192.168.40.3
+    stop: 192.168.40.10
+---
+apiVersion: cilium.io/v2alpha1
+kind: CiliumL2AnnouncementPolicy
+metadata:
+  name: default
+spec:
+  loadBalancerIPs: true
+  nodeSelector:
+    matchExpressions:
+    - key: node-role.kubernetes.io/control-plane
+      operator: DoesNotExist
