@@ -4,8 +4,8 @@ resources:
 - ../platform/argocd
 - ../platform/cert-manager
 - ../platform/sealed-secrets
-- ../platform
-- ../media
+- media.yaml
+- platform.yaml
 secretGenerator:
 - name: sealed-secrets-key
   namespace: sealed-secrets
