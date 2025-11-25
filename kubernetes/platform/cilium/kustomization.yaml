@@ -12,3 +12,13 @@ helmCharts:
   releaseName: cilium
   namespace: cilium
   valuesFile: values.yaml
+  valuesInline:
+    l2announcements:
+      enabled: true
+    gatewayAPI:
+      enabled: true
+      gatewayClass:
+        create: "false"
+      secretsNamespace:
+        create: false
+        name: cilium

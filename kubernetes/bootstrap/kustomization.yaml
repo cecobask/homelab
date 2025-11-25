@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
 - ../platform/argocd
 - ../platform/cert-manager
-- ../platform/cilium
 - ../platform/sealed-secrets
 - ../platform
 - ../media
