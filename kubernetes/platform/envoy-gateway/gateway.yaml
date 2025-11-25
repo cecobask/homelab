@@ -1,0 +1,42 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cecobask.com
+  namespace: envoy-gateway
+spec:
+  dnsNames:
+  - "*.cecobask.com"
+  - cecobask.com
+  issuerRef:
+    kind: ClusterIssuer
+    name: cloudflare
+  secretName: cecobask.com
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: GatewayClass
+metadata:
+  name: envoy
+spec:
+  controllerName: gateway.envoyproxy.io/gatewayclass-controller
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: envoy
+  namespace: envoy-gateway
+spec:
+  gatewayClassName: envoy
+  addresses:
+  - value: 192.168.40.3
+  listeners:
+  - name: https
+    protocol: HTTPS
+    port: 443
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        name: cecobask.com
+    allowedRoutes:
+      namespaces:
+        from: All
