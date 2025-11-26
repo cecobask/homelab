@@ -6,7 +6,6 @@ metadata:
 spec:
   dnsNames:
   - "*.cecobask.com"
-  - cecobask.com
   issuerRef:
     kind: ClusterIssuer
     name: cloudflare
