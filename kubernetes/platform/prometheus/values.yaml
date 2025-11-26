@@ -13,3 +13,15 @@ prometheus:
           resources:
             requests:
               storage: 30Gi
+cleanPrometheusOperatorObjectNames: true
+fullnameOverride: prometheus
+alertmanager:
+  fullnameOverride: alertmanager
+grafana:
+  fullnameOverride: grafana
+kube-state-metrics:
+  fullnameOverride: kube-state-metrics
+prometheusOperator:
+  fullnameOverride: prometheus-operator
+prometheus-node-exporter:
+  fullnameOverride: prometheus-node-exporter
