@@ -11,7 +11,7 @@ apply:
 
 .PHONY: bootstrap
 bootstrap:
-	@bash hack/bootstrap.sh
+	@kubectl apply -k bootstrap
 
 TALOS_DIR := $(HOME)/.talos
 $(TALOS_DIR):
@@ -33,11 +33,13 @@ save/secrets: | $(TALOS_DIR)
 	@terraform output -raw secrets > $(TALOS_DIR)/secrets.yaml
 
 .PHONY: down
-down: teardown destroy
+down: cleanup destroy
 
-.PHONY: teardown
-teardown:
-	@bash hack/teardown.sh
+.PHONY: cleanup
+cleanup:
+	@kubens argocd
+	@argocd login --core
+	@argocd app delete media --yes --wait
 
 .PHONY: destroy
 destroy:

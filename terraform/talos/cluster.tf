@@ -65,6 +65,7 @@ resource "talos_cluster_kubeconfig" "this" {
   }
 }
 
+# tflint-ignore: terraform_unused_declarations
 data "talos_cluster_health" "this" {
   depends_on             = [talos_cluster_kubeconfig.this]
   client_configuration   = data.talos_client_configuration.this.client_configuration

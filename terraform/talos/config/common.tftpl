@@ -5,8 +5,10 @@ cluster:
   proxy:
     disabled: true
   extraManifests:
-  - https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/cilium/manifests.yaml
   - https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.4.0/standard-install.yaml
+  - https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/argocd/manifests.yaml
+  - https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/cilium/manifests.yaml
+  - https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/sealed-secrets/manifests.yaml
 machine:
   install:
     disk: /dev/sda
