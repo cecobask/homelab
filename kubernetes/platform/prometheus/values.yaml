@@ -1,5 +1,3 @@
-crds:
-  enabled: false
 kubeProxy:
   enabled: false
 prometheus:

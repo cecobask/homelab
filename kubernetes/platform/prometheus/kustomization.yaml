@@ -1,11 +1,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+commonAnnotations:
+  argocd.argoproj.io/sync-options: ServerSideApply=true
 resources:
 - namespace.yaml
 helmCharts:
 - repo: oci://ghcr.io/prometheus-community/charts
   name: kube-prometheus-stack
   version: 79.8.2
-  releaseName: kube-prometheus-stack
-  namespace: kube-prometheus-stack
+  releaseName: prometheus
+  namespace: prometheus
+  includeCRDs: true
   valuesFile: values.yaml
