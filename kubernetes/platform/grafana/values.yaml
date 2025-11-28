@@ -1,0 +1,15 @@
+image:
+  tag: 12.3.0
+serviceMonitor:
+  enabled: true
+persistence:
+  enabled: true
+  type: sts
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: proxmox
+  size: 10Gi
+admin:
+  existingSecret: grafana
+  userKey: user
+  passwordKey: password

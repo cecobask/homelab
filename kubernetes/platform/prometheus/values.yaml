@@ -1,9 +1,12 @@
+grafana:
+  enabled: false
 kubeProxy:
   enabled: false
 prometheus:
   nodeSelector:
     topology.kubernetes.io/zone: pve1
   prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
     storageSpec:
       volumeClaimTemplate:
         spec:
@@ -17,8 +20,6 @@ cleanPrometheusOperatorObjectNames: true
 fullnameOverride: prometheus
 alertmanager:
   fullnameOverride: alertmanager
-grafana:
-  fullnameOverride: grafana
 kube-state-metrics:
   fullnameOverride: kube-state-metrics
 prometheusOperator:
