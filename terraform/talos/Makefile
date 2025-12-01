@@ -10,8 +10,15 @@ apply:
 	@terraform apply -auto-approve
 
 .PHONY: bootstrap
-bootstrap:
-	@kubectl apply -k bootstrap
+bootstrap: bootstrap/volumes bootstrap/applications
+
+.PHONY: bootstrap/volumes
+bootstrap/volumes:
+	@bash hack/bootstrap/volumes.sh
+
+.PHONY: bootstrap/applications
+bootstrap/applications:
+	@bash hack/bootstrap/applications.sh
 
 TALOS_DIR := $(HOME)/.talos
 $(TALOS_DIR):
@@ -33,13 +40,18 @@ save/secrets: | $(TALOS_DIR)
 	@terraform output -raw secrets > $(TALOS_DIR)/secrets.yaml
 
 .PHONY: down
-down: cleanup destroy
+down: destroy
 
 .PHONY: cleanup
-cleanup:
-	@kubens argocd
-	@argocd login --core
-	@argocd app delete media --yes --wait
+cleanup: cleanup/media
+
+.PHONY: cleanup/media
+cleanup/media:
+	@bash hack/cleanup/media.sh
+
+.PHONY: cleanup/volumes
+cleanup/volumes:
+	@bash hack/cleanup/volumes.sh
 
 .PHONY: destroy
 destroy:
