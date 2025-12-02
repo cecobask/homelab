@@ -1,3 +1,17 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: prowlarr
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 1Gi
+  csi:
+    driver: csi.proxmox.sinextra.dev
+    volumeHandle: homelab/pve2/local-lvm/vm-9999-prowlarr
+  storageClassName: proxmox-retain
+---
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -8,4 +22,5 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: proxmox
+  storageClassName: proxmox-retain
+  volumeName: prowlarr

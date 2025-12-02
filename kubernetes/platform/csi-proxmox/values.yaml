@@ -1,8 +1,9 @@
 storageClass:
 - name: proxmox
   storage: local-lvm
+- name: proxmox-retain
+  storage: local-lvm
   reclaimPolicy: Retain
-  fstype: ext4
 nodeSelector:
   node-role.kubernetes.io/control-plane: ""
 tolerations:
