@@ -10,4 +10,3 @@ helmCharts:
   version: v1.6.0
   releaseName: envoy-gateway
   namespace: envoy-gateway
-  valuesFile: values.yaml
