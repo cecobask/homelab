@@ -30,9 +30,12 @@ resource "proxmox_virtual_environment_vm" "this" {
     mac_address = each.value.mac_address
     vlan_id     = 40
   }
+  cdrom {
+    file_id   = proxmox_virtual_environment_download_file.this[each.value.node_name].id
+    interface = "ide0"
+  }
   disk {
     datastore_id = "local-lvm"
-    file_id      = proxmox_virtual_environment_download_file.this[each.value.node_name].id
     interface    = "scsi0"
     iothread     = true
     discard      = "on"

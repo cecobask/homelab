@@ -40,18 +40,18 @@ save/secrets: | $(TALOS_DIR)
 	@terraform output -raw secrets > $(TALOS_DIR)/secrets.yaml
 
 .PHONY: down
-down: destroy
+down: cleanup destroy
 
 .PHONY: cleanup
-cleanup: cleanup/media
+cleanup: cleanup/kubernetes
 
-.PHONY: cleanup/media
-cleanup/media:
-	@bash hack/cleanup/media.sh
+.PHONY: cleanup/kubernetes
+cleanup/kubernetes:
+	@bash hack/cleanup/kubernetes.sh
 
-.PHONY: cleanup/volumes
-cleanup/volumes:
-	@bash hack/cleanup/volumes.sh
+.PHONY: cleanup/proxmox
+cleanup/proxmox:
+	@bash hack/cleanup/proxmox.sh
 
 .PHONY: destroy
 destroy:

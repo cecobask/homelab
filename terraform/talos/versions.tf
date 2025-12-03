@@ -18,11 +18,6 @@ terraform {
   }
 }
 
-provider "proxmox" {
-  insecure = true
-  ssh {
-    agent = true
-  }
-}
+provider "proxmox" {}
 
 provider "talos" {}
