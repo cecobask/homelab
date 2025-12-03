@@ -9,6 +9,8 @@ spec:
     storage: 5Gi
   csi:
     driver: csi.proxmox.sinextra.dev
+    volumeAttributes:
+      storage: lvm
     volumeHandle: homelab/pve2/local-lvm/vm-9999-radarr
   storageClassName: proxmox-retain
 ---
