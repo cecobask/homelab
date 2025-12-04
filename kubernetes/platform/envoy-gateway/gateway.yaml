@@ -1,3 +1,15 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyProxy
+metadata:
+  name: envoy
+  namespace: envoy-gateway
+spec:
+  provider:
+    type: Kubernetes
+    kubernetes:
+      envoyService:
+        externalTrafficPolicy: Cluster
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: GatewayClass
 metadata:
@@ -12,6 +24,11 @@ metadata:
   namespace: envoy-gateway
 spec:
   gatewayClassName: envoy
+  infrastructure:
+    parametersRef:
+      group: gateway.envoyproxy.io
+      kind: EnvoyProxy
+      name: envoy
   listeners:
   - name: https
     protocol: HTTPS
@@ -19,7 +36,8 @@ spec:
     tls:
       mode: Terminate
       certificateRefs:
-      - kind: Secret
+      - group: ""
+        kind: Secret
         name: cecobask.com
     allowedRoutes:
       namespaces:
