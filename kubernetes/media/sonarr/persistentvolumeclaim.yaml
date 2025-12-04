@@ -1,21 +1,5 @@
-kind: PersistentVolume
 apiVersion: v1
-metadata:
-  name: sonarr
-spec:
-  accessModes:
-  - ReadWriteOnce
-  capacity:
-    storage: 5Gi
-  csi:
-    driver: csi.proxmox.sinextra.dev
-    volumeAttributes:
-      storage: lvm
-    volumeHandle: homelab/pve2/local-lvm/vm-9999-sonarr
-  storageClassName: proxmox-retain
----
 kind: PersistentVolumeClaim
-apiVersion: v1
 metadata:
   name: sonarr
 spec:
@@ -24,5 +8,4 @@ spec:
   resources:
     requests:
       storage: 5Gi
-  storageClassName: proxmox-retain
-  volumeName: sonarr
+  storageClassName: proxmox

@@ -1,9 +1,6 @@
 storageClass:
 - name: proxmox
   storage: local-lvm
-- name: proxmox-retain
-  storage: local-lvm
-  reclaimPolicy: Retain
 nodeSelector:
   node-role.kubernetes.io/control-plane: ""
 tolerations:
