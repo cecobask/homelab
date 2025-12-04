@@ -8,8 +8,6 @@ secretGenerator:
   namespace: sealed-secrets
   options:
     disableNameSuffixHash: true
-    labels:
-      sealedsecrets.bitnami.com/sealed-secrets-key: active
   type: kubernetes.io/tls
   files:
   - tls.crt
