@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-echo "Cleaning up apps with persistent volumes..."
+echo "Cleaning up applications..."
 kubens argocd
 argocd login --core
 argocd proj windows add default --kind=deny --schedule="* * * * *" --duration=30m --applications="*" --manual-sync

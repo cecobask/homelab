@@ -10,15 +10,8 @@ apply:
 	@terraform apply -auto-approve
 
 .PHONY: bootstrap
-bootstrap: bootstrap/volumes bootstrap/applications
-
-.PHONY: bootstrap/volumes
-bootstrap/volumes:
-	@bash hack/bootstrap/volumes.sh
-
-.PHONY: bootstrap/applications
-bootstrap/applications:
-	@bash hack/bootstrap/applications.sh
+bootstrap:
+	@bash hack/bootstrap.sh
 
 TALOS_DIR := $(HOME)/.talos
 $(TALOS_DIR):
@@ -43,15 +36,8 @@ save/secrets: | $(TALOS_DIR)
 down: cleanup destroy
 
 .PHONY: cleanup
-cleanup: cleanup/kubernetes
-
-.PHONY: cleanup/kubernetes
-cleanup/kubernetes:
-	@bash hack/cleanup/kubernetes.sh
-
-.PHONY: cleanup/proxmox
-cleanup/proxmox:
-	@bash hack/cleanup/proxmox.sh
+cleanup:
+	@bash hack/cleanup.sh
 
 .PHONY: destroy
 destroy:
