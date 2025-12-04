@@ -3,16 +3,11 @@ kind: Kustomization
 commonAnnotations:
   argocd.argoproj.io/sync-options: ServerSideApply=true
 resources:
+- https://github.com/envoyproxy/gateway/releases/download/v1.6.0/envoy-gateway-crds.yaml
 - certificate.yaml
 - gateway.yaml
 - namespace.yaml
 helmCharts:
-- repo: oci://docker.io/envoyproxy
-  name: gateway-crds-helm
-  version: v1.6.0
-  releaseName: envoy-gateway-crds
-  namespace: envoy-gateway
-  valuesFile: values.yaml
 - repo: oci://docker.io/envoyproxy
   name: gateway-helm
   version: v1.6.0
