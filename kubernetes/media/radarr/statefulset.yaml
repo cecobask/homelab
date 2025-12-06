@@ -1,9 +1,9 @@
-kind: Deployment
+kind: StatefulSet
 apiVersion: apps/v1
 metadata:
   name: radarr
 spec:
-  replicas: 1
+  serviceName: radarr
   selector:
     matchLabels:
       app: radarr
@@ -34,9 +34,16 @@ spec:
         - name: media
           mountPath: /media
       volumes:
-      - name: config
-        persistentVolumeClaim:
-          claimName: radarr
       - name: media
         persistentVolumeClaim:
           claimName: media
+  volumeClaimTemplates:
+  - metadata:
+      name: config
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      storageClassName: proxmox
+      resources:
+        requests:
+          storage: 5Gi

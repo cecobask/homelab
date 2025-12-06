@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: qui
 spec:
+  clusterIP: None
   selector:
     app: qui
   ports:

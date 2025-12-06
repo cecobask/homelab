@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: sonarr
 spec:
+  clusterIP: None
   selector:
     app: sonarr
   ports:

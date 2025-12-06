@@ -1,26 +1,26 @@
-kind: Deployment
+kind: StatefulSet
 apiVersion: apps/v1
 metadata:
-  name: jellyfin
+  name: qui
 spec:
-  replicas: 1
+  serviceName: qui
   selector:
     matchLabels:
-      app: jellyfin
+      app: qui
   template:
     metadata:
       labels:
-        app: jellyfin
+        app: qui
     spec:
       nodeSelector:
         topology.kubernetes.io/zone: pve2
       containers:
-      - name: jellyfin
-        image: ghcr.io/jellyfin/jellyfin:10.11.2
+      - name: qui
+        image: ghcr.io/autobrr/qui:v1.7.0
         livenessProbe:
           httpGet:
-            path: /health
-            port: 8096
+            path: /healthz/liveness
+            port: 7476
           initialDelaySeconds: 30
           timeoutSeconds: 10
         volumeMounts:
@@ -29,9 +29,16 @@ spec:
         - name: media
           mountPath: /media
       volumes:
-      - name: config
-        persistentVolumeClaim:
-          claimName: jellyfin
       - name: media
         persistentVolumeClaim:
           claimName: media
+  volumeClaimTemplates:
+  - metadata:
+      name: config
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      storageClassName: proxmox
+      resources:
+        requests:
+          storage: 1Gi

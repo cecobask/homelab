@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: qbittorrent
 spec:
+  clusterIP: None
   selector:
     app: qbittorrent
   ports:

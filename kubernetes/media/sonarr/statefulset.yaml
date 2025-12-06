@@ -1,9 +1,9 @@
-kind: Deployment
+kind: StatefulSet
 apiVersion: apps/v1
 metadata:
   name: sonarr
 spec:
-  replicas: 1
+  serviceName: sonarr
   selector:
     matchLabels:
       app: sonarr
@@ -34,9 +34,16 @@ spec:
         - name: media
           mountPath: /media
       volumes:
-      - name: config
-        persistentVolumeClaim:
-          claimName: sonarr
       - name: media
         persistentVolumeClaim:
           claimName: media
+  volumeClaimTemplates:
+  - metadata:
+      name: config
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      storageClassName: proxmox
+      resources:
+        requests:
+          storage: 5Gi

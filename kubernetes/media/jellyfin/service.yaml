@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: jellyfin
 spec:
+  clusterIP: None
   selector:
     app: jellyfin
   ports:

@@ -1,9 +1,9 @@
-kind: Deployment
+kind: StatefulSet
 apiVersion: apps/v1
 metadata:
   name: prowlarr
 spec:
-  replicas: 1
+  serviceName: prowlarr
   selector:
     matchLabels:
       app: prowlarr
@@ -35,3 +35,13 @@ spec:
       - name: config
         persistentVolumeClaim:
           claimName: prowlarr
+  volumeClaimTemplates:
+  - metadata:
+      name: config
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      storageClassName: proxmox
+      resources:
+        requests:
+          storage: 1Gi

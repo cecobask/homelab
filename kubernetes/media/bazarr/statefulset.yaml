@@ -1,9 +1,9 @@
-kind: Deployment
+kind: StatefulSet
 apiVersion: apps/v1
 metadata:
   name: bazarr
 spec:
-  replicas: 1
+  serviceName: bazarr
   selector:
     matchLabels:
       app: bazarr
@@ -34,9 +34,16 @@ spec:
         - name: media
           mountPath: /media
       volumes:
-      - name: config
-        persistentVolumeClaim:
-          claimName: bazarr
       - name: media
         persistentVolumeClaim:
           claimName: media
+  volumeClaimTemplates:
+  - metadata:
+      name: config
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      storageClassName: proxmox
+      resources:
+        requests:
+          storage: 1Gi
