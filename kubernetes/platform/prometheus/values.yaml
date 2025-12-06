@@ -7,9 +7,9 @@ grafana:
 kubeProxy:
   enabled: false
 prometheus:
-  nodeSelector:
-    topology.kubernetes.io/zone: pve1
   prometheusSpec:
+    nodeSelector:
+      topology.kubernetes.io/zone: pve1
     serviceMonitorSelectorNilUsesHelmValues: false
     storageSpec:
       volumeClaimTemplate:
