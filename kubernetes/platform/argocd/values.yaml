@@ -3,6 +3,8 @@ global:
     tag: v3.1.9
 configs:
   cm:
+    application.instanceLabelKey: argocd.argoproj.io/instance
+    application.resourceTrackingMethod: annotation+label
     kustomize.buildOptions: --enable-helm
   params:
     server.insecure: true
