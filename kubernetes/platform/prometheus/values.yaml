@@ -8,14 +8,6 @@ kubeProxy:
   enabled: false
 prometheus:
   prometheusSpec:
-    scrapeClasses:
-    - name: cluster
-      relabelings:
-      - action: replace
-        regex: (.*)
-        replacement: homelab
-        sourceLabels: [ __name__ ]
-        targetLabel: cluster
     nodeSelector:
       topology.kubernetes.io/zone: pve1
     serviceMonitorSelectorNilUsesHelmValues: false
@@ -30,9 +22,46 @@ prometheus:
               storage: 30Gi
 cleanPrometheusOperatorObjectNames: true
 fullnameOverride: prometheus
+commonLabels:
+  cluster: homelab
+coreDns:
+  serviceMonitor:
+    targetLabels:
+    - cluster
+kubeControllerManager:
+  serviceMonitor:
+    targetLabels:
+    - cluster
+kubeEtcd:
+  serviceMonitor:
+    targetLabels:
+    - cluster
+kubelet:
+  serviceMonitor:
+    targetLabels:
+    - cluster
+kubeScheduler:
+  serviceMonitor:
+    selector:
+      matchLabels:
+        component: kube-scheduler
+    targetLabels:
+    - cluster
 kube-state-metrics:
   fullnameOverride: kube-state-metrics
+  customLabels:
+    cluster: homelab
+  prometheus:
+    monitor:
+      targetLabels:
+      - cluster
 prometheusOperator:
   fullnameOverride: prometheus-operator
+  extraArgs:
+  - --labels=cluster=homelab
 prometheus-node-exporter:
   fullnameOverride: prometheus-node-exporter
+  prometheus:
+    monitor:
+      targetLabels:
+      - cluster
