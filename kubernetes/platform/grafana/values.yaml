@@ -40,3 +40,33 @@ dashboards:
       gnetId: 1860
       revision: 42
       datasource: Prometheus
+    cluster-total:
+      url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/cluster-total.json
+    controller-manager:
+      url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/controller-manager.json
+    k8s-resources-cluster:
+      url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/k8s-resources-cluster.json
+    k8s-resources-namespace:
+      url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/k8s-resources-namespace.json
+    k8s-resources-node:
+      url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/k8s-resources-node.json
+    k8s-resources-pod:
+      url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/k8s-resources-pod.json
+    k8s-resources-workload:
+      url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/k8s-resources-workload.json
+    k8s-resources-workloads-namespace:
+      url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/k8s-resources-workloads-namespace.json
+    kubelet:
+      url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/kubelet.json
+    namespace-by-pod:
+      url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/namespace-by-pod.json
+    namespace-by-workload:
+      url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/namespace-by-workload.json
+    persistentvolumesusage:
+      url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/persistentvolumesusage.json
+    pod-total:
+      url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/pod-total.json
+    scheduler:
+      url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/scheduler.json
+    workload-total:
+      url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/workload-total.json
