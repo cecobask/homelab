@@ -8,7 +8,32 @@ configs:
     kustomize.buildOptions: --enable-helm
   params:
     server.insecure: true
+applicationSet:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+controller:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
 dex:
   enabled: false
 notifications:
   enabled: false
+redis:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+repoServer:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+server:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
