@@ -8,6 +8,14 @@ kubeProxy:
   enabled: false
 prometheus:
   prometheusSpec:
+    scrapeClasses:
+    - name: cluster
+      relabelings:
+      - action: replace
+        regex: (.*)
+        replacement: homelab
+        sourceLabels: [ __name__ ]
+        targetLabel: cluster
     nodeSelector:
       topology.kubernetes.io/zone: pve1
     serviceMonitorSelectorNilUsesHelmValues: false
