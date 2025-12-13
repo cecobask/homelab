@@ -2,7 +2,12 @@ image = {
   version      = "v1.11.2"
   platform     = "nocloud"
   architecture = "amd64"
-  extensions   = ["intel-ucode", "qemu-guest-agent"]
+  extensions = [
+    "intel-ucode",
+    "iscsi-tools",
+    "qemu-guest-agent",
+    "util-linux-tools"
+  ]
 }
 
 vms = {
@@ -11,7 +16,7 @@ vms = {
     vm_id        = 201
     cpu_cores    = 2
     ram_mb       = 1024 * 3
-    disk_gb      = 100
+    disk_gb      = 30
     ipv4         = "192.168.40.201"
     mac_address  = "00:00:00:00:02:01"
     machine_type = "controlplane"
@@ -21,7 +26,7 @@ vms = {
     vm_id        = 202
     cpu_cores    = 2
     ram_mb       = 1024 * 3
-    disk_gb      = 100
+    disk_gb      = 30
     ipv4         = "192.168.40.202"
     mac_address  = "00:00:00:00:02:02"
     machine_type = "controlplane"
@@ -31,7 +36,7 @@ vms = {
     vm_id        = 203
     cpu_cores    = 2
     ram_mb       = 1024 * 3
-    disk_gb      = 100
+    disk_gb      = 30
     ipv4         = "192.168.40.203"
     mac_address  = "00:00:00:00:02:03"
     machine_type = "controlplane"
@@ -41,7 +46,7 @@ vms = {
     vm_id        = 211
     cpu_cores    = 2
     ram_mb       = 1024 * 4
-    disk_gb      = 100
+    disk_gb      = 30
     ipv4         = "192.168.40.211"
     mac_address  = "00:00:00:00:02:11"
     machine_type = "worker"
@@ -51,7 +56,7 @@ vms = {
     vm_id        = 212
     cpu_cores    = 4
     ram_mb       = 1024 * 4
-    disk_gb      = 100
+    disk_gb      = 30
     ipv4         = "192.168.40.212"
     mac_address  = "00:00:00:00:02:12"
     machine_type = "worker"
