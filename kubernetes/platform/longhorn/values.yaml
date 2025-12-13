@@ -1,0 +1,18 @@
+csi:
+  attacherReplicaCount: 2
+  provisionerReplicaCount: 2
+  resizerReplicaCount: 2
+  snapshotterReplicaCount: 2
+defaultSettings:
+  defaultDataPath: /var/mnt/longhorn
+longhornUI:
+  replicas: 1
+metrics:
+  serviceMonitor:
+    enabled: true
+persistence:
+  defaultClass: false
+  defaultClassReplicaCount: 2
+  defaultDataLocality: best-effort
+preUpgradeChecker:
+  jobEnabled: false
