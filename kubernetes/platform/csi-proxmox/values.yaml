@@ -1,9 +1,0 @@
-storageClass:
-- name: proxmox
-  storage: local-lvm
-nodeSelector:
-  node-role.kubernetes.io/control-plane: ""
-tolerations:
-- key: node-role.kubernetes.io/control-plane
-  effect: NoSchedule
-existingConfigSecret: csi-proxmox

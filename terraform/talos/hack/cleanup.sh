@@ -6,7 +6,7 @@ echo "Cleaning up applications..."
 kubens argocd
 argocd login --core
 argocd proj windows add default --kind=deny --schedule="* * * * *" --applications="*" --duration=3m
-argocd app delete --yes --selector='argocd.argoproj.io/instance, argocd.argoproj.io/instance notin (argocd,cilium,csi-proxmox,csi-smb,longhorn)'
+argocd app delete --yes --selector='argocd.argoproj.io/instance, argocd.argoproj.io/instance notin (argocd,cilium,longhorn,sealed-secrets)'
 argocd app delete media --yes
 kubectl wait pv --all --for=delete --timeout=3m
 kubectl patch setting deleting-confirmation-flag --namespace=longhorn-system --patch='{"value": "true"}' --type=merge
