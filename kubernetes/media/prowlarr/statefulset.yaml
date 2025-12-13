@@ -12,8 +12,6 @@ spec:
       labels:
         app: prowlarr
     spec:
-      nodeSelector:
-        topology.kubernetes.io/zone: pve2
       securityContext:
         runAsUser: 65534
         runAsGroup: 65534
@@ -41,7 +39,7 @@ spec:
     spec:
       accessModes:
       - ReadWriteOnce
-      storageClassName: proxmox
+      storageClassName: longhorn
       resources:
         requests:
           storage: 1Gi

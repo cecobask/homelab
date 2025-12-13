@@ -7,7 +7,7 @@ persistence:
   type: sts
   accessModes:
   - ReadWriteOnce
-  storageClassName: proxmox
+  storageClassName: longhorn
   size: 10Gi
 admin:
   existingSecret: grafana

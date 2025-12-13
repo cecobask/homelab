@@ -12,8 +12,6 @@ spec:
       labels:
         app: qui
     spec:
-      nodeSelector:
-        topology.kubernetes.io/zone: pve2
       containers:
       - name: qui
         image: ghcr.io/autobrr/qui:v1.7.0
@@ -38,7 +36,7 @@ spec:
     spec:
       accessModes:
       - ReadWriteOnce
-      storageClassName: proxmox
+      storageClassName: longhorn
       resources:
         requests:
           storage: 1Gi
