@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - httproute.yaml
 - namespace.yaml
+- volumesnapshotclass.yaml
 helmCharts:
 - repo: https://charts.longhorn.io
   name: longhorn

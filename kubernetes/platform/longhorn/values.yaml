@@ -2,7 +2,7 @@ csi:
   attacherReplicaCount: 2
   provisionerReplicaCount: 2
   resizerReplicaCount: 2
-  snapshotterReplicaCount: 2
+  snapshotterReplicaCount: 1
 defaultSettings:
   defaultDataPath: /var/mnt/longhorn
 longhornUI:
