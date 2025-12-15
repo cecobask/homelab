@@ -41,16 +41,6 @@ resource "proxmox_virtual_environment_vm" "this" {
     discard      = "on"
     size         = each.value.disk_gb
   }
-  dynamic "disk" {
-    for_each = each.value.machine_type == "worker" ? [1] : []
-    content {
-      datastore_id = "local-lvm"
-      interface    = "scsi1"
-      iothread     = true
-      discard      = "on"
-      size         = 200
-    }
-  }
   operating_system {
     type = "l26"
   }
