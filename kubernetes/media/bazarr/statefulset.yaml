@@ -12,6 +12,14 @@ spec:
       labels:
         app: bazarr
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: topology.kubernetes.io/zone
+                operator: In
+                values: [ pve2 ]
       securityContext:
         runAsUser: 65534
         runAsGroup: 65534
@@ -41,7 +49,7 @@ spec:
     spec:
       accessModes:
       - ReadWriteOnce
-      storageClassName: longhorn
+      storageClassName: proxmox
       resources:
         requests:
           storage: 1Gi

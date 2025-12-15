@@ -8,11 +8,19 @@ kubeProxy:
   enabled: false
 prometheus:
   prometheusSpec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: topology.kubernetes.io/zone
+              operator: In
+              values: [ pve1 ]
     serviceMonitorSelectorNilUsesHelmValues: false
     storageSpec:
       volumeClaimTemplate:
         spec:
-          storageClassName: longhorn
+          storageClassName: proxmox
           accessModes:
           - ReadWriteOnce
           resources:

@@ -12,6 +12,14 @@ spec:
       labels:
         app: jellyfin
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: topology.kubernetes.io/zone
+                operator: In
+                values: [ pve2 ]
       containers:
       - name: jellyfin
         image: ghcr.io/jellyfin/jellyfin:10.11.2
@@ -36,7 +44,7 @@ spec:
     spec:
       accessModes:
       - ReadWriteOnce
-      storageClassName: longhorn
+      storageClassName: proxmox
       resources:
         requests:
           storage: 10Gi

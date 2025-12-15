@@ -1,18 +1,15 @@
-image:
-  tag: 12.3.0
-serviceMonitor:
-  enabled: true
-persistence:
-  enabled: true
-  type: sts
-  accessModes:
-  - ReadWriteOnce
-  storageClassName: longhorn
-  size: 10Gi
 admin:
   existingSecret: grafana
   userKey: user
   passwordKey: password
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: topology.kubernetes.io/zone
+          operator: In
+          values: [ pve1 ]
 datasources:
   datasources.yaml:
     apiVersion: 1
@@ -70,3 +67,14 @@ dashboards:
       url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/scheduler.json
     workload-total:
       url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/workload-total.json
+image:
+  tag: 12.3.0
+persistence:
+  enabled: true
+  type: sts
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: proxmox
+  size: 10Gi
+serviceMonitor:
+  enabled: true
