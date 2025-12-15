@@ -3,4 +3,10 @@ kind: Kustomization
 namespace: kube-system
 resources:
 - https://github.com/kubernetes-csi/external-snapshotter/client/config/crd?ref=v8.4.0
-- https://github.com/kubernetes-csi/external-snapshotter/deploy/kubernetes/snapshot-controller?ref=v8.4.0
+helmCharts:
+- repo: https://piraeus.io/helm-charts
+  name: snapshot-controller
+  version: 4.2.0
+  releaseName: snapshot-controller
+  namespace: kube-system
+  valuesFile: values.yaml
