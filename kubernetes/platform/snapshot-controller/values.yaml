@@ -1,5 +1,0 @@
-controller:
-  image:
-    tag: v8.4.0
-  serviceMonitor:
-    create: true

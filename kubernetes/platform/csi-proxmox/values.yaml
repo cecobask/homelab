@@ -18,6 +18,11 @@ controller:
     image:
       repository: registry.k8s.io/sig-storage/csi-resizer
       tag: v1.14.0
+  snapshotter:
+    enabled: true
+    image:
+      repository: registry.k8s.io/sig-storage/csi-snapshotter
+      tag: v8.4.0
 node:
   driverRegistrar:
     image:
