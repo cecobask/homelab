@@ -49,7 +49,11 @@ spec:
     spec:
       accessModes:
       - ReadWriteOnce
-      storageClassName: proxmox
+      dataSourceRef:
+        kind: ReplicationDestination
+        apiGroup: volsync.backube
+        name: bazarr
       resources:
         requests:
           storage: 1Gi
+      storageClassName: proxmox

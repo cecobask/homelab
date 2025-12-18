@@ -25,3 +25,27 @@ spec:
       daily: 3
     storageClassName: proxmox
     volumeSnapshotClassName: proxmox
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationDestination
+metadata:
+  name: bazarr
+spec:
+  trigger:
+    manual: once
+  restic:
+    accessModes:
+    - ReadWriteOnce
+    capacity: 1Gi
+    cleanupCachePVC: true
+    cleanupTempPVC: true
+    copyMethod: Snapshot
+    enableFileDeletion: true
+    moverSecurityContext:
+      runAsUser: 65534
+      runAsGroup: 65534
+      fsGroup: 65534
+      fsGroupChangePolicy: OnRootMismatch
+    repository: restic-bazarr
+    storageClassName: proxmox
+    volumeSnapshotClassName: proxmox
