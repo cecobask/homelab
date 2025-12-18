@@ -18,10 +18,10 @@ spec:
   trigger:
     schedule: "0 3 * * *"
   restic:
-    cacheStorageClassName: proxmox
     copyMethod: Snapshot
     pruneIntervalDays: 1
     repository: restic-bazarr
     retain:
       daily: 3
+    storageClassName: proxmox
     volumeSnapshotClassName: proxmox
