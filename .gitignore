@@ -1,4 +1,5 @@
 *.crt
 *.key
+bitwarden-token
 kubernetes/**/charts
 terraform/**/*.qcow2

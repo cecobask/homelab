@@ -4,11 +4,9 @@ resources:
 - media.yaml
 - platform.yaml
 secretGenerator:
-- name: sealed-secrets-key
-  namespace: sealed-secrets
+- name: bitwarden
+  namespace: external-secrets
+  files:
+  - token=bitwarden-token
   options:
     disableNameSuffixHash: true
-  type: kubernetes.io/tls
-  files:
-  - tls.crt
-  - tls.key

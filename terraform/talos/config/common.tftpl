@@ -7,8 +7,9 @@ cluster:
   extraManifests:
   - https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.4.0/standard-install.yaml
   - https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/argocd/manifests.yaml
+  - https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/cert-manager/manifests.yaml
   - https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/cilium/manifests.yaml
-  - https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/sealed-secrets/manifests.yaml
+  - https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/external-secrets/manifests.yaml
   - https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/snapshot-controller/manifests.yaml
 machine:
   install:

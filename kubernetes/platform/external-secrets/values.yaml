@@ -1,0 +1,13 @@
+bitwarden-sdk-server:
+  enabled: true
+  image:
+    tls:
+      secretName: bitwarden-sdk-server
+webhook:
+  certManager:
+    enabled: true
+    cert:
+      issuerRef:
+        name: internal-ca
+        kind: ClusterIssuer
+  lookaheadInterval: 48h

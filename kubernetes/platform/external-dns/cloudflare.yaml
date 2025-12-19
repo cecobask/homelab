@@ -1,8 +1,14 @@
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
 metadata:
   name: cloudflare
   namespace: external-dns
 spec:
-  encryptedData:
-    token: AgAM0Z2ZbRBn8uqiAzSQtR85IJWK2VyiAny6BuJ/F6Hfx73PqaqlMldQQpR/La4oe0z0EF81Z0Cd5zIQl1QAO5HAjnP3ghPxQN714Ex1OkJmzMJcHWz8e0UU8AisHL1EsKPFVVWWDi6r86Ujq3I6L6ueoNOvAeSFvs9LVebmK7v4UJXbvfWPOIUXvvyRQ9T9tG52FMFNWuRJ2YCxMy0HhcjXCWIq6sjrUJK5ATcZNrB/vFQBGfeY/8b2T03kLJVG0rUYeC4VOVamuFg1D+GZbkF+69bz+y95Y4vAxtxXL71yhkavHAu2uActEQUQyjRoRCKFmyFreDOiri43WhRwNyCmZH9CIFmS/BHSkvSGRBYVCcA74dsZecdzB7q9oeOjYE8CP1mApNov+mqkrCRGFS3cDWiRT5VDoXnv2fNDIHE9uSYl8kr11vKQbhHVA4EbdehVSZPU8II3P9aacuNNZLKw1B65gaWejtHHOESiqKTm1SktHDrfAIm2p7b4c3djrdt6NpxZKeJnvNZRHoOcpxP5thexUcJx9lHGHvxSamKwGBqoFiPJTlPp7BvoxpFAySFzxyxjGcupdXIZGlZOhryx31QtOuU7X3utKEQkabMoRjAUFEDN74ZqCmFUTulDv/1lH+Yg97Uiq9VkPpzn/RKaSaBBQVyCnUclK1bknoBWUrsyPQJWbqR6LkQM2kFYEYeNRYrJVvleCY0Et8RZAIJWU3XU5MBcFfrF1ZxWAoRz+HnbHZ0ltTna
+  refreshInterval: 24h
+  secretStoreRef:
+    name: bitwarden
+    kind: ClusterSecretStore
+  data:
+  - secretKey: token
+    remoteRef:
+      key: 3e9913dc-4ee1-451b-9b26-b3b80162547d

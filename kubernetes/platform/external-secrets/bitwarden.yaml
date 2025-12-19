@@ -1,0 +1,41 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: bitwarden-sdk-server
+spec:
+  secretName: bitwarden-sdk-server
+  dnsNames:
+  - bitwarden-sdk-server
+  - bitwarden-sdk-server.external-secrets
+  - bitwarden-sdk-server.external-secrets.svc.cluster.local
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS8
+    size: 2048
+  issuerRef:
+    name: internal-ca
+    kind: ClusterIssuer
+---
+apiVersion: external-secrets.io/v1
+kind: ClusterSecretStore
+metadata:
+  name: bitwarden
+spec:
+  provider:
+    bitwardensecretsmanager:
+      apiURL: https://api.bitwarden.com
+      identityURL: https://identity.bitwarden.com
+      auth:
+        secretRef:
+          credentials:
+            key: token
+            name: bitwarden
+            namespace: external-secrets
+      bitwardenServerSDKURL: https://bitwarden-sdk-server.external-secrets.svc.cluster.local:9998
+      caProvider:
+        type: Secret
+        name: bitwarden-sdk-server
+        key: ca.crt
+        namespace: external-secrets
+      organizationID: fc32290b-66fc-48b3-a734-b37800bcfb53
+      projectID: 4bceaa73-37aa-4403-845d-b37800bdc7b3
