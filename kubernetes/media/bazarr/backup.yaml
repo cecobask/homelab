@@ -19,7 +19,12 @@ spec:
       key: fc256235-0bc9-4494-9568-b3b801637cf8
   - secretKey: RESTIC_REPOSITORY
     remoteRef:
-      key: a41dc5df-00eb-4d82-8aa4-b3b80164f3a4
+      key: 1c31c13f-4ad7-45bb-88c4-b3b8016414be
+  target:
+    template:
+      data:
+        RESTIC_REPOSITORY: s3:{{ .RESTIC_REPOSITORY }}/volsync/bazarr
+      mergePolicy: Merge
 ---
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
