@@ -3,7 +3,7 @@ kind: ExternalSecret
 metadata:
   name: restic-bazarr
 spec:
-  refreshInterval: 24h
+  refreshInterval: 0s
   secretStoreRef:
     name: bitwarden
     kind: ClusterSecretStore

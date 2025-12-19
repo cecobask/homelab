@@ -14732,7 +14732,7 @@ spec:
   - remoteRef:
       key: 334a9236-04d8-40a0-8d7a-b37800c1aac4
     secretKey: token
-  refreshInterval: 24h
+  refreshInterval: 0s
   secretStoreRef:
     kind: ClusterSecretStore
     name: bitwarden

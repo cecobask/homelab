@@ -4,7 +4,7 @@ metadata:
   name: cloudflare
   namespace: cert-manager
 spec:
-  refreshInterval: 24h
+  refreshInterval: 0s
   secretStoreRef:
     name: bitwarden
     kind: ClusterSecretStore
