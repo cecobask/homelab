@@ -26,10 +26,10 @@ spec:
     deletionPolicy: Delete
     template:
       data:
-        AWS_ACCESS_KEY_ID: '{{ printf "{{ .backblazeApplicationKey }}" }}'
-        AWS_SECRET_ACCESS_KEY: '{{ printf "{{ .backblazeKeyID }}" }}'
-        RESTIC_PASSWORD: '{{ printf "{{ .resticPassword }}" }}'
-        RESTIC_REPOSITORY: '{{ printf "s3:%s/volsync/%s" "{{ .resticRepository }}" "{{ .Values.name }}" }}'
+        AWS_ACCESS_KEY_ID: '{{ "{{ .backblazeApplicationKey }}" }}'
+        AWS_SECRET_ACCESS_KEY: '{{ "{{ .backblazeKeyID }}" }}'
+        RESTIC_PASSWORD: '{{ "{{ .resticPassword }}" }}'
+        RESTIC_REPOSITORY: 's3:{{ "{{ .resticRepository }}" }}/volsync/{{ .Values.name }}'
 ---
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
