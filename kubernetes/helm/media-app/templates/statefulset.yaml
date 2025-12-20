@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  serviceName: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+    spec:
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        {{- with .Values.livenessProbe }}
+        livenessProbe:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.readinessProbe }}
+        name: {{ .Values.name }}
+        readinessProbe:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.resources }}
+        resources:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.volumeMounts }}
+        volumeMounts:
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      {{- with .Values.securityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.volumes }}
+      volumes:
+      {{- toYaml . | nindent 6 }}
+      {{- end }}
+  {{- if .Values.persistence.enabled }}
+  volumeClaimTemplates:
+  - metadata:
+      name: {{ .Values.persistence.name }}
+    spec:
+      {{- with .Values.persistence.accessModes }}
+      accessModes:
+      {{- toYaml . | nindent 6 }}
+      {{- end }}
+      dataSourceRef:
+        kind: ReplicationDestination
+        apiGroup: volsync.backube
+        name: {{ .Values.name }}
+      resources:
+        requests:
+          storage: {{ .Values.persistence.capacity }}
+      storageClassName: {{ .Values.persistence.storageClassName }}
+  {{- end }}

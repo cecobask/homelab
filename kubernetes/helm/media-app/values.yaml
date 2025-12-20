@@ -1,0 +1,50 @@
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: topology.kubernetes.io/zone
+          operator: In
+          values: [ pve2 ]
+httpRoute:
+  enabled: false
+  hostname: ~
+  parentRefs:
+  - name: envoy
+    namespace: envoy-gateway
+image:
+  repository: ~
+  tag: ~
+livenessProbe: ~
+name: ~
+readinessProbe: ~
+resources: ~
+persistence:
+  enabled: false
+  accessModes:
+  - ReadWriteOnce
+  capacity: ~
+  name: config
+  secret:
+    backblazeApplicationKey: a8ee4e06-80ae-47ca-a7fb-b3b801648720
+    backblazeKeyID: a41dc5df-00eb-4d82-8aa4-b3b80164f3a4
+    resticPassword: fc256235-0bc9-4494-9568-b3b801637cf8
+    resticRepository: 1c31c13f-4ad7-45bb-88c4-b3b8016414be
+  storageClassName: proxmox
+  volumeSnapshotClassName: proxmox
+secretStoreRef:
+  name: bitwarden
+  kind: ClusterSecretStore
+securityContext: ~
+service:
+  port: ~
+  targetPort: ~
+volumeMounts:
+- name: config
+  mountPath: /config
+- name: media
+  mountPath: /media
+volumes:
+- name: media
+  persistentVolumeClaim:
+    claimName: media

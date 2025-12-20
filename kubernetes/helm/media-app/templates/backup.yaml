@@ -1,0 +1,74 @@
+{{- if .Values.persistence.enabled -}}
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: "restic-{{ .Values.name }}"
+spec:
+  data:
+  - secretKey: backblazeApplicationKey
+    remoteRef:
+      key: {{ .Values.persistence.secret.backblazeApplicationKey }}
+  - secretKey: backblazeKeyID
+    remoteRef:
+      key: {{ .Values.persistence.secret.backblazeKeyID }}
+  - secretKey: resticPassword
+    remoteRef:
+      key: {{ .Values.persistence.secret.resticPassword }}
+  - secretKey: resticRepository
+    remoteRef:
+      key: {{ .Values.persistence.secret.resticRepository }}
+  refreshInterval: 0s
+  {{- with .Values.secretStoreRef }}
+  secretStoreRef:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  target:
+    template:
+      data:
+        AWS_ACCESS_KEY_ID: '{{ printf "{{ .backblazeApplicationKey }}" }}'
+        AWS_SECRET_ACCESS_KEY: '{{ printf "{{ .backblazeKeyID }}" }}'
+        RESTIC_PASSWORD: '{{ printf "{{ .resticPassword }}" }}'
+        RESTIC_REPOSITORY: '{{ printf "s3:%s/volsync/%s" "{{ .resticRepository }}" "{{ .Values.name }}" }}'
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: {{ .Values.name }}
+spec:
+  restic:
+    copyMethod: Snapshot
+    pruneIntervalDays: 1
+    repository: "restic-{{ .Values.name }}"
+    retain:
+      daily: 3
+    storageClassName: {{ .Values.persistence.storageClassName }}
+    volumeSnapshotClassName: {{ .Values.persistence.volumeSnapshotClassName }}
+  sourcePVC: "config-{{ .Values.name }}-0"
+  trigger:
+    schedule: 0 3 * * *
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationDestination
+metadata:
+  name: {{ .Values.name }}
+spec:
+  restic:
+    {{- with .Values.persistence.accessModes }}
+    accessModes:
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+    capacity: {{ .Values.persistence.capacity }}
+    cleanupCachePVC: true
+    cleanupTempPVC: true
+    copyMethod: Snapshot
+    enableFileDeletion: true
+    {{- with .Values.securityContext }}
+    moverSecurityContext:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
+    repository: "restic-{{ .Values.name }}"
+    storageClassName: {{ .Values.persistence.storageClassName }}
+    volumeSnapshotClassName: {{ .Values.persistence.volumeSnapshotClassName }}
+  trigger:
+    manual: once
+{{- end }}
