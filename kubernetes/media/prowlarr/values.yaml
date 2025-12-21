@@ -1,0 +1,31 @@
+httpRoute:
+  enabled: true
+  hostname: prowlarr.cecobask.com
+image:
+  repository: ghcr.io/home-operations/prowlarr
+  tag: 2.3.0
+livenessProbe:
+  httpGet:
+    path: /ping
+    port: 9696
+  initialDelaySeconds: 30
+  timeoutSeconds: 10
+name: prowlarr
+persistence:
+  enabled: true
+  capacity: 1Gi
+securityContext:
+  runAsUser: 65534
+  runAsGroup: 65534
+  fsGroup: 65534
+  fsGroupChangePolicy: OnRootMismatch
+service:
+  port: 80
+  targetPort: 9696
+volumeMounts:
+- name: config
+  mountPath: /config
+volumes:
+- name: config
+  persistentVolumeClaim:
+    claimName: prowlarr
