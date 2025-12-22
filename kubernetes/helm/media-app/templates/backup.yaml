@@ -17,7 +17,6 @@ spec:
   - secretKey: resticRepository
     remoteRef:
       key: {{ .Values.persistence.backup.resticRepository }}
-  refreshInterval: 0s
   {{- with .Values.secretStoreRef }}
   secretStoreRef:
     {{- toYaml . | nindent 4 }}
