@@ -15,5 +15,4 @@ persistence:
   enabled: true
   capacity: 1Gi
 service:
-  port: 80
   targetPort: 7476

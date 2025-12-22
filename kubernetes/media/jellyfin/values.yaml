@@ -15,5 +15,4 @@ persistence:
   enabled: true
   capacity: 10Gi
 service:
-  port: 80
   targetPort: 8096

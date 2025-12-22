@@ -15,7 +15,6 @@ persistence:
   enabled: true
   capacity: 1Gi
 service:
-  port: 80
   targetPort: 9696
 volumeMounts:
 - name: config

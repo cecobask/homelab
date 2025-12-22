@@ -41,7 +41,7 @@ securityContext:
   fsGroup: 65534
   fsGroupChangePolicy: OnRootMismatch
 service:
-  port: ~
+  port: 80
   targetPort: ~
 volumeMounts:
 - name: config
