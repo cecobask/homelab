@@ -38,6 +38,10 @@ metadata:
 spec:
   restic:
     copyMethod: Snapshot
+    {{- with .Values.securityContext }}
+    moverSecurityContext:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
     pruneIntervalDays: 1
     repository: "restic-{{ .Values.name }}"
     retain:
