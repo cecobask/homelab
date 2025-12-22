@@ -1,0 +1,24 @@
+httpRoute:
+  enabled: true
+  hostname: qbit.cecobask.com
+image:
+  repository: ghcr.io/home-operations/qbittorrent
+  tag: 5.1.3
+livenessProbe:
+  httpGet:
+    path: /api/v2/app/version
+    port: 8080
+  initialDelaySeconds: 30
+  timeoutSeconds: 10
+name: qbittorrent
+persistence:
+  enabled: true
+  capacity: 1Gi
+securityContext:
+  runAsUser: 65534
+  runAsGroup: 65534
+  fsGroup: 65534
+  fsGroupChangePolicy: OnRootMismatch
+service:
+  port: 80
+  targetPort: 8080
