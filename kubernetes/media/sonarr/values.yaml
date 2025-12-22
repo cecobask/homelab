@@ -1,0 +1,24 @@
+httpRoute:
+  enabled: true
+  hostname: sonarr.cecobask.com
+image:
+  repository: ghcr.io/home-operations/sonarr
+  tag: 4.0.16
+livenessProbe:
+  httpGet:
+    path: /ping
+    port: 8989
+  initialDelaySeconds: 30
+  timeoutSeconds: 10
+name: sonarr
+persistence:
+  enabled: true
+  capacity: 5Gi
+securityContext:
+  runAsUser: 65534
+  runAsGroup: 65534
+  fsGroup: 65534
+  fsGroupChangePolicy: OnRootMismatch
+service:
+  port: 80
+  targetPort: 8989
