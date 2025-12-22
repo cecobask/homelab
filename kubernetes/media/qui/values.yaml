@@ -14,11 +14,6 @@ name: qui
 persistence:
   enabled: true
   capacity: 1Gi
-securityContext:
-  runAsUser: 65534
-  runAsGroup: 65534
-  fsGroup: 65534
-  fsGroupChangePolicy: OnRootMismatch
 service:
   port: 80
   targetPort: 7476
