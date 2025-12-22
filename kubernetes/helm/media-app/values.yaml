@@ -24,8 +24,8 @@ persistence:
   backup:
     backblazeAccountID: 829ce80c-c7e7-44ca-9cd3-b3bb010754e1
     backblazeAccountKey: 1f7b53e2-70de-40b4-bced-b3bb0107ca6e
+    backblazeRepository: 1c31c13f-4ad7-45bb-88c4-b3b8016414be
     resticPassword: fc256235-0bc9-4494-9568-b3b801637cf8
-    resticRepository: 1c31c13f-4ad7-45bb-88c4-b3b8016414be
   capacity: ~
   enabled: false
   name: config

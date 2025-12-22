@@ -11,12 +11,12 @@ spec:
   - secretKey: backblazeAccountKey
     remoteRef:
       key: {{ .Values.persistence.backup.backblazeAccountKey }}
+  - secretKey: backblazeRepository
+    remoteRef:
+      key: {{ .Values.persistence.backup.backblazeRepository }}
   - secretKey: resticPassword
     remoteRef:
       key: {{ .Values.persistence.backup.resticPassword }}
-  - secretKey: resticRepository
-    remoteRef:
-      key: {{ .Values.persistence.backup.resticRepository }}
   {{- with .Values.secretStoreRef }}
   secretStoreRef:
     {{- toYaml . | nindent 4 }}
@@ -28,7 +28,7 @@ spec:
         B2_ACCOUNT_ID: '{{ "{{ .backblazeAccountID }}" }}'
         B2_ACCOUNT_KEY: '{{ "{{ .backblazeAccountKey }}" }}'
         RESTIC_PASSWORD: '{{ "{{ .resticPassword }}" }}'
-        RESTIC_REPOSITORY: 's3:{{ "{{ .resticRepository }}" }}/volsync/{{ .Values.name }}'
+        RESTIC_REPOSITORY: '{{ "{{ .backblazeRepository }}" }}/{{ .Values.name }}'
 ---
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
