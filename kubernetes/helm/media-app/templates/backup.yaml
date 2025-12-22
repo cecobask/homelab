@@ -5,18 +5,18 @@ metadata:
   name: "restic-{{ .Values.name }}"
 spec:
   data:
-  - secretKey: backblazeApplicationKey
+  - secretKey: backblazeAccountID
     remoteRef:
-      key: {{ .Values.persistence.secret.backblazeApplicationKey }}
-  - secretKey: backblazeKeyID
+      key: {{ .Values.persistence.backup.backblazeAccountID }}
+  - secretKey: backblazeAccountKey
     remoteRef:
-      key: {{ .Values.persistence.secret.backblazeKeyID }}
+      key: {{ .Values.persistence.backup.backblazeAccountKey }}
   - secretKey: resticPassword
     remoteRef:
-      key: {{ .Values.persistence.secret.resticPassword }}
+      key: {{ .Values.persistence.backup.resticPassword }}
   - secretKey: resticRepository
     remoteRef:
-      key: {{ .Values.persistence.secret.resticRepository }}
+      key: {{ .Values.persistence.backup.resticRepository }}
   refreshInterval: 0s
   {{- with .Values.secretStoreRef }}
   secretStoreRef:
@@ -26,8 +26,8 @@ spec:
     deletionPolicy: Delete
     template:
       data:
-        AWS_ACCESS_KEY_ID: '{{ "{{ .backblazeApplicationKey }}" }}'
-        AWS_SECRET_ACCESS_KEY: '{{ "{{ .backblazeKeyID }}" }}'
+        B2_ACCOUNT_ID: '{{ "{{ .backblazeAccountID }}" }}'
+        B2_ACCOUNT_KEY: '{{ "{{ .backblazeAccountKey }}" }}'
         RESTIC_PASSWORD: '{{ "{{ .resticPassword }}" }}'
         RESTIC_REPOSITORY: 's3:{{ "{{ .resticRepository }}" }}/volsync/{{ .Values.name }}'
 ---

@@ -17,8 +17,8 @@ persistence:
 service:
   targetPort: 9696
 volumeMounts:
-- name: config
-  mountPath: /config
+- mountPath: /config
+  name: config
 volumes:
 - name: config
   persistentVolumeClaim:

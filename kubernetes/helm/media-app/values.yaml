@@ -5,7 +5,8 @@ affinity:
       - matchExpressions:
         - key: topology.kubernetes.io/zone
           operator: In
-          values: [ pve2 ]
+          values:
+          - pve2
 httpRoute:
   enabled: false
   hostname: ~
@@ -17,21 +18,20 @@ image:
   tag: ~
 livenessProbe: ~
 name: ~
-readinessProbe: ~
-resources: ~
 persistence:
-  enabled: false
   accessModes:
   - ReadWriteOnce
-  capacity: ~
-  name: config
-  secret:
-    backblazeApplicationKey: a8ee4e06-80ae-47ca-a7fb-b3b801648720
-    backblazeKeyID: a41dc5df-00eb-4d82-8aa4-b3b80164f3a4
+  backup:
+    backblazeAccountID: 829ce80c-c7e7-44ca-9cd3-b3bb010754e1
+    backblazeAccountKey: 1f7b53e2-70de-40b4-bced-b3bb0107ca6e
     resticPassword: fc256235-0bc9-4494-9568-b3b801637cf8
     resticRepository: 1c31c13f-4ad7-45bb-88c4-b3b8016414be
+  capacity: ~
+  enabled: false
+  name: config
   storageClassName: proxmox
   volumeSnapshotClassName: proxmox
+resources: ~
 secretStoreRef:
   name: bitwarden
   kind: ClusterSecretStore
@@ -44,10 +44,10 @@ service:
   port: 80
   targetPort: ~
 volumeMounts:
-- name: config
-  mountPath: /config
-- name: media
-  mountPath: /media
+- mountPath: /config
+  name: config
+- mountPath: /media
+  name: media
 volumes:
 - name: media
   persistentVolumeClaim:
