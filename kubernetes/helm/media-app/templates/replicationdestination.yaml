@@ -1,0 +1,26 @@
+{{- if .Values.persistence.enabled -}}
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationDestination
+metadata:
+  name: {{ .Values.name }}
+spec:
+  restic:
+    {{- with .Values.persistence.accessModes }}
+    accessModes:
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+    capacity: {{ .Values.persistence.capacity }}
+    cleanupCachePVC: true
+    cleanupTempPVC: true
+    copyMethod: Snapshot
+    enableFileDeletion: true
+    {{- with .Values.securityContext }}
+    moverSecurityContext:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
+    repository: "restic-{{ .Values.name }}"
+    storageClassName: {{ .Values.persistence.storageClassName }}
+    volumeSnapshotClassName: {{ .Values.persistence.volumeSnapshotClassName }}
+  trigger:
+    manual: once
+{{- end }}

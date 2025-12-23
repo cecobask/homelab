@@ -1,0 +1,22 @@
+{{- if .Values.persistence.enabled -}}
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: {{ .Values.name }}
+spec:
+  restic:
+    copyMethod: Snapshot
+    {{- with .Values.securityContext }}
+    moverSecurityContext:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
+    pruneIntervalDays: 1
+    repository: "restic-{{ .Values.name }}"
+    retain:
+      daily: 3
+    storageClassName: {{ .Values.persistence.storageClassName }}
+    volumeSnapshotClassName: {{ .Values.persistence.volumeSnapshotClassName }}
+  sourcePVC: "config-{{ .Values.name }}-0"
+  trigger:
+    schedule: 0 3 * * *
+{{- end }}
