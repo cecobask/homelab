@@ -1,12 +1,10 @@
 image = {
-  version      = "v1.11.2"
+  version      = "v1.12.0"
   platform     = "nocloud"
   architecture = "amd64"
   extensions = [
     "intel-ucode",
-    "iscsi-tools",
-    "qemu-guest-agent",
-    "util-linux-tools"
+    "qemu-guest-agent"
   ]
 }
 
@@ -66,7 +64,7 @@ vms = {
 cluster = {
   name               = "homelab"
   bootstrap_node     = "talos-ctrl-01"
-  kubernetes_version = "v1.34.1"
+  kubernetes_version = "v1.35.0"
   gateway            = "192.168.40.1"
   vip                = "192.168.40.2"
 }
