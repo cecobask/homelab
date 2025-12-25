@@ -1,0 +1,16 @@
+args:
+- --kubelet-insecure-tls
+image:
+  repository: registry.k8s.io/metrics-server/metrics-server
+  tag: v0.8.0
+metrics:
+  enabled: true
+serviceMonitor:
+  enabled: true
+tls:
+  type: cert-manager
+  certManager:
+    existingIssuer:
+      enabled: true
+      kind: ClusterIssuer
+      name: internal-ca
