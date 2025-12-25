@@ -18,5 +18,5 @@ spec:
     volumeSnapshotClassName: {{ .Values.persistence.volumeSnapshotClassName }}
   sourcePVC: "config-{{ .Values.name }}-0"
   trigger:
-    schedule: 0 3 * * *
+    schedule: 00 04 * * *
 {{- end }}

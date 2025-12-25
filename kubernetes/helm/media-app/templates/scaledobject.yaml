@@ -1,0 +1,17 @@
+{{- if .Values.persistence.enabled -}}
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: {{ .Values.name }}
+spec:
+  scaleTargetRef:
+    kind: StatefulSet
+    name: {{ .Values.name }}
+  triggers:
+    - type: cron
+      metadata:
+        start: 10 04 * * *
+        end: 50 03 * * *
+        timezone: Europe/Dublin
+        desiredReplicas: "1"
+{{- end }}
