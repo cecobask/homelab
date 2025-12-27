@@ -1,6 +1,8 @@
-global:
-  image:
-    tag: v3.1.9
+applicationSet:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
 configs:
   cm:
     application.instanceLabelKey: argocd.argoproj.io/instance
@@ -8,11 +10,6 @@ configs:
     kustomize.buildOptions: --enable-helm
   params:
     server.insecure: true
-applicationSet:
-  metrics:
-    enabled: true
-    serviceMonitor:
-      enabled: true
 controller:
   metrics:
     enabled: true
@@ -20,6 +17,10 @@ controller:
       enabled: true
 dex:
   enabled: false
+global:
+  image:
+    repository: quay.io/argoproj/argocd
+    tag: v3.1.9
 notifications:
   enabled: false
 redis:

@@ -1,3 +1,4 @@
+export ARGOCD_ADMIN_PASSWORD='XXX'
 export KUBECONFIG="$HOME/.talos/kubeconfig"
 export PROXMOX_VE_API_TOKEN='<username>@<realm>!<token-name>=<token-id>'
 export PROXMOX_VE_ENDPOINT='https://<proxmox-host>:8006'
