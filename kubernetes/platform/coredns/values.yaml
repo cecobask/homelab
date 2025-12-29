@@ -8,33 +8,4 @@ prometheus:
   monitor:
     enabled: true
     namespace: coredns
-servers:
-- zones:
-  - zone: .
-  port: 53
-  plugins:
-  - name: errors
-  - name: debug
-  - name: health
-    configBlock: |-
-      lameduck 5s
-  - name: ready
-  - name: etcd
-    parameters: cecobask.com
-    configBlock: |
-      stubzones
-      path /skydns
-      endpoint http://etcd.coredns.svc.cluster.local:2379
-      fallthrough
-  - name: log
-  - name: forward
-    parameters: . /etc/resolv.conf
-  - name: cache
-    parameters: 30
-  - name: reload
-  - name: loop
-  - name: loadbalance
-service:
-  annotations:
-    lbipam.cilium.io/ips: 192.168.40.4
 serviceType: LoadBalancer
