@@ -13,6 +13,10 @@ apply:
 bootstrap:
 	@bash hack/bootstrap.sh
 
+.PHONY: update-argocd-creds
+update-argocd-creds:
+	@bash hack/update-argocd-creds.sh
+
 TALOS_DIR := $(HOME)/.talos
 $(TALOS_DIR):
 	@mkdir -p "$@"
