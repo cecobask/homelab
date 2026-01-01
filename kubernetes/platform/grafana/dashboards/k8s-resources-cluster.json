@@ -1555,10 +1555,10 @@
                "type": "prometheus",
                "uid": "${datasource}"
             },
-            "hide": 0,
+            "hide": 2,
             "label": "cluster",
             "name": "cluster",
-            "query": "label_values(up{job=\"kube-state-metrics\"}, cluster)",
+            "query": "label_values(up{job=\"cadvisor\"}, cluster)",
             "refresh": 2,
             "sort": 1,
             "type": "query"
