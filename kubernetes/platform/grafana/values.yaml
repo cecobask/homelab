@@ -10,15 +10,6 @@ affinity:
         - key: topology.kubernetes.io/zone
           operator: In
           values: [ pve1 ]
-datasources:
-  datasources.yaml:
-    apiVersion: 1
-    datasources:
-    - name: Prometheus
-      type: prometheus
-      url: http://prometheus-prometheus.prometheus.svc.cluster.local:9090
-      access: proxy
-      isDefault: true
 dashboardProviders:
   dashboardproviders.yaml:
     apiVersion: 1
@@ -29,13 +20,11 @@ dashboardProviders:
         path: /var/lib/grafana/dashboards/default
 dashboards:
   default:
+    apiserver:
+      url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/apiserver.json
     argocd:
       gnetId: 14584
       revision: 1
-      datasource: Prometheus
-    node-exporter:
-      gnetId: 1860
-      revision: 42
       datasource: Prometheus
     cluster-total:
       url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/cluster-total.json
@@ -59,6 +48,10 @@ dashboards:
       url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/namespace-by-pod.json
     namespace-by-workload:
       url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/namespace-by-workload.json
+    node-exporter:
+      gnetId: 1860
+      revision: 42
+      datasource: Prometheus
     persistentvolumesusage:
       url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/persistentvolumesusage.json
     pod-total:
@@ -67,6 +60,15 @@ dashboards:
       url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/scheduler.json
     workload-total:
       url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/workload-total.json
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+    - name: Prometheus
+      type: prometheus
+      url: http://prometheus-prometheus.prometheus.svc.cluster.local:9090
+      access: proxy
+      isDefault: true
 image:
   tag: 12.3.0
 persistence:
