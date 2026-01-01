@@ -48,9 +48,6 @@ kubelet:
     - cluster
 kubeScheduler:
   serviceMonitor:
-    selector:
-      matchLabels:
-        component: kube-scheduler
     targetLabels:
     - cluster
 kube-state-metrics:
