@@ -13,28 +13,20 @@ apply:
 bootstrap:
 	@bash hack/bootstrap.sh
 
+.PHONY: save
+save: save/kubeconfig save/talosconfig
+
+.PHONY: save/kubeconfig
+save/kubeconfig:
+	@terraform output -raw kubeconfig > outputs/kubeconfig
+
+.PHONY: save/talosconfig
+save/talosconfig:
+	@terraform output -raw talosconfig > outputs/talosconfig
+
 .PHONY: update-argocd-creds
 update-argocd-creds:
 	@bash hack/update-argocd-creds.sh
-
-TALOS_DIR := $(HOME)/.talos
-$(TALOS_DIR):
-	@mkdir -p "$@"
-
-.PHONY: save
-save: save/talosconfig save/kubeconfig save/secrets
-
-.PHONY: save/talosconfig
-save/talosconfig: | $(TALOS_DIR)
-	@terraform output -raw talosconfig > $(TALOS_DIR)/config
-
-.PHONY: save/kubeconfig
-save/kubeconfig: | $(TALOS_DIR)
-	@terraform output -raw kubeconfig > $(TALOS_DIR)/kubeconfig
-
-.PHONY: save/secrets
-save/secrets: | $(TALOS_DIR)
-	@terraform output -raw secrets > $(TALOS_DIR)/secrets.yaml
 
 .PHONY: down
 down: cleanup destroy

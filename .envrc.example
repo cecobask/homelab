@@ -1,5 +1,6 @@
 export ARGOCD_ADMIN_PASSWORD='XXX'
-export KUBECONFIG="$HOME/.talos/kubeconfig"
+export KUBECONFIG="$PWD/terraform/talos/outputs/kubeconfig"
 export PROXMOX_VE_ENDPOINT='https://<proxmox-host>:8006'
 export PROXMOX_VE_PASSWORD='XXX'
 export PROXMOX_VE_USERNAME='<username>@<realm>'
+export TALOSCONFIG="$PWD/terraform/talos/outputs/talosconfig"
