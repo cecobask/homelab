@@ -1,11 +1,46 @@
 alertmanager:
   enabled: false
+cleanPrometheusOperatorObjectNames: true
+commonLabels:
+  cluster: homelab
+coreDns:
+  serviceMonitor:
+    targetLabels:
+    - cluster
 defaultRules:
   create: false
+fullnameOverride: prometheus
 grafana:
   enabled: false
+kubeControllerManager:
+  serviceMonitor:
+    targetLabels:
+    - cluster
+kubeEtcd:
+  service:
+    selector:
+      component: kube-scheduler
+  serviceMonitor:
+    targetLabels:
+    - cluster
+kubelet:
+  serviceMonitor:
+    targetLabels:
+    - cluster
 kubeProxy:
   enabled: false
+kubeScheduler:
+  serviceMonitor:
+    targetLabels:
+    - cluster
+kube-state-metrics:
+  fullnameOverride: kube-state-metrics
+  customLabels:
+    cluster: homelab
+  prometheus:
+    monitor:
+      targetLabels:
+      - cluster
 prometheus:
   prometheusSpec:
     affinity:
@@ -26,38 +61,6 @@ prometheus:
           resources:
             requests:
               storage: 30Gi
-cleanPrometheusOperatorObjectNames: true
-fullnameOverride: prometheus
-commonLabels:
-  cluster: homelab
-coreDns:
-  serviceMonitor:
-    targetLabels:
-    - cluster
-kubeControllerManager:
-  serviceMonitor:
-    targetLabels:
-    - cluster
-kubeEtcd:
-  serviceMonitor:
-    targetLabels:
-    - cluster
-kubelet:
-  serviceMonitor:
-    targetLabels:
-    - cluster
-kubeScheduler:
-  serviceMonitor:
-    targetLabels:
-    - cluster
-kube-state-metrics:
-  fullnameOverride: kube-state-metrics
-  customLabels:
-    cluster: homelab
-  prometheus:
-    monitor:
-      targetLabels:
-      - cluster
 prometheusOperator:
   fullnameOverride: prometheus-operator
   extraArgs:
