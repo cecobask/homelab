@@ -1,15 +1,12 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
   name: external-secrets
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     controller-gen.kubebuilder.io/version: v0.19.0
   labels:
     external-secrets.io/component: controller
@@ -230,7 +227,6 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     controller-gen.kubebuilder.io/version: v0.19.0
   labels:
     external-secrets.io/component: controller
@@ -329,7 +325,6 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     controller-gen.kubebuilder.io/version: v0.19.0
   labels:
     external-secrets.io/component: controller
@@ -2008,7 +2003,6 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     controller-gen.kubebuilder.io/version: v0.19.0
   labels:
     external-secrets.io/component: controller
@@ -4390,7 +4384,6 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     controller-gen.kubebuilder.io/version: v0.19.0
   labels:
     external-secrets.io/component: controller
@@ -4971,7 +4964,6 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     controller-gen.kubebuilder.io/version: v0.19.0
   labels:
     external-secrets.io/component: controller
@@ -15510,7 +15502,6 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     controller-gen.kubebuilder.io/version: v0.19.0
   labels:
     external-secrets.io/component: controller
@@ -15713,7 +15704,6 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     controller-gen.kubebuilder.io/version: v0.19.0
   labels:
     external-secrets.io/component: controller
@@ -17119,7 +17109,6 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     controller-gen.kubebuilder.io/version: v0.19.0
   labels:
     external-secrets.io/component: controller
@@ -17186,7 +17175,6 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     controller-gen.kubebuilder.io/version: v0.19.0
   labels:
     external-secrets.io/component: controller
@@ -17449,7 +17437,6 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     controller-gen.kubebuilder.io/version: v0.19.0
   labels:
     external-secrets.io/component: controller
@@ -17564,7 +17551,6 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     controller-gen.kubebuilder.io/version: v0.19.0
   labels:
     external-secrets.io/component: controller
@@ -17684,7 +17670,6 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     controller-gen.kubebuilder.io/version: v0.19.0
   labels:
     external-secrets.io/component: controller
@@ -17823,7 +17808,6 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     controller-gen.kubebuilder.io/version: v0.19.0
   labels:
     external-secrets.io/component: controller
@@ -17921,7 +17905,6 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     controller-gen.kubebuilder.io/version: v0.19.0
   labels:
     external-secrets.io/component: controller
@@ -18035,7 +18018,6 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     controller-gen.kubebuilder.io/version: v0.19.0
   labels:
     external-secrets.io/component: controller
@@ -18562,7 +18544,6 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     controller-gen.kubebuilder.io/version: v0.19.0
   labels:
     external-secrets.io/component: controller
@@ -18655,7 +18636,6 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     controller-gen.kubebuilder.io/version: v0.19.0
   labels:
     external-secrets.io/component: controller
@@ -29194,7 +29174,6 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     controller-gen.kubebuilder.io/version: v0.19.0
   labels:
     external-secrets.io/component: controller
@@ -29267,7 +29246,6 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     controller-gen.kubebuilder.io/version: v0.19.0
   labels:
     external-secrets.io/component: controller
@@ -29483,7 +29461,6 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     controller-gen.kubebuilder.io/version: v0.19.0
   labels:
     external-secrets.io/component: controller
@@ -29535,7 +29512,6 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     controller-gen.kubebuilder.io/version: v0.19.0
   labels:
     external-secrets.io/component: controller
@@ -30583,7 +30559,6 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     controller-gen.kubebuilder.io/version: v0.19.0
   labels:
     external-secrets.io/component: controller
@@ -30816,8 +30791,6 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
   labels:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
@@ -30830,8 +30803,6 @@ metadata:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
   labels:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
@@ -30844,8 +30815,6 @@ metadata:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
   labels:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
@@ -30858,8 +30827,6 @@ metadata:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
   labels:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
@@ -30898,8 +30865,6 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
   labels:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
@@ -31051,8 +31016,6 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
   labels:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
@@ -31106,8 +31069,6 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
   labels:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
@@ -31130,8 +31091,6 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
   labels:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
@@ -31182,8 +31141,6 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
   labels:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
@@ -31204,8 +31161,6 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
   labels:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
@@ -31225,8 +31180,6 @@ subjects:
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
   labels:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
@@ -31248,8 +31201,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
   labels:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
@@ -31273,8 +31224,6 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
   labels:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
@@ -31291,8 +31240,6 @@ spec:
       app.kubernetes.io/name: bitwarden-sdk-server
   template:
     metadata:
-      annotations:
-        argocd.argoproj.io/sync-options: ServerSideApply=true
       labels:
         app.kubernetes.io/instance: external-secrets
         app.kubernetes.io/name: bitwarden-sdk-server
@@ -31337,8 +31284,6 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
   labels:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
@@ -31356,8 +31301,6 @@ spec:
       app.kubernetes.io/name: external-secrets
   template:
     metadata:
-      annotations:
-        argocd.argoproj.io/sync-options: ServerSideApply=true
       labels:
         app.kubernetes.io/instance: external-secrets
         app.kubernetes.io/managed-by: Helm
@@ -31396,8 +31339,6 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
   labels:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
@@ -31415,8 +31356,6 @@ spec:
       app.kubernetes.io/name: external-secrets-webhook
   template:
     metadata:
-      annotations:
-        argocd.argoproj.io/sync-options: ServerSideApply=true
       labels:
         app.kubernetes.io/instance: external-secrets
         app.kubernetes.io/managed-by: Helm
@@ -31477,8 +31416,6 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
   name: bitwarden-sdk-server
   namespace: external-secrets
 spec:
@@ -31498,8 +31435,6 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
   labels:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
@@ -31525,8 +31460,6 @@ spec:
 apiVersion: external-secrets.io/v1
 kind: ClusterSecretStore
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
   name: bitwarden
   namespace: external-secrets
 spec:
@@ -31553,7 +31486,6 @@ apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     cert-manager.io/inject-ca-from: external-secrets/external-secrets-webhook
   labels:
     app.kubernetes.io/instance: external-secrets
@@ -31593,7 +31525,6 @@ apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
     cert-manager.io/inject-ca-from: external-secrets/external-secrets-webhook
   labels:
     app.kubernetes.io/instance: external-secrets

@@ -9,6 +9,7 @@ configs:
     application.resourceTrackingMethod: annotation+label
     kustomize.buildOptions: --enable-helm
   params:
+    controller.diff.server.side: true
     server.insecure: true
 controller:
   metrics:
