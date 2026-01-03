@@ -10,8 +10,6 @@ spec:
     {{- toYaml . | nindent 4 }}
     {{- end }}
     capacity: {{ .Values.persistence.capacity }}
-    cleanupCachePVC: true
-    cleanupTempPVC: true
     copyMethod: Snapshot
     enableFileDeletion: true
     {{- with .Values.affinity }}
