@@ -14,6 +14,10 @@ spec:
     cleanupTempPVC: true
     copyMethod: Snapshot
     enableFileDeletion: true
+    {{- with .Values.affinity }}
+    moverAffinity:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
     {{- with .Values.securityContext }}
     moverSecurityContext:
       {{- toYaml . | nindent 6 }}
