@@ -1,5 +1,19 @@
+cainjector:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 96Mi
 crds:
   enabled: true
 global:
   leaderElection:
     namespace: cert-manager
+resources:
+  requests:
+    cpu: 10m
+    memory: 96Mi
+webhook:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 64Mi
