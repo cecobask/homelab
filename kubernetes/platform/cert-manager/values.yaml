@@ -8,6 +8,9 @@ crds:
 global:
   leaderElection:
     namespace: cert-manager
+prometheus:
+  servicemonitor:
+    enabled: true
 resources:
   requests:
     cpu: 10m
