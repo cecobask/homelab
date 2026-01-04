@@ -3,6 +3,10 @@ applicationSet:
     enabled: true
     serviceMonitor:
       enabled: true
+  resources:
+    requests:
+      cpu: 10m
+      memory: 62Mi
 configs:
   cm:
     application.instanceLabelKey: argocd.argoproj.io/instance
@@ -16,6 +20,10 @@ controller:
     enabled: true
     serviceMonitor:
       enabled: true
+  resources:
+    requests:
+      cpu: 150m
+      memory: 768Mi
 dex:
   enabled: false
 notifications:
@@ -25,13 +33,25 @@ redis:
     enabled: true
     serviceMonitor:
       enabled: true
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
 repoServer:
   metrics:
     enabled: true
     serviceMonitor:
       enabled: true
+  resources:
+    requests:
+      cpu: 80m
+      memory: 128Mi
 server:
   metrics:
     enabled: true
     serviceMonitor:
       enabled: true
+  resources:
+    requests:
+      cpu: 10m
+      memory: 96Mi

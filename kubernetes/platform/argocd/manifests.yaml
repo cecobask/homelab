@@ -25424,7 +25424,10 @@ spec:
         - containerPort: 7000
           name: webhook
           protocol: TCP
-        resources: {}
+        resources:
+          requests:
+            cpu: 10m
+            memory: 62Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -25547,7 +25550,10 @@ spec:
         - containerPort: 6379
           name: redis
           protocol: TCP
-        resources: {}
+        resources:
+          requests:
+            cpu: 10m
+            memory: 32Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -25911,7 +25917,10 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
-        resources: {}
+        resources:
+          requests:
+            cpu: 80m
+            memory: 128Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -25948,7 +25957,10 @@ spec:
         image: quay.io/argoproj/argocd:v3.2.3
         imagePullPolicy: IfNotPresent
         name: copyutil
-        resources: {}
+        resources:
+          requests:
+            cpu: 80m
+            memory: 128Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -26383,7 +26395,10 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
-        resources: {}
+        resources:
+          requests:
+            cpu: 10m
+            memory: 96Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -26806,7 +26821,10 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
-        resources: {}
+        resources:
+          requests:
+            cpu: 150m
+            memory: 768Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
