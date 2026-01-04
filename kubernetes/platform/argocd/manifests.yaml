@@ -117,6 +117,10 @@ spec:
                       a failed sync. If set to 0, no retries will be performed.
                     format: int64
                     type: integer
+                  refresh:
+                    description: 'Refresh indicates if the latest revision should
+                      be used on retry instead of the initial one (default: false)'
+                    type: boolean
                 type: object
               sync:
                 description: Sync contains parameters for the operation
@@ -1481,11 +1485,15 @@ spec:
                       path:
                         description: |-
                           Path is a directory path within the git repository where hydrated manifests should be committed to and synced
-                          from. If hydrateTo is set, this is just the path from which hydrated manifests will be synced.
+                          from. The Path should never point to the root of the repo. If hydrateTo is set, this is just the path from which
+                          hydrated manifests will be synced.
+                        minLength: 1
+                        pattern: ^.{2,}|[^./]$
                         type: string
                       targetBranch:
-                        description: TargetBranch is the branch to which hydrated
-                          manifests should be committed
+                        description: |-
+                          TargetBranch is the branch from which hydrated manifests will be synced.
+                          If HydrateTo is not set, this is also the branch to which hydrated manifests are committed.
                         type: string
                     required:
                     - path
@@ -1944,6 +1952,10 @@ spec:
                           a failed sync. If set to 0, no retries will be performed.
                         format: int64
                         type: integer
+                      refresh:
+                        description: 'Refresh indicates if the latest revision should
+                          be used on retry instead of the initial one (default: false)'
+                        type: boolean
                     type: object
                   syncOptions:
                     description: Options allow you to specify whole app sync-options
@@ -2912,6 +2924,11 @@ spec:
                               be performed.
                             format: int64
                             type: integer
+                          refresh:
+                            description: 'Refresh indicates if the latest revision
+                              should be used on retry instead of the initial one (default:
+                              false)'
+                            type: boolean
                         type: object
                       sync:
                         description: Sync contains parameters for the operation
@@ -4884,11 +4901,15 @@ spec:
                               path:
                                 description: |-
                                   Path is a directory path within the git repository where hydrated manifests should be committed to and synced
-                                  from. If hydrateTo is set, this is just the path from which hydrated manifests will be synced.
+                                  from. The Path should never point to the root of the repo. If hydrateTo is set, this is just the path from which
+                                  hydrated manifests will be synced.
+                                minLength: 1
+                                pattern: ^.{2,}|[^./]$
                                 type: string
                               targetBranch:
-                                description: TargetBranch is the branch to which hydrated
-                                  manifests should be committed
+                                description: |-
+                                  TargetBranch is the branch from which hydrated manifests will be synced.
+                                  If HydrateTo is not set, this is also the branch to which hydrated manifests are committed.
                                 type: string
                             required:
                             - path
@@ -4963,11 +4984,15 @@ spec:
                               path:
                                 description: |-
                                   Path is a directory path within the git repository where hydrated manifests should be committed to and synced
-                                  from. If hydrateTo is set, this is just the path from which hydrated manifests will be synced.
+                                  from. The Path should never point to the root of the repo. If hydrateTo is set, this is just the path from which
+                                  hydrated manifests will be synced.
+                                minLength: 1
+                                pattern: ^.{2,}|[^./]$
                                 type: string
                               targetBranch:
-                                description: TargetBranch is the branch to which hydrated
-                                  manifests should be committed
+                                description: |-
+                                  TargetBranch is the branch from which hydrated manifests will be synced.
+                                  If HydrateTo is not set, this is also the branch to which hydrated manifests are committed.
                                 type: string
                             required:
                             - path
@@ -6309,6 +6334,8 @@ spec:
                                     syncSource:
                                       properties:
                                         path:
+                                          minLength: 1
+                                          pattern: ^.{2,}|[^./]$
                                           type: string
                                         targetBranch:
                                           type: string
@@ -6600,6 +6627,8 @@ spec:
                                         limit:
                                           format: int64
                                           type: integer
+                                        refresh:
+                                          type: boolean
                                       type: object
                                     syncOptions:
                                       items:
@@ -6991,6 +7020,8 @@ spec:
                                     syncSource:
                                       properties:
                                         path:
+                                          minLength: 1
+                                          pattern: ^.{2,}|[^./]$
                                           type: string
                                         targetBranch:
                                           type: string
@@ -7282,6 +7313,8 @@ spec:
                                         limit:
                                           format: int64
                                           type: integer
+                                        refresh:
+                                          type: boolean
                                       type: object
                                     syncOptions:
                                       items:
@@ -7674,6 +7707,8 @@ spec:
                                     syncSource:
                                       properties:
                                         path:
+                                          minLength: 1
+                                          pattern: ^.{2,}|[^./]$
                                           type: string
                                         targetBranch:
                                           type: string
@@ -7965,6 +8000,8 @@ spec:
                                         limit:
                                           format: int64
                                           type: integer
+                                        refresh:
+                                          type: boolean
                                       type: object
                                     syncOptions:
                                       items:
@@ -8335,6 +8372,8 @@ spec:
                                     syncSource:
                                       properties:
                                         path:
+                                          minLength: 1
+                                          pattern: ^.{2,}|[^./]$
                                           type: string
                                         targetBranch:
                                           type: string
@@ -8626,6 +8665,8 @@ spec:
                                         limit:
                                           format: int64
                                           type: integer
+                                        refresh:
+                                          type: boolean
                                       type: object
                                     syncOptions:
                                       items:
@@ -9021,6 +9062,8 @@ spec:
                                               syncSource:
                                                 properties:
                                                   path:
+                                                    minLength: 1
+                                                    pattern: ^.{2,}|[^./]$
                                                     type: string
                                                   targetBranch:
                                                     type: string
@@ -9312,6 +9355,8 @@ spec:
                                                   limit:
                                                     format: int64
                                                     type: integer
+                                                  refresh:
+                                                    type: boolean
                                                 type: object
                                               syncOptions:
                                                 items:
@@ -9703,6 +9748,8 @@ spec:
                                               syncSource:
                                                 properties:
                                                   path:
+                                                    minLength: 1
+                                                    pattern: ^.{2,}|[^./]$
                                                     type: string
                                                   targetBranch:
                                                     type: string
@@ -9994,6 +10041,8 @@ spec:
                                                   limit:
                                                     format: int64
                                                     type: integer
+                                                  refresh:
+                                                    type: boolean
                                                 type: object
                                               syncOptions:
                                                 items:
@@ -10386,6 +10435,8 @@ spec:
                                               syncSource:
                                                 properties:
                                                   path:
+                                                    minLength: 1
+                                                    pattern: ^.{2,}|[^./]$
                                                     type: string
                                                   targetBranch:
                                                     type: string
@@ -10677,6 +10728,8 @@ spec:
                                                   limit:
                                                     format: int64
                                                     type: integer
+                                                  refresh:
+                                                    type: boolean
                                                 type: object
                                               syncOptions:
                                                 items:
@@ -11047,6 +11100,8 @@ spec:
                                               syncSource:
                                                 properties:
                                                   path:
+                                                    minLength: 1
+                                                    pattern: ^.{2,}|[^./]$
                                                     type: string
                                                   targetBranch:
                                                     type: string
@@ -11338,6 +11393,8 @@ spec:
                                                   limit:
                                                     format: int64
                                                     type: integer
+                                                  refresh:
+                                                    type: boolean
                                                 type: object
                                               syncOptions:
                                                 items:
@@ -11716,6 +11773,8 @@ spec:
                                               syncSource:
                                                 properties:
                                                   path:
+                                                    minLength: 1
+                                                    pattern: ^.{2,}|[^./]$
                                                     type: string
                                                   targetBranch:
                                                     type: string
@@ -12007,6 +12066,8 @@ spec:
                                                   limit:
                                                     format: int64
                                                     type: integer
+                                                  refresh:
+                                                    type: boolean
                                                 type: object
                                               syncOptions:
                                                 items:
@@ -12162,12 +12223,16 @@ spec:
                                     - project
                                     - repo
                                     type: object
+                                  continueOnRepoNotFoundError:
+                                    type: boolean
                                   filters:
                                     items:
                                       properties:
                                         branchMatch:
                                           type: string
                                         targetBranchMatch:
+                                          type: string
+                                        titleMatch:
                                           type: string
                                       type: object
                                     type: array
@@ -12608,6 +12673,8 @@ spec:
                                               syncSource:
                                                 properties:
                                                   path:
+                                                    minLength: 1
+                                                    pattern: ^.{2,}|[^./]$
                                                     type: string
                                                   targetBranch:
                                                     type: string
@@ -12899,6 +12966,8 @@ spec:
                                                   limit:
                                                     format: int64
                                                     type: integer
+                                                  refresh:
+                                                    type: boolean
                                                 type: object
                                               syncOptions:
                                                 items:
@@ -13495,6 +13564,8 @@ spec:
                                               syncSource:
                                                 properties:
                                                   path:
+                                                    minLength: 1
+                                                    pattern: ^.{2,}|[^./]$
                                                     type: string
                                                   targetBranch:
                                                     type: string
@@ -13786,6 +13857,8 @@ spec:
                                                   limit:
                                                     format: int64
                                                     type: integer
+                                                  refresh:
+                                                    type: boolean
                                                 type: object
                                               syncOptions:
                                                 items:
@@ -14173,6 +14246,8 @@ spec:
                                     syncSource:
                                       properties:
                                         path:
+                                          minLength: 1
+                                          pattern: ^.{2,}|[^./]$
                                           type: string
                                         targetBranch:
                                           type: string
@@ -14464,6 +14539,8 @@ spec:
                                         limit:
                                           format: int64
                                           type: integer
+                                        refresh:
+                                          type: boolean
                                       type: object
                                     syncOptions:
                                       items:
@@ -14861,6 +14938,8 @@ spec:
                                               syncSource:
                                                 properties:
                                                   path:
+                                                    minLength: 1
+                                                    pattern: ^.{2,}|[^./]$
                                                     type: string
                                                   targetBranch:
                                                     type: string
@@ -15152,6 +15231,8 @@ spec:
                                                   limit:
                                                     format: int64
                                                     type: integer
+                                                  refresh:
+                                                    type: boolean
                                                 type: object
                                               syncOptions:
                                                 items:
@@ -15543,6 +15624,8 @@ spec:
                                               syncSource:
                                                 properties:
                                                   path:
+                                                    minLength: 1
+                                                    pattern: ^.{2,}|[^./]$
                                                     type: string
                                                   targetBranch:
                                                     type: string
@@ -15834,6 +15917,8 @@ spec:
                                                   limit:
                                                     format: int64
                                                     type: integer
+                                                  refresh:
+                                                    type: boolean
                                                 type: object
                                               syncOptions:
                                                 items:
@@ -16226,6 +16311,8 @@ spec:
                                               syncSource:
                                                 properties:
                                                   path:
+                                                    minLength: 1
+                                                    pattern: ^.{2,}|[^./]$
                                                     type: string
                                                   targetBranch:
                                                     type: string
@@ -16517,6 +16604,8 @@ spec:
                                                   limit:
                                                     format: int64
                                                     type: integer
+                                                  refresh:
+                                                    type: boolean
                                                 type: object
                                               syncOptions:
                                                 items:
@@ -16887,6 +16976,8 @@ spec:
                                               syncSource:
                                                 properties:
                                                   path:
+                                                    minLength: 1
+                                                    pattern: ^.{2,}|[^./]$
                                                     type: string
                                                   targetBranch:
                                                     type: string
@@ -17178,6 +17269,8 @@ spec:
                                                   limit:
                                                     format: int64
                                                     type: integer
+                                                  refresh:
+                                                    type: boolean
                                                 type: object
                                               syncOptions:
                                                 items:
@@ -17556,6 +17649,8 @@ spec:
                                               syncSource:
                                                 properties:
                                                   path:
+                                                    minLength: 1
+                                                    pattern: ^.{2,}|[^./]$
                                                     type: string
                                                   targetBranch:
                                                     type: string
@@ -17847,6 +17942,8 @@ spec:
                                                   limit:
                                                     format: int64
                                                     type: integer
+                                                  refresh:
+                                                    type: boolean
                                                 type: object
                                               syncOptions:
                                                 items:
@@ -18002,12 +18099,16 @@ spec:
                                     - project
                                     - repo
                                     type: object
+                                  continueOnRepoNotFoundError:
+                                    type: boolean
                                   filters:
                                     items:
                                       properties:
                                         branchMatch:
                                           type: string
                                         targetBranchMatch:
+                                          type: string
+                                        titleMatch:
                                           type: string
                                       type: object
                                     type: array
@@ -18448,6 +18549,8 @@ spec:
                                               syncSource:
                                                 properties:
                                                   path:
+                                                    minLength: 1
+                                                    pattern: ^.{2,}|[^./]$
                                                     type: string
                                                   targetBranch:
                                                     type: string
@@ -18739,6 +18842,8 @@ spec:
                                                   limit:
                                                     format: int64
                                                     type: integer
+                                                  refresh:
+                                                    type: boolean
                                                 type: object
                                               syncOptions:
                                                 items:
@@ -19335,6 +19440,8 @@ spec:
                                               syncSource:
                                                 properties:
                                                   path:
+                                                    minLength: 1
+                                                    pattern: ^.{2,}|[^./]$
                                                     type: string
                                                   targetBranch:
                                                     type: string
@@ -19626,6 +19733,8 @@ spec:
                                                   limit:
                                                     format: int64
                                                     type: integer
+                                                  refresh:
+                                                    type: boolean
                                                 type: object
                                               syncOptions:
                                                 items:
@@ -20017,6 +20126,8 @@ spec:
                                     syncSource:
                                       properties:
                                         path:
+                                          minLength: 1
+                                          pattern: ^.{2,}|[^./]$
                                           type: string
                                         targetBranch:
                                           type: string
@@ -20308,6 +20419,8 @@ spec:
                                         limit:
                                           format: int64
                                           type: integer
+                                        refresh:
+                                          type: boolean
                                       type: object
                                     syncOptions:
                                       items:
@@ -20685,6 +20798,8 @@ spec:
                                     syncSource:
                                       properties:
                                         path:
+                                          minLength: 1
+                                          pattern: ^.{2,}|[^./]$
                                           type: string
                                         targetBranch:
                                           type: string
@@ -20976,6 +21091,8 @@ spec:
                                         limit:
                                           format: int64
                                           type: integer
+                                        refresh:
+                                          type: boolean
                                       type: object
                                     syncOptions:
                                       items:
@@ -21131,12 +21248,16 @@ spec:
                           - project
                           - repo
                           type: object
+                        continueOnRepoNotFoundError:
+                          type: boolean
                         filters:
                           items:
                             properties:
                               branchMatch:
                                 type: string
                               targetBranchMatch:
+                                type: string
+                              titleMatch:
                                 type: string
                             type: object
                           type: array
@@ -21577,6 +21698,8 @@ spec:
                                     syncSource:
                                       properties:
                                         path:
+                                          minLength: 1
+                                          pattern: ^.{2,}|[^./]$
                                           type: string
                                         targetBranch:
                                           type: string
@@ -21868,6 +21991,8 @@ spec:
                                         limit:
                                           format: int64
                                           type: integer
+                                        refresh:
+                                          type: boolean
                                       type: object
                                     syncOptions:
                                       items:
@@ -22464,6 +22589,8 @@ spec:
                                     syncSource:
                                       properties:
                                         path:
+                                          minLength: 1
+                                          pattern: ^.{2,}|[^./]$
                                           type: string
                                         targetBranch:
                                           type: string
@@ -22755,6 +22882,8 @@ spec:
                                         limit:
                                           format: int64
                                           type: integer
+                                        refresh:
+                                          type: boolean
                                       type: object
                                     syncOptions:
                                       items:
@@ -22836,6 +22965,8 @@ spec:
                 type: object
               strategy:
                 properties:
+                  deletionOrder:
+                    type: string
                   rollingSync:
                     properties:
                       steps:
@@ -23217,6 +23348,8 @@ spec:
                           syncSource:
                             properties:
                               path:
+                                minLength: 1
+                                pattern: ^.{2,}|[^./]$
                                 type: string
                               targetBranch:
                                 type: string
@@ -23508,6 +23641,8 @@ spec:
                               limit:
                                 format: int64
                                 type: integer
+                              refresh:
+                                type: boolean
                             type: object
                           syncOptions:
                             items:
@@ -23613,6 +23748,9 @@ spec:
                       type: string
                   type: object
                 type: array
+              resourcesCount:
+                format: int64
+                type: integer
             type: object
         required:
         - metadata
@@ -24002,8 +24140,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-application-controller
   namespace: argocd
 ---
@@ -24017,8 +24155,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-applicationset-controller
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-applicationset-controller
   namespace: argocd
 ---
@@ -24035,8 +24173,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-redis-secret-init
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-redis-secret-init
   namespace: argocd
 ---
@@ -24050,8 +24188,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-repo-server
   namespace: argocd
 ---
@@ -24065,8 +24203,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-server
   namespace: argocd
 ---
@@ -24079,8 +24217,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-application-controller
   namespace: argocd
 rules:
@@ -24132,8 +24270,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-applicationset-controller
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-applicationset-controller
   namespace: argocd
 rules:
@@ -24212,12 +24350,16 @@ rules:
   - leases
   verbs:
   - create
-  - delete
+- apiGroups:
+  - coordination.k8s.io
+  resourceNames:
+  - 58ac56fa.applicationsets.argoproj.io
+  resources:
+  - leases
+  verbs:
   - get
-  - list
-  - patch
   - update
-  - watch
+  - create
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -24231,8 +24373,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-redis-secret-init
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-redis-secret-init
   namespace: argocd
 rules:
@@ -24260,8 +24402,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-repo-server
   namespace: argocd
 rules: null
@@ -24275,8 +24417,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-server
   namespace: argocd
 rules:
@@ -24324,8 +24466,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-application-controller
 rules:
 - apiGroups:
@@ -24348,8 +24490,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-server
 rules:
 - apiGroups:
@@ -24406,8 +24548,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-application-controller
   namespace: argocd
 roleRef:
@@ -24428,8 +24570,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-applicationset-controller
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-applicationset-controller
   namespace: argocd
 roleRef:
@@ -24453,8 +24595,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-redis-secret-init
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-redis-secret-init
   namespace: argocd
 roleRef:
@@ -24474,8 +24616,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-repo-server
   namespace: argocd
 roleRef:
@@ -24496,8 +24638,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-server
   namespace: argocd
 roleRef:
@@ -24518,8 +24660,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-application-controller
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -24539,8 +24681,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-server
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -24652,7 +24794,6 @@ data:
       - BackgroundScanReport
       - ClusterBackgroundScanReport
       - UpdateRequest
-  server.rbac.log.enforce.enable: "false"
   statusbadge.enabled: "false"
   timeout.hard.reconciliation: 0s
   timeout.reconciliation: 180s
@@ -24665,8 +24806,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-cm
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-cm
   namespace: argocd
 ---
@@ -24700,8 +24841,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-cmd-params-cm
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-cmd-params-cm
   namespace: argocd
 ---
@@ -24713,8 +24854,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-gpg-keys-cm
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-gpg-keys-cm
   namespace: argocd
 ---
@@ -24732,8 +24873,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-rbac-cm
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-rbac-cm
   namespace: argocd
 ---
@@ -24773,8 +24914,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-redis
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-redis-health-configmap
   namespace: argocd
 ---
@@ -24802,8 +24943,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-ssh-known-hosts-cm
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-ssh-known-hosts-cm
   namespace: argocd
 ---
@@ -24815,8 +24956,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-tls-certs-cm
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-tls-certs-cm
   namespace: argocd
 ---
@@ -24829,8 +24970,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-secret
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-secret
   namespace: argocd
 type: Opaque
@@ -24844,8 +24985,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-metrics
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-application-controller-metrics
   namespace: argocd
 spec:
@@ -24868,8 +25009,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-applicationset-controller
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-applicationset-controller
   namespace: argocd
 spec:
@@ -24891,8 +25032,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-metrics
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-applicationset-controller-metrics
   namespace: argocd
 spec:
@@ -24915,8 +25056,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-redis
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-redis
   namespace: argocd
 spec:
@@ -24937,8 +25078,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-redis
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-redis-metrics
   namespace: argocd
 spec:
@@ -24963,8 +25104,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-repo-server
   namespace: argocd
 spec:
@@ -24986,8 +25127,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-repo-server-metrics
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-repo-server-metrics
   namespace: argocd
 spec:
@@ -25010,8 +25151,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-server
   namespace: argocd
 spec:
@@ -25039,8 +25180,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-server-metrics
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-server-metrics
   namespace: argocd
 spec:
@@ -25063,8 +25204,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-applicationset-controller
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-applicationset-controller
   namespace: argocd
 spec:
@@ -25077,15 +25218,15 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cmd-params: 29f98bfee945133dcaf3f7dc7d795d8d4d6e3a847a8a534da37e44948ae7c6e9
+        checksum/cmd-params: 6d2297afff2a42b295522a38696efc5dfc7aaccd7b4d66f5a8c800c504b26d21
       labels:
         app.kubernetes.io/component: applicationset-controller
         app.kubernetes.io/instance: argocd
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: argocd-applicationset-controller
         app.kubernetes.io/part-of: argocd
-        app.kubernetes.io/version: v3.1.9
-        helm.sh/chart: argo-cd-9.0.5
+        app.kubernetes.io/version: v3.2.3
+        helm.sh/chart: argo-cd-9.2.4
     spec:
       affinity:
         podAntiAffinity:
@@ -25270,7 +25411,7 @@ spec:
               key: applicationsetcontroller.status.max.resources.count
               name: argocd-cmd-params-cm
               optional: true
-        image: quay.io/argoproj/argocd:v3.1.9
+        image: quay.io/argoproj/argocd:v3.2.3
         imagePullPolicy: IfNotPresent
         name: applicationset-controller
         ports:
@@ -25304,6 +25445,8 @@ spec:
           name: gpg-keyring
         - mountPath: /app/config/reposerver/tls
           name: argocd-repo-server-tls
+        - mountPath: /home/argocd/params
+          name: argocd-cmd-params-cm
         - mountPath: /tmp
           name: tmp
       dnsPolicy: ClusterFirst
@@ -25336,6 +25479,13 @@ spec:
             path: ca.crt
           optional: true
           secretName: argocd-repo-server-tls
+      - configMap:
+          items:
+          - key: applicationsetcontroller.profile.enabled
+            path: profiler.enabled
+          name: argocd-cmd-params-cm
+          optional: true
+        name: argocd-cmd-params-cm
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -25346,8 +25496,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-redis
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-redis
   namespace: argocd
 spec:
@@ -25364,8 +25514,8 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: argocd-redis
         app.kubernetes.io/part-of: argocd
-        app.kubernetes.io/version: v3.1.9
-        helm.sh/chart: argo-cd-9.0.5
+        app.kubernetes.io/version: v3.2.3
+        helm.sh/chart: argo-cd-9.2.4
     spec:
       affinity:
         podAntiAffinity:
@@ -25390,7 +25540,7 @@ spec:
             secretKeyRef:
               key: auth
               name: argocd-redis
-        image: ecr-public.aws.com/docker/library/redis:7.2.11-alpine
+        image: ecr-public.aws.com/docker/library/redis:8.2.2-alpine
         imagePullPolicy: IfNotPresent
         name: redis
         ports:
@@ -25432,8 +25582,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-repo-server
   namespace: argocd
 spec:
@@ -25446,16 +25596,16 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cm: 128403f4af42c4a006c8487b2bb7a63e8c2cf6761d73c7eb3e24921a28ebf66d
-        checksum/cmd-params: 29f98bfee945133dcaf3f7dc7d795d8d4d6e3a847a8a534da37e44948ae7c6e9
+        checksum/cm: 9ae4e64594ef143b161db456558ec8264f379f5327f3d29505ec69128ee63767
+        checksum/cmd-params: 6d2297afff2a42b295522a38696efc5dfc7aaccd7b4d66f5a8c800c504b26d21
       labels:
         app.kubernetes.io/component: repo-server
         app.kubernetes.io/instance: argocd
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: argocd-repo-server
         app.kubernetes.io/part-of: argocd
-        app.kubernetes.io/version: v3.1.9
-        helm.sh/chart: argo-cd-9.0.5
+        app.kubernetes.io/version: v3.2.3
+        helm.sh/chart: argo-cd-9.2.4
     spec:
       affinity:
         podAntiAffinity:
@@ -25709,6 +25859,18 @@ spec:
               key: reposerver.revision.cache.lock.timeout
               name: argocd-cmd-params-cm
               optional: true
+        - name: ARGOCD_REPO_SERVER_ENABLE_BUILTIN_GIT_CONFIG
+          valueFrom:
+            configMapKeyRef:
+              key: reposerver.enable.builtin.git.config
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_GRPC_MAX_SIZE_MB
+          valueFrom:
+            configMapKeyRef:
+              key: reposerver.grpc.max.size
+              name: argocd-cmd-params-cm
+              optional: true
         - name: ARGOCD_REPO_SERVER_INCLUDE_HIDDEN_DIRECTORIES
           valueFrom:
             configMapKeyRef:
@@ -25721,7 +25883,7 @@ spec:
           value: /helm-working-dir
         - name: HELM_DATA_HOME
           value: /helm-working-dir
-        image: quay.io/argoproj/argocd:v3.1.9
+        image: quay.io/argoproj/argocd:v3.2.3
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
@@ -25780,10 +25942,10 @@ spec:
       initContainers:
       - command:
         - /bin/cp
-        - -n
+        - --update=none
         - /usr/local/bin/argocd
         - /var/run/argocd/argocd-cmp-server
-        image: quay.io/argoproj/argocd:v3.1.9
+        image: quay.io/argoproj/argocd:v3.2.3
         imagePullPolicy: IfNotPresent
         name: copyutil
         resources: {}
@@ -25844,8 +26006,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-server
   namespace: argocd
 spec:
@@ -25858,16 +26020,16 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cm: 128403f4af42c4a006c8487b2bb7a63e8c2cf6761d73c7eb3e24921a28ebf66d
-        checksum/cmd-params: 29f98bfee945133dcaf3f7dc7d795d8d4d6e3a847a8a534da37e44948ae7c6e9
+        checksum/cm: 9ae4e64594ef143b161db456558ec8264f379f5327f3d29505ec69128ee63767
+        checksum/cmd-params: 6d2297afff2a42b295522a38696efc5dfc7aaccd7b4d66f5a8c800c504b26d21
       labels:
         app.kubernetes.io/component: server
         app.kubernetes.io/instance: argocd
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: argocd-server
         app.kubernetes.io/part-of: argocd
-        app.kubernetes.io/version: v3.1.9
-        helm.sh/chart: argo-cd-9.0.5
+        app.kubernetes.io/version: v3.2.3
+        helm.sh/chart: argo-cd-9.2.4
     spec:
       affinity:
         podAntiAffinity:
@@ -26193,7 +26355,7 @@ spec:
               key: server.sync.replace.allowed
               name: argocd-cmd-params-cm
               optional: true
-        image: quay.io/argoproj/argocd:v3.1.9
+        image: quay.io/argoproj/argocd:v3.2.3
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
@@ -26305,8 +26467,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-application-controller
   namespace: argocd
 spec:
@@ -26320,16 +26482,16 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cm: 128403f4af42c4a006c8487b2bb7a63e8c2cf6761d73c7eb3e24921a28ebf66d
-        checksum/cmd-params: 29f98bfee945133dcaf3f7dc7d795d8d4d6e3a847a8a534da37e44948ae7c6e9
+        checksum/cm: 9ae4e64594ef143b161db456558ec8264f379f5327f3d29505ec69128ee63767
+        checksum/cmd-params: 6d2297afff2a42b295522a38696efc5dfc7aaccd7b4d66f5a8c800c504b26d21
       labels:
         app.kubernetes.io/component: application-controller
         app.kubernetes.io/instance: argocd
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: argocd-application-controller
         app.kubernetes.io/part-of: argocd
-        app.kubernetes.io/version: v3.1.9
-        helm.sh/chart: argo-cd-9.0.5
+        app.kubernetes.io/version: v3.2.3
+        helm.sh/chart: argo-cd-9.2.4
     spec:
       affinity:
         podAntiAffinity:
@@ -26450,6 +26612,12 @@ spec:
           valueFrom:
             configMapKeyRef:
               key: controller.self.heal.backoff.cooldown.seconds
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_SYNC_WAVE_DELAY
+          valueFrom:
+            configMapKeyRef:
+              key: controller.sync.wave.delay.seconds
               name: argocd-cmd-params-cm
               optional: true
         - name: ARGOCD_APPLICATION_CONTROLLER_SYNC_TIMEOUT
@@ -26622,7 +26790,7 @@ spec:
               optional: true
         - name: KUBECACHEDIR
           value: /tmp/kubecache
-        image: quay.io/argoproj/argocd:v3.1.9
+        image: quay.io/argoproj/argocd:v3.2.3
         imagePullPolicy: IfNotPresent
         name: application-controller
         ports:
@@ -26699,8 +26867,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-redis-secret-init
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.3
+    helm.sh/chart: argo-cd-9.2.4
   name: argocd-redis-secret-init
   namespace: argocd
 spec:
@@ -26712,8 +26880,8 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: argocd-redis-secret-init
         app.kubernetes.io/part-of: argocd
-        app.kubernetes.io/version: v3.1.9
-        helm.sh/chart: argo-cd-9.0.5
+        app.kubernetes.io/version: v3.2.3
+        helm.sh/chart: argo-cd-9.2.4
     spec:
       affinity:
         podAntiAffinity:
@@ -26729,7 +26897,7 @@ spec:
         - argocd
         - admin
         - redis-initial-password
-        image: quay.io/argoproj/argocd:v3.1.9
+        image: quay.io/argoproj/argocd:v3.2.3
         imagePullPolicy: IfNotPresent
         name: secret-init
         resources: {}

@@ -18,10 +18,6 @@ controller:
       enabled: true
 dex:
   enabled: false
-global:
-  image:
-    repository: quay.io/argoproj/argocd
-    tag: v3.1.9
 notifications:
   enabled: false
 redis:
