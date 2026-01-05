@@ -5,12 +5,16 @@ image:
   tag: v0.8.0
 metrics:
   enabled: true
+resources:
+  requests:
+    cpu: 10m
+    memory: 128Mi
 serviceMonitor:
   enabled: true
 tls:
-  type: cert-manager
   certManager:
     existingIssuer:
       enabled: true
       kind: ClusterIssuer
       name: internal-ca
+  type: cert-manager
