@@ -74,5 +74,9 @@ persistence:
   size: 10Gi
   storageClassName: proxmox
   type: sts
+resources:
+  requests:
+    cpu: 40m
+    memory: 320Mi
 serviceMonitor:
   enabled: true
