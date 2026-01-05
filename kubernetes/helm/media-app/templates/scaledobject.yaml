@@ -3,6 +3,7 @@ apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
   name: {{ .Values.name }}
+  namespace: {{ .Release.Namespace }}
 spec:
   scaleTargetRef:
     kind: StatefulSet

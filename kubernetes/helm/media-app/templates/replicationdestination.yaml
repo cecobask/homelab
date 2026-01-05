@@ -3,6 +3,7 @@ apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
   name: {{ .Values.name }}
+  namespace: {{ .Release.Namespace }}
 spec:
   restic:
     {{- with .Values.persistence.accessModes }}
