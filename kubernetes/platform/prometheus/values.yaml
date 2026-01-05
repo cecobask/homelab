@@ -55,16 +55,16 @@ prometheus:
     storageSpec:
       volumeClaimTemplate:
         spec:
-          storageClassName: proxmox
           accessModes:
           - ReadWriteOnce
           resources:
             requests:
               storage: 30Gi
+          storageClassName: proxmox
 prometheusOperator:
-  fullnameOverride: prometheus-operator
   extraArgs:
   - --labels=cluster=homelab
+  fullnameOverride: prometheus-operator
 prometheus-node-exporter:
   fullnameOverride: prometheus-node-exporter
   prometheus:
