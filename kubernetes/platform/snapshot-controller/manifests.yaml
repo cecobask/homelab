@@ -190,7 +190,7 @@ spec:
       clientConfig:
         service:
           name: snapshot-conversion-webhook-service
-          namespace: kube-system
+          namespace: default
           path: /convert
       conversionReviewVersions:
       - v1
@@ -2582,7 +2582,6 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: snapshot-controller
-  namespace: kube-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -2648,7 +2647,10 @@ spec:
             path: /healthz/leader-election
             port: http
             scheme: HTTP
-        resources: {}
+        resources:
+          requests:
+            cpu: 10m
+            memory: 64Mi
         securityContext:
           capabilities:
             drop:
