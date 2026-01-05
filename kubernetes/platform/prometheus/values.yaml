@@ -41,6 +41,10 @@ kube-state-metrics:
     monitor:
       targetLabels:
       - cluster
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
 prometheus:
   prometheusSpec:
     affinity:
@@ -51,6 +55,10 @@ prometheus:
             - key: topology.kubernetes.io/zone
               operator: In
               values: [ pve1 ]
+    resources:
+      requests:
+        cpu: 50m
+        memory: 768Mi
     serviceMonitorSelectorNilUsesHelmValues: false
     storageSpec:
       volumeClaimTemplate:
@@ -65,9 +73,17 @@ prometheusOperator:
   extraArgs:
   - --labels=cluster=homelab
   fullnameOverride: prometheus-operator
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
 prometheus-node-exporter:
   fullnameOverride: prometheus-node-exporter
   prometheus:
     monitor:
       targetLabels:
       - cluster
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
