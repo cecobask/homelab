@@ -14,5 +14,9 @@ name: qui
 persistence:
   enabled: true
   capacity: 1Gi
+resources:
+  requests:
+    cpu: 10m
+    memory: 32Mi
 service:
   targetPort: 7476

@@ -14,5 +14,9 @@ name: jellyfin
 persistence:
   enabled: true
   capacity: 10Gi
+resources:
+  requests:
+    cpu: 10m
+    memory: 180Mi
 service:
   targetPort: 8096

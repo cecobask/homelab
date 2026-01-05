@@ -14,5 +14,9 @@ name: bazarr
 persistence:
   enabled: true
   capacity: 1Gi
+resources:
+  requests:
+    cpu: 10m
+    memory: 180Mi
 service:
   targetPort: 6767

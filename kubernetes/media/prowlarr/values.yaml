@@ -14,6 +14,10 @@ name: prowlarr
 persistence:
   enabled: true
   capacity: 1Gi
+resources:
+  requests:
+    cpu: 10m
+    memory: 180Mi
 service:
   targetPort: 9696
 volumeMounts:

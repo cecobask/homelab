@@ -14,5 +14,9 @@ name: qbittorrent
 persistence:
   enabled: true
   capacity: 1Gi
+resources:
+  requests:
+    cpu: 10m
+    memory: 64Mi
 service:
   targetPort: 8080
