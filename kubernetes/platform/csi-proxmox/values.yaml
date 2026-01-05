@@ -5,6 +5,9 @@ affinity:
       - matchExpressions:
         - key: node-role.kubernetes.io/control-plane
           operator: Exists
+controller:
+  snapshotter:
+    enabled: true
 existingConfigSecret: csi-proxmox
 node:
   plugin:
