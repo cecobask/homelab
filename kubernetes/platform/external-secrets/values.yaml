@@ -3,6 +3,14 @@ bitwarden-sdk-server:
   image:
     tls:
       secretName: bitwarden-sdk-server
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
+resources:
+  requests:
+    cpu: 10m
+    memory: 128Mi
 webhook:
   certManager:
     cert:
@@ -11,3 +19,7 @@ webhook:
         name: internal-ca
     enabled: true
   lookaheadInterval: 48h
+  resources:
+    requests:
+      cpu: 10m
+      memory: 64Mi

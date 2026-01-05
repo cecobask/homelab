@@ -31356,7 +31356,10 @@ spec:
             path: /ready
             port: http
             scheme: HTTPS
-        resources: {}
+        resources:
+          requests:
+            cpu: 10m
+            memory: 32Mi
         securityContext: {}
         volumeMounts:
         - mountPath: /certs
@@ -31416,6 +31419,10 @@ spec:
         - containerPort: 8080
           name: metrics
           protocol: TCP
+        resources:
+          requests:
+            cpu: 10m
+            memory: 128Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -31486,6 +31493,10 @@ spec:
             port: 8081
           initialDelaySeconds: 20
           periodSeconds: 5
+        resources:
+          requests:
+            cpu: 10m
+            memory: 64Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
