@@ -1,2 +1,6 @@
 metrics:
   disableAuth: true
+resources:
+  requests:
+    cpu: 10m
+    memory: 72Mi
