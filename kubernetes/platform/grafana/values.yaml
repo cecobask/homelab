@@ -1,7 +1,7 @@
 admin:
   existingSecret: grafana
-  userKey: user
   passwordKey: password
+  userKey: user
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
@@ -15,9 +15,9 @@ dashboardProviders:
     apiVersion: 1
     providers:
     - name: default
-      type: file
       options:
         path: /var/lib/grafana/dashboards/default
+      type: file
 dashboards:
   default:
     apiserver:
@@ -25,11 +25,12 @@ dashboards:
     argocd:
       gnetId: 14584
       revision: 1
-      datasource: Prometheus
     cluster-total:
       url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/cluster-total.json
     controller-manager:
       url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/controller-manager.json
+    kubelet:
+      url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/kubelet.json
     k8s-resources-cluster:
       url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/k8s-resources-cluster.json
     k8s-resources-namespace:
@@ -42,8 +43,6 @@ dashboards:
       url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/k8s-resources-workload.json
     k8s-resources-workloads-namespace:
       url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/k8s-resources-workloads-namespace.json
-    kubelet:
-      url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/kubelet.json
     namespace-by-pod:
       url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/namespace-by-pod.json
     namespace-by-workload:
@@ -51,7 +50,6 @@ dashboards:
     node-exporter:
       gnetId: 1860
       revision: 42
-      datasource: Prometheus
     persistentvolumesusage:
       url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/kubernetes/platform/grafana/dashboards/persistentvolumesusage.json
     pod-total:
@@ -64,19 +62,17 @@ datasources:
   datasources.yaml:
     apiVersion: 1
     datasources:
-    - name: Prometheus
+    - access: proxy
+      isDefault: true
+      name: Prometheus
       type: prometheus
       url: http://prometheus-prometheus.prometheus.svc.cluster.local:9090
-      access: proxy
-      isDefault: true
-image:
-  tag: 12.3.0
 persistence:
-  enabled: true
-  type: sts
   accessModes:
   - ReadWriteOnce
-  storageClassName: proxmox
+  enabled: true
   size: 10Gi
+  storageClassName: proxmox
+  type: sts
 serviceMonitor:
   enabled: true
