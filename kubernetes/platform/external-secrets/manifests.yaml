@@ -5021,8 +5021,8 @@ spec:
             description: SecretStoreSpec defines the desired state of SecretStore.
             properties:
               conditions:
-                description: Used to constraint a ClusterSecretStore to specific namespaces.
-                  Relevant only to ClusterSecretStore
+                description: Used to constrain a ClusterSecretStore to specific namespaces.
+                  Relevant only to ClusterSecretStore.
                 items:
                   description: |-
                     ClusterSecretStoreCondition describes a condition by which to choose namespaces to process ExternalSecrets in
@@ -7216,7 +7216,7 @@ spec:
                     type: object
                   github:
                     description: |-
-                      Github configures this store to push GitHub Action secrets using GitHub API provider.
+                      Github configures this store to push GitHub Actions secrets using the GitHub API provider.
                       Note: This provider only supports write operations (PushSecret) and cannot fetch secrets from GitHub
                     properties:
                       appID:
@@ -8229,6 +8229,51 @@ spec:
                             - clientSecret
                             type: object
                         type: object
+                      caBundle:
+                        description: |-
+                          CABundle is a PEM-encoded CA certificate bundle used to validate
+                          the Infisical server's TLS certificate. Mutually exclusive with CAProvider.
+                        format: byte
+                        type: string
+                      caProvider:
+                        description: |-
+                          CAProvider is a reference to a Secret or ConfigMap that contains a CA certificate.
+                          The certificate is used to validate the Infisical server's TLS certificate.
+                          Mutually exclusive with CABundle.
+                        properties:
+                          key:
+                            description: The key where the CA certificate can be found
+                              in the Secret or ConfigMap.
+                            maxLength: 253
+                            minLength: 1
+                            pattern: ^[-._a-zA-Z0-9]+$
+                            type: string
+                          name:
+                            description: The name of the object located at the provider
+                              type.
+                            maxLength: 253
+                            minLength: 1
+                            pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
+                            type: string
+                          namespace:
+                            description: |-
+                              The namespace the Provider type is in.
+                              Can only be defined when used in a ClusterSecretStore.
+                            maxLength: 63
+                            minLength: 1
+                            pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+                            type: string
+                          type:
+                            description: The type of provider to use such as "Secret",
+                              or "ConfigMap".
+                            enum:
+                            - Secret
+                            - ConfigMap
+                            type: string
+                        required:
+                        - name
+                        - type
+                        type: object
                       hostAPI:
                         default: https://app.infisical.com/api
                         description: HostAPI specifies the base URL of the Infisical
@@ -9194,7 +9239,8 @@ spec:
                     - project
                     type: object
                   scaleway:
-                    description: Scaleway
+                    description: Scaleway configures this store to sync secrets using
+                      the Scaleway provider.
                     properties:
                       accessKey:
                         description: AccessKey is the non-secret part of the api key.
@@ -9480,7 +9526,7 @@ spec:
                     type: object
                   vault:
                     description: Vault configures this store to sync secrets using
-                      Hashi provider
+                      the HashiCorp Vault provider.
                     properties:
                       auth:
                         description: Auth configures how secret-manager authenticates
@@ -10938,7 +10984,7 @@ spec:
                   Empty or 0 will default to the controller config.
                 type: integer
               retrySettings:
-                description: Used to configure http retries if failed
+                description: Used to configure HTTP retries on failures.
                 properties:
                   maxRetries:
                     format: int32
@@ -11026,8 +11072,8 @@ spec:
             description: SecretStoreSpec defines the desired state of SecretStore.
             properties:
               conditions:
-                description: Used to constraint a ClusterSecretStore to specific namespaces.
-                  Relevant only to ClusterSecretStore
+                description: Used to constrain a ClusterSecretStore to specific namespaces.
+                  Relevant only to ClusterSecretStore.
                 items:
                   description: |-
                     ClusterSecretStoreCondition describes a condition by which to choose namespaces to process ExternalSecrets in
@@ -12898,8 +12944,8 @@ spec:
                         type: string
                     type: object
                   github:
-                    description: Github configures this store to push Github Action
-                      secrets using Github API provider
+                    description: Github configures this store to push GitHub Actions
+                      secrets using the GitHub API provider.
                     properties:
                       appID:
                         description: appID specifies the Github APP that will be used
@@ -14066,7 +14112,8 @@ spec:
                     - project
                     type: object
                   scaleway:
-                    description: Scaleway
+                    description: Scaleway configures this store to sync secrets using
+                      the Scaleway provider.
                     properties:
                       accessKey:
                         description: AccessKey is the non-secret part of the api key.
@@ -14305,7 +14352,7 @@ spec:
                     type: object
                   vault:
                     description: Vault configures this store to sync secrets using
-                      Hashi provider
+                      the HashiCorp Vault provider.
                     properties:
                       auth:
                         description: Auth configures how secret-manager authenticates
@@ -15448,7 +15495,7 @@ spec:
                   Empty or 0 will default to the controller config.
                 type: integer
               retrySettings:
-                description: Used to configure http retries if failed
+                description: Used to configure HTTP retries on failures.
                 properties:
                   maxRetries:
                     description: MaxRetries is the maximum number of retry attempts.
@@ -18693,8 +18740,8 @@ spec:
             description: SecretStoreSpec defines the desired state of SecretStore.
             properties:
               conditions:
-                description: Used to constraint a ClusterSecretStore to specific namespaces.
-                  Relevant only to ClusterSecretStore
+                description: Used to constrain a ClusterSecretStore to specific namespaces.
+                  Relevant only to ClusterSecretStore.
                 items:
                   description: |-
                     ClusterSecretStoreCondition describes a condition by which to choose namespaces to process ExternalSecrets in
@@ -20888,7 +20935,7 @@ spec:
                     type: object
                   github:
                     description: |-
-                      Github configures this store to push GitHub Action secrets using GitHub API provider.
+                      Github configures this store to push GitHub Actions secrets using the GitHub API provider.
                       Note: This provider only supports write operations (PushSecret) and cannot fetch secrets from GitHub
                     properties:
                       appID:
@@ -21901,6 +21948,51 @@ spec:
                             - clientSecret
                             type: object
                         type: object
+                      caBundle:
+                        description: |-
+                          CABundle is a PEM-encoded CA certificate bundle used to validate
+                          the Infisical server's TLS certificate. Mutually exclusive with CAProvider.
+                        format: byte
+                        type: string
+                      caProvider:
+                        description: |-
+                          CAProvider is a reference to a Secret or ConfigMap that contains a CA certificate.
+                          The certificate is used to validate the Infisical server's TLS certificate.
+                          Mutually exclusive with CABundle.
+                        properties:
+                          key:
+                            description: The key where the CA certificate can be found
+                              in the Secret or ConfigMap.
+                            maxLength: 253
+                            minLength: 1
+                            pattern: ^[-._a-zA-Z0-9]+$
+                            type: string
+                          name:
+                            description: The name of the object located at the provider
+                              type.
+                            maxLength: 253
+                            minLength: 1
+                            pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
+                            type: string
+                          namespace:
+                            description: |-
+                              The namespace the Provider type is in.
+                              Can only be defined when used in a ClusterSecretStore.
+                            maxLength: 63
+                            minLength: 1
+                            pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+                            type: string
+                          type:
+                            description: The type of provider to use such as "Secret",
+                              or "ConfigMap".
+                            enum:
+                            - Secret
+                            - ConfigMap
+                            type: string
+                        required:
+                        - name
+                        - type
+                        type: object
                       hostAPI:
                         default: https://app.infisical.com/api
                         description: HostAPI specifies the base URL of the Infisical
@@ -22866,7 +22958,8 @@ spec:
                     - project
                     type: object
                   scaleway:
-                    description: Scaleway
+                    description: Scaleway configures this store to sync secrets using
+                      the Scaleway provider.
                     properties:
                       accessKey:
                         description: AccessKey is the non-secret part of the api key.
@@ -23152,7 +23245,7 @@ spec:
                     type: object
                   vault:
                     description: Vault configures this store to sync secrets using
-                      Hashi provider
+                      the HashiCorp Vault provider.
                     properties:
                       auth:
                         description: Auth configures how secret-manager authenticates
@@ -24610,7 +24703,7 @@ spec:
                   Empty or 0 will default to the controller config.
                 type: integer
               retrySettings:
-                description: Used to configure http retries if failed
+                description: Used to configure HTTP retries on failures.
                 properties:
                   maxRetries:
                     format: int32
@@ -24698,8 +24791,8 @@ spec:
             description: SecretStoreSpec defines the desired state of SecretStore.
             properties:
               conditions:
-                description: Used to constraint a ClusterSecretStore to specific namespaces.
-                  Relevant only to ClusterSecretStore
+                description: Used to constrain a ClusterSecretStore to specific namespaces.
+                  Relevant only to ClusterSecretStore.
                 items:
                   description: |-
                     ClusterSecretStoreCondition describes a condition by which to choose namespaces to process ExternalSecrets in
@@ -26570,8 +26663,8 @@ spec:
                         type: string
                     type: object
                   github:
-                    description: Github configures this store to push Github Action
-                      secrets using Github API provider
+                    description: Github configures this store to push GitHub Actions
+                      secrets using the GitHub API provider.
                     properties:
                       appID:
                         description: appID specifies the Github APP that will be used
@@ -27738,7 +27831,8 @@ spec:
                     - project
                     type: object
                   scaleway:
-                    description: Scaleway
+                    description: Scaleway configures this store to sync secrets using
+                      the Scaleway provider.
                     properties:
                       accessKey:
                         description: AccessKey is the non-secret part of the api key.
@@ -27977,7 +28071,7 @@ spec:
                     type: object
                   vault:
                     description: Vault configures this store to sync secrets using
-                      Hashi provider
+                      the HashiCorp Vault provider.
                     properties:
                       auth:
                         description: Auth configures how secret-manager authenticates
@@ -29120,7 +29214,7 @@ spec:
                   Empty or 0 will default to the controller config.
                 type: integer
               retrySettings:
-                description: Used to configure http retries if failed
+                description: Used to configure HTTP retries on failures.
                 properties:
                   maxRetries:
                     description: MaxRetries is the maximum number of retry attempts.
@@ -30807,8 +30901,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v1.2.0
-    helm.sh/chart: external-secrets-1.2.0
+    app.kubernetes.io/version: v1.2.1
+    helm.sh/chart: external-secrets-1.2.1
   name: external-secrets
   namespace: external-secrets
 ---
@@ -30819,8 +30913,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets-webhook
-    app.kubernetes.io/version: v1.2.0
-    helm.sh/chart: external-secrets-1.2.0
+    app.kubernetes.io/version: v1.2.1
+    helm.sh/chart: external-secrets-1.2.1
   name: external-secrets-webhook
   namespace: external-secrets
 ---
@@ -30831,8 +30925,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v1.2.0
-    helm.sh/chart: external-secrets-1.2.0
+    app.kubernetes.io/version: v1.2.1
+    helm.sh/chart: external-secrets-1.2.1
   name: external-secrets-leaderelection
   namespace: external-secrets
 rules:
@@ -30869,8 +30963,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v1.2.0
-    helm.sh/chart: external-secrets-1.2.0
+    app.kubernetes.io/version: v1.2.1
+    helm.sh/chart: external-secrets-1.2.1
   name: external-secrets-controller
 rules:
 - apiGroups:
@@ -31020,8 +31114,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v1.2.0
-    helm.sh/chart: external-secrets-1.2.0
+    app.kubernetes.io/version: v1.2.1
+    helm.sh/chart: external-secrets-1.2.1
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
   name: external-secrets-edit
@@ -31073,8 +31167,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v1.2.0
-    helm.sh/chart: external-secrets-1.2.0
+    app.kubernetes.io/version: v1.2.1
+    helm.sh/chart: external-secrets-1.2.1
     servicebinding.io/controller: "true"
   name: external-secrets-servicebindings
 rules:
@@ -31095,8 +31189,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v1.2.0
-    helm.sh/chart: external-secrets-1.2.0
+    app.kubernetes.io/version: v1.2.1
+    helm.sh/chart: external-secrets-1.2.1
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
     rbac.authorization.k8s.io/aggregate-to-view: "true"
@@ -31145,8 +31239,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v1.2.0
-    helm.sh/chart: external-secrets-1.2.0
+    app.kubernetes.io/version: v1.2.1
+    helm.sh/chart: external-secrets-1.2.1
   name: external-secrets-leaderelection
   namespace: external-secrets
 roleRef:
@@ -31165,8 +31259,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v1.2.0
-    helm.sh/chart: external-secrets-1.2.0
+    app.kubernetes.io/version: v1.2.1
+    helm.sh/chart: external-secrets-1.2.1
   name: external-secrets-controller
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -31205,9 +31299,9 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets-webhook
-    app.kubernetes.io/version: v1.2.0
+    app.kubernetes.io/version: v1.2.1
     external-secrets.io/component: webhook
-    helm.sh/chart: external-secrets-1.2.0
+    helm.sh/chart: external-secrets-1.2.1
   name: external-secrets-webhook
   namespace: external-secrets
 spec:
@@ -31288,8 +31382,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v1.2.0
-    helm.sh/chart: external-secrets-1.2.0
+    app.kubernetes.io/version: v1.2.1
+    helm.sh/chart: external-secrets-1.2.1
   name: external-secrets
   namespace: external-secrets
 spec:
@@ -31305,8 +31399,8 @@ spec:
         app.kubernetes.io/instance: external-secrets
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: external-secrets
-        app.kubernetes.io/version: v1.2.0
-        helm.sh/chart: external-secrets-1.2.0
+        app.kubernetes.io/version: v1.2.1
+        helm.sh/chart: external-secrets-1.2.1
     spec:
       automountServiceAccountToken: true
       containers:
@@ -31315,7 +31409,7 @@ spec:
         - --metrics-addr=:8080
         - --loglevel=info
         - --zap-time-encoding=epoch
-        image: ghcr.io/external-secrets/external-secrets:v1.2.0
+        image: ghcr.io/external-secrets/external-secrets:v1.2.1
         imagePullPolicy: IfNotPresent
         name: external-secrets
         ports:
@@ -31343,8 +31437,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets-webhook
-    app.kubernetes.io/version: v1.2.0
-    helm.sh/chart: external-secrets-1.2.0
+    app.kubernetes.io/version: v1.2.1
+    helm.sh/chart: external-secrets-1.2.1
   name: external-secrets-webhook
   namespace: external-secrets
 spec:
@@ -31360,8 +31454,8 @@ spec:
         app.kubernetes.io/instance: external-secrets
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: external-secrets-webhook
-        app.kubernetes.io/version: v1.2.0
-        helm.sh/chart: external-secrets-1.2.0
+        app.kubernetes.io/version: v1.2.1
+        helm.sh/chart: external-secrets-1.2.1
     spec:
       automountServiceAccountToken: true
       containers:
@@ -31376,7 +31470,7 @@ spec:
         - --loglevel=info
         - --zap-time-encoding=epoch
         - --lookahead-interval=48h
-        image: ghcr.io/external-secrets/external-secrets:v1.2.0
+        image: ghcr.io/external-secrets/external-secrets:v1.2.1
         imagePullPolicy: IfNotPresent
         name: webhook
         ports:
@@ -31439,9 +31533,9 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets-webhook
-    app.kubernetes.io/version: v1.2.0
+    app.kubernetes.io/version: v1.2.1
     external-secrets.io/component: webhook
-    helm.sh/chart: external-secrets-1.2.0
+    helm.sh/chart: external-secrets-1.2.1
   name: external-secrets-webhook
   namespace: external-secrets
 spec:
@@ -31461,7 +31555,6 @@ apiVersion: external-secrets.io/v1
 kind: ClusterSecretStore
 metadata:
   name: bitwarden
-  namespace: external-secrets
 spec:
   provider:
     bitwardensecretsmanager:
@@ -31491,9 +31584,9 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets-webhook
-    app.kubernetes.io/version: v1.2.0
+    app.kubernetes.io/version: v1.2.1
     external-secrets.io/component: webhook
-    helm.sh/chart: external-secrets-1.2.0
+    helm.sh/chart: external-secrets-1.2.1
   name: externalsecret-validate
 webhooks:
 - admissionReviewVersions:
@@ -31530,9 +31623,9 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets-webhook
-    app.kubernetes.io/version: v1.2.0
+    app.kubernetes.io/version: v1.2.1
     external-secrets.io/component: webhook
-    helm.sh/chart: external-secrets-1.2.0
+    helm.sh/chart: external-secrets-1.2.1
   name: secretstore-validate
 webhooks:
 - admissionReviewVersions:
