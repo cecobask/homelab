@@ -17,6 +17,7 @@ variable "vms" {
     ipv4         = string
     mac_address  = string
     machine_type = string
+    gpu          = optional(bool, false)
   }))
 }
 

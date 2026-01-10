@@ -50,4 +50,13 @@ resource "proxmox_virtual_environment_vm" "this" {
       }
     }
   }
+  dynamic "hostpci" {
+    for_each = each.value.gpu ? [1] : []
+    content {
+      device = "hostpci0"
+      id     = "0000:00:02.0"
+      pcie   = true
+      rombar = true
+    }
+  }
 }

@@ -48,6 +48,7 @@ vms = {
     ipv4         = "192.168.40.211"
     mac_address  = "00:00:00:00:02:11"
     machine_type = "worker"
+    gpu          = true
   }
   talos-work-02 = {
     node_name    = "pve2"
@@ -58,6 +59,7 @@ vms = {
     ipv4         = "192.168.40.212"
     mac_address  = "00:00:00:00:02:12"
     machine_type = "worker"
+    gpu          = true
   }
 }
 
