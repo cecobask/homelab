@@ -15,7 +15,7 @@ spec:
     moverSecurityContext:
       {{- toYaml . | nindent 6 }}
     {{- end }}
-    pruneIntervalDays: 1
+    pruneIntervalDays: 3
     repository: "restic-{{ .Values.name }}"
     retain:
       daily: 3
