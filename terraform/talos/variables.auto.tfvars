@@ -4,6 +4,7 @@ image = {
   architecture = "amd64"
   extensions = [
     "intel-ucode",
+    "i915",
     "qemu-guest-agent"
   ]
 }
