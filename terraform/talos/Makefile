@@ -28,6 +28,10 @@ save/talosconfig:
 update-argocd-creds:
 	@bash hack/update-argocd-creds.sh
 
+.PHONY: update-kubernetes-manifests
+update-kubernetes-manifests:
+	@bash hack/update-kubernetes-manifests.sh
+
 .PHONY: down
 down: cleanup destroy
 
