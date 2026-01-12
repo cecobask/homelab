@@ -18,5 +18,7 @@ resources:
   requests:
     cpu: 10m
     memory: 180Mi
+  limits:
+    gpu.intel.com/i915: 1000m
 service:
   targetPort: 8096

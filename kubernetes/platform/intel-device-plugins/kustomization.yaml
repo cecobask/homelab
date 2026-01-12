@@ -20,4 +20,3 @@ helmCharts:
   namespace: kube-system
   valuesInline:
     name: gpudp
-    sharedDevNum: 3
