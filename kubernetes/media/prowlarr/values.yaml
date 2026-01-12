@@ -23,7 +23,4 @@ service:
 volumeMounts:
 - mountPath: /config
   name: config
-volumes:
-- name: config
-  persistentVolumeClaim:
-    claimName: prowlarr
+volumes: ~
