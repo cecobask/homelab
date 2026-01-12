@@ -1,0 +1,30 @@
+httpRoute:
+  enabled: true
+  hostname: seerr.cecobask.com
+image:
+  repository: ghcr.io/seerr-team/seerr
+  tag: sha-d0f029b
+livenessProbe:
+  httpGet:
+    path: /api/v1/status
+    port: 5055
+  initialDelaySeconds: 30
+  timeoutSeconds: 10
+name: seerr
+persistence:
+  enabled: true
+  capacity: 5Gi
+resources:
+  requests:
+    cpu: 10m
+    memory: 180Mi
+securityContext:
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
+service:
+  targetPort: 5055
+volumeMounts:
+- mountPath: /app/config
+  name: config
+volumes: ~
