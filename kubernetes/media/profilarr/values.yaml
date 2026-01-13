@@ -1,0 +1,26 @@
+httpRoute:
+  enabled: true
+  hostname: profilarr.cecobask.com
+image:
+  repository: santiagosayshey/profilarr
+  tag: v1.1.2
+livenessProbe:
+  httpGet:
+    path: /
+    port: 6868
+  initialDelaySeconds: 30
+  timeoutSeconds: 10
+name: profilarr
+persistence:
+  enabled: true
+  capacity: 1Gi
+resources:
+  requests:
+    cpu: 10m
+    memory: 180Mi
+service:
+  targetPort: 6868
+volumeMounts:
+- mountPath: /config
+  name: config
+volumes: ~
