@@ -5,10 +5,12 @@ image:
   repository: santiagosayshey/profilarr
   tag: v1.1.2
 livenessProbe:
+  failureThreshold: 5
   httpGet:
     path: /
     port: 6868
   initialDelaySeconds: 30
+  periodSeconds: 15
   timeoutSeconds: 10
 name: profilarr
 persistence:
@@ -16,8 +18,8 @@ persistence:
   capacity: 1Gi
 resources:
   requests:
-    cpu: 10m
-    memory: 180Mi
+    cpu: 100m
+    memory: 100Mi
 service:
   targetPort: 6868
 volumeMounts:

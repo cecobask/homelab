@@ -5,10 +5,12 @@ image:
   repository: ghcr.io/home-operations/prowlarr
   tag: 2.3.0
 livenessProbe:
+  failureThreshold: 5
   httpGet:
     path: /ping
     port: 9696
   initialDelaySeconds: 30
+  periodSeconds: 15
   timeoutSeconds: 10
 name: prowlarr
 persistence:
@@ -16,8 +18,8 @@ persistence:
   capacity: 1Gi
 resources:
   requests:
-    cpu: 10m
-    memory: 180Mi
+    cpu: 40m
+    memory: 300Mi
 service:
   targetPort: 9696
 volumeMounts:

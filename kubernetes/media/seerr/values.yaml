@@ -5,10 +5,12 @@ image:
   repository: ghcr.io/seerr-team/seerr
   tag: sha-d0f029b
 livenessProbe:
+  failureThreshold: 5
   httpGet:
     path: /api/v1/status
     port: 5055
   initialDelaySeconds: 30
+  periodSeconds: 15
   timeoutSeconds: 10
 name: seerr
 persistence:
@@ -16,8 +18,8 @@ persistence:
   capacity: 5Gi
 resources:
   requests:
-    cpu: 10m
-    memory: 180Mi
+    cpu: 40m
+    memory: 300Mi
 securityContext:
   runAsUser: 1000
   runAsGroup: 1000

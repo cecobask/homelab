@@ -5,10 +5,12 @@ image:
   repository: ghcr.io/jellyfin/jellyfin
   tag: 10.11.2
 livenessProbe:
+  failureThreshold: 5
   httpGet:
     path: /health
     port: 8096
   initialDelaySeconds: 30
+  periodSeconds: 15
   timeoutSeconds: 10
 name: jellyfin
 persistence:
@@ -16,8 +18,8 @@ persistence:
   capacity: 10Gi
 resources:
   requests:
-    cpu: 10m
-    memory: 180Mi
+    cpu: 150m
+    memory: 800Mi
   limits:
     gpu.intel.com/i915: 1000m
 service:

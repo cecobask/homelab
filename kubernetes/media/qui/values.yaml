@@ -5,10 +5,12 @@ image:
   repository: ghcr.io/autobrr/qui
   tag: v1.7.0
 livenessProbe:
+  failureThreshold: 5
   httpGet:
     path: /healthz/liveness
     port: 7476
   initialDelaySeconds: 30
+  periodSeconds: 15
   timeoutSeconds: 10
 name: qui
 persistence:
@@ -17,6 +19,6 @@ persistence:
 resources:
   requests:
     cpu: 10m
-    memory: 32Mi
+    memory: 100Mi
 service:
   targetPort: 7476
