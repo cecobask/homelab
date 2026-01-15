@@ -31,6 +31,7 @@ persistence:
   name: config
   storageClassName: proxmox
   volumeSnapshotClassName: proxmox
+readinessProbe: ~
 resources: ~
 secretStoreRef:
   name: bitwarden
@@ -43,6 +44,7 @@ securityContext:
 service:
   port: 80
   targetPort: ~
+startupProbe: ~
 volumeMounts:
 - mountPath: /config
   name: config

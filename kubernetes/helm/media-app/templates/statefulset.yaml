@@ -30,8 +30,16 @@ spec:
           {{- toYaml . | nindent 10 }}
         {{- end }}
         name: {{ .Values.name }}
+        {{- with .Values.readinessProbe }}
+        readinessProbe:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
         {{- with .Values.resources }}
         resources:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.startupProbe }}
+        startupProbe:
           {{- toYaml . | nindent 10 }}
         {{- end }}
         {{- with .Values.volumeMounts }}
