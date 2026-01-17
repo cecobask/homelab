@@ -1,6 +1,8 @@
 httpRoute:
   enabled: true
   hostname: jellyfin.cecobask.com
+  timeouts:
+    request: 3h
 image:
   repository: ghcr.io/jellyfin/jellyfin
   tag: 10.11.2
