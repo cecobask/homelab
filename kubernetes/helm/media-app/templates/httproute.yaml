@@ -15,4 +15,6 @@ spec:
   - backendRefs:
     - name: {{ .Values.name }}
       port: {{ .Values.service.port }}
+    timeouts:
+      request: 3m
 {{- end }}
