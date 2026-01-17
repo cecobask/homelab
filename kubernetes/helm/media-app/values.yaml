@@ -13,6 +13,8 @@ httpRoute:
   parentRefs:
   - name: envoy
     namespace: envoy-gateway
+  timeouts:
+    request: 30s
 image:
   repository: ~
   tag: ~
