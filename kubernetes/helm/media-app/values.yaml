@@ -33,6 +33,9 @@ persistence:
   name: config
   storageClassName: proxmox
   volumeSnapshotClassName: proxmox
+rbac:
+  enabled: false
+  rules: ~
 readinessProbe: ~
 resources: ~
 secretStoreRef:
