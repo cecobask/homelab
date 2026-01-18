@@ -22,6 +22,17 @@ name: homepage
 persistence:
   enabled: true
   capacity: 1Gi
+rbac:
+  enabled: true
+  rules:
+  - apiGroups:
+    - gateway.networking.k8s.io
+    resources:
+    - httproutes
+    - gateways
+    verbs:
+    - get
+    - list
 resources:
   requests:
     cpu: 100m
