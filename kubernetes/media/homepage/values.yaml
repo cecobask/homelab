@@ -1,0 +1,34 @@
+env:
+- name: HOMEPAGE_ALLOWED_HOSTS
+  value: homepage.cecobask.com
+httpRoute:
+  enabled: true
+  hostname: homepage.cecobask.com
+image:
+  repository: ghcr.io/gethomepage/homepage
+  tag: dev
+livenessProbe:
+  failureThreshold: 5
+  httpGet:
+    httpHeaders:
+    - name: Host
+      value: homepage.cecobask.com
+    path: /api/healthcheck
+    port: 3000
+  initialDelaySeconds: 30
+  periodSeconds: 15
+  timeoutSeconds: 10
+name: homepage
+persistence:
+  enabled: true
+  capacity: 1Gi
+resources:
+  requests:
+    cpu: 100m
+    memory: 300Mi
+service:
+  targetPort: 3000
+volumeMounts:
+- mountPath: /app/config
+  name: config
+volumes: ~
