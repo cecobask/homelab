@@ -9,12 +9,14 @@ applicationSet:
       memory: 62Mi
 configs:
   cm:
+    accounts.readonly: apiKey
     application.instanceLabelKey: argocd.argoproj.io/instance
     application.resourceTrackingMethod: annotation+label
     kustomize.buildOptions: --enable-helm
   params:
     controller.diff.server.side: true
     server.insecure: true
+  policy.csv: "g, readonly, role:readonly"
 controller:
   metrics:
     enabled: true
