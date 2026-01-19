@@ -1,0 +1,69 @@
+- Media:
+  - Bazarr:
+      description: Subtitle management for movies and TV shows
+      href: https://bazarr.cecobask.com
+      icon: bazarr
+      widget:
+        type: bazarr
+        url: http://bazarr.media.svc.cluster.local:6767
+        key: "{{HOMEPAGE_VAR_BAZARR_TOKEN}}"
+  - Jellyfin:
+      description: Media server for streaming movies and TV shows
+      href: https://jellyfin.cecobask.com
+      icon: jellyfin
+      widget:
+        type: jellyfin
+        url: http://jellyfin.media.svc.cluster.local:8096
+        key: "{{HOMEPAGE_VAR_JELLYFIN_TOKEN}}"
+        enableBlocks: true
+        enableNowPlaying: false
+        fields:
+        - movies
+        - series
+        - episodes
+  - Profilarr:
+      description: Quality profile and custom format manager for Radarr and Sonarr
+      href: https://profilarr.cecobask.com
+      icon: profilarr
+  - Prowlarr:
+      description: Indexer manager for Radarr and Sonarr
+      href: https://prowlarr.cecobask.com
+      icon: prowlarr
+      widget:
+        type: prowlarr
+        url: http://prowlarr.media.svc.cluster.local:9696
+        key: "{{HOMEPAGE_VAR_PROWLARR_TOKEN}}"
+  - qBittorrent:
+      description: BitTorrent client for downloading media
+      href: https://qui.cecobask.com
+      icon: qbittorrent
+      widget:
+        type: qbittorrent
+        url: http://qbittorrent.media.svc.cluster.local:8080
+        username: "{{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}"
+        password: "{{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}"
+  - Radarr:
+      description: Movie collection manager
+      href: https://radarr.cecobask.com
+      icon: radarr
+      widget:
+        type: radarr
+        url: http://radarr.media.svc.cluster.local:7878
+        key: "{{HOMEPAGE_VAR_RADARR_TOKEN}}"
+        enableQueue: true
+  - Seerr:
+      description: Request and discovery platform for movies and TV shows
+      href: https://seerr.cecobask.com
+      icon: jellyseerr
+      widget:
+        type: jellyseerr
+        url: http://seerr.media.svc.cluster.local:5055
+        key: "{{HOMEPAGE_VAR_SEERR_TOKEN}}"
+  - Sonarr:
+      description: TV show collection manager
+      href: https://sonarr.cecobask.com
+      icon: sonarr
+      widget:
+        type: sonarr
+        url: http://sonarr.media.svc.cluster.local:8989
+        key: "{{HOMEPAGE_VAR_SONARR_TOKEN}}"

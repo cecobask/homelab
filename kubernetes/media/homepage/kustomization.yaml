@@ -1,5 +1,23 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+resources:
+- secret.yaml
+configMapGenerator:
+- name: homepage
+  namespace: media
+  files:
+  - custom.css
+  - kubernetes.yaml
+  - services.yaml
+  - settings.yaml
+  literals:
+  - bookmarks.yaml=
+  - custom.js=
+  - docker.yaml=
+  - proxmox.yaml=
+  - widgets.yaml=
+  options:
+    disableNameSuffixHash: true
 helmGlobals:
   chartHome: ../../helm
 helmCharts:

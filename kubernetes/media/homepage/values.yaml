@@ -1,6 +1,46 @@
 env:
 - name: HOMEPAGE_ALLOWED_HOSTS
   value: homepage.cecobask.com
+- name: HOMEPAGE_VAR_BAZARR_TOKEN
+  valueFrom:
+    secretKeyRef:
+      name: homepage
+      key: bazarrToken
+- name: HOMEPAGE_VAR_JELLYFIN_TOKEN
+  valueFrom:
+    secretKeyRef:
+      name: homepage
+      key: jellyfinToken
+- name: HOMEPAGE_VAR_PROWLARR_TOKEN
+  valueFrom:
+    secretKeyRef:
+      name: homepage
+      key: prowlarrToken
+- name: HOMEPAGE_VAR_QBITTORRENT_USERNAME
+  valueFrom:
+    secretKeyRef:
+      name: homepage
+      key: qbittorrentUsername
+- name: HOMEPAGE_VAR_QBITTORRENT_PASSWORD
+  valueFrom:
+    secretKeyRef:
+      name: homepage
+      key: qbittorrentPassword
+- name: HOMEPAGE_VAR_RADARR_TOKEN
+  valueFrom:
+    secretKeyRef:
+      name: homepage
+      key: radarrToken
+- name: HOMEPAGE_VAR_SEERR_TOKEN
+  valueFrom:
+    secretKeyRef:
+      name: homepage
+      key: seerrToken
+- name: HOMEPAGE_VAR_SONARR_TOKEN
+  valueFrom:
+    secretKeyRef:
+      name: homepage
+      key: sonarrToken
 httpRoute:
   enabled: true
   hostname: homepage.cecobask.com
@@ -19,20 +59,6 @@ livenessProbe:
   periodSeconds: 15
   timeoutSeconds: 10
 name: homepage
-persistence:
-  enabled: true
-  capacity: 1Gi
-rbac:
-  enabled: true
-  rules:
-  - apiGroups:
-    - gateway.networking.k8s.io
-    resources:
-    - httproutes
-    - gateways
-    verbs:
-    - get
-    - list
 resources:
   requests:
     cpu: 100m
@@ -46,4 +72,12 @@ service:
 volumeMounts:
 - mountPath: /app/config
   name: config
-volumes: ~
+- mountPath: /app/config/logs
+  name: logs
+volumes:
+- name: config
+  configMap:
+    name: homepage
+- name: logs
+  emptyDir:
+    sizeLimit: 500Mi
