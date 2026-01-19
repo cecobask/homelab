@@ -17,8 +17,12 @@
       icon: prowlarr
   - qBittorrent:
       description: BitTorrent client for downloading media
-      href: https://qui.cecobask.com
+      href: https://qbit.cecobask.com
       icon: qbittorrent
+  - Qui:
+      description: Alternative BitTorrent web user interface
+      href: https://qui.cecobask.com
+      icon: qui
   - Radarr:
       description: Movie collection manager
       href: https://radarr.cecobask.com
@@ -33,6 +37,14 @@
       icon: sonarr
 - Platform:
   - Argo CD:
-      description:
+      description: Declarative continuous delivery tool
       href: https://argocd.cecobask.com
       icon: argo-cd
+  - Grafana:
+      description: Data visualization platform
+      href: https://grafana.cecobask.com
+      icon: grafana
+  - Prometheus:
+      description: Monitoring system
+      href: https://prometheus.cecobask.com
+      icon: prometheus
