@@ -1,9 +1,9 @@
 env:
 - name: HOMEPAGE_ALLOWED_HOSTS
-  value: homepage.cecobask.com
+  value: homelab.cecobask.com
 httpRoute:
   enabled: true
-  hostname: homepage.cecobask.com
+  hostname: homelab.cecobask.com
 image:
   repository: ghcr.io/gethomepage/homepage
   tag: dev
@@ -12,7 +12,7 @@ livenessProbe:
   httpGet:
     httpHeaders:
     - name: Host
-      value: homepage.cecobask.com
+      value: homelab.cecobask.com
     path: /api/healthcheck
     port: 3000
   initialDelaySeconds: 30
