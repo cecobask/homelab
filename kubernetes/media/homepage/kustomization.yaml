@@ -8,12 +8,12 @@ configMapGenerator:
   - kubernetes.yaml
   - services.yaml
   - settings.yaml
+  - widgets.yaml
   literals:
   - bookmarks.yaml=
   - custom.js=
   - docker.yaml=
   - proxmox.yaml=
-  - widgets.yaml=
   options:
     disableNameSuffixHash: true
 helmGlobals:
