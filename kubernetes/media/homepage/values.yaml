@@ -41,6 +41,11 @@ env:
     secretKeyRef:
       name: homepage
       key: sonarrToken
+- name: HOMEPAGE_VAR_ARGOCD_TOKEN
+  valueFrom:
+    secretKeyRef:
+      name: argocd-readonly
+      key: token
 httpRoute:
   enabled: true
   hostname: homepage.cecobask.com

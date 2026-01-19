@@ -67,3 +67,12 @@
         type: sonarr
         url: http://sonarr.media.svc.cluster.local:8989
         key: "{{HOMEPAGE_VAR_SONARR_TOKEN}}"
+- Platform:
+  - Argo CD:
+      description:
+      href: https://argocd.cecobask.com
+      icon: argo-cd
+      widget:
+        type: argocd
+        url: http://argocd-server.argocd.svc.cluster.local
+        key: "{{HOMEPAGE_VAR_ARGOCD_TOKEN}}"
