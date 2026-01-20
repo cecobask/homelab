@@ -48,3 +48,24 @@
       description: Monitoring system
       href: https://prometheus.cecobask.com
       icon: prometheus
+- Miscellaneous:
+  - Home Assistant:
+      description: Home automation platform
+      href: https://haos.cecobask.com
+      icon: home-assistant
+  - Proxmox 1:
+      description: Virtualization platform
+      href: https://pve1.cecobask.com:8006
+      icon: proxmox
+  - Proxmox 2:
+      description: Virtualization platform
+      href: https://pve2.cecobask.com:8006
+      icon: proxmox
+  - Proxmox 3:
+      description: Virtualization platform
+      href: https://pve3.cecobask.com:8006
+      icon: proxmox
+  - UniFi:
+      description: Network management, surveillance, and storage solutions
+      href: https://unifi.ui.com
+      icon: unifi
