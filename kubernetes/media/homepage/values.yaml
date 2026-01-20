@@ -6,7 +6,7 @@ httpRoute:
   hostname: homelab.cecobask.com
 image:
   repository: ghcr.io/gethomepage/homepage
-  tag: dev
+  tag: v1.9.0
 livenessProbe:
   failureThreshold: 5
   httpGet:
