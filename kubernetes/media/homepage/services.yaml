@@ -1,43 +1,43 @@
 - Media:
   - Bazarr:
-      description: Subtitle management for movies and TV shows
+      description: Subtitle manager
       href: https://bazarr.cecobask.com
       icon: bazarr
   - Jellyfin:
-      description: Media server for streaming movies and TV shows
+      description: Media server
       href: https://jellyfin.cecobask.com
       icon: jellyfin
   - Profilarr:
-      description: Quality profile and custom format manager for Radarr and Sonarr
+      description: Quality profile manager
       href: https://profilarr.cecobask.com
       icon: profilarr
   - Prowlarr:
-      description: Indexer manager for Radarr and Sonarr
+      description: Indexer manager
       href: https://prowlarr.cecobask.com
       icon: prowlarr
   - qBittorrent:
-      description: BitTorrent client for downloading media
+      description: BitTorrent client
       href: https://qbit.cecobask.com
       icon: qbittorrent
   - Qui:
-      description: Alternative BitTorrent web user interface
+      description: BitTorrent web user interface
       href: https://qui.cecobask.com
       icon: qui
   - Radarr:
-      description: Movie collection manager
+      description: Movie manager
       href: https://radarr.cecobask.com
       icon: radarr
   - Seerr:
-      description: Request and discovery platform for movies and TV shows
+      description: Movie and TV show request platform
       href: https://seerr.cecobask.com
       icon: jellyseerr
   - Sonarr:
-      description: TV show collection manager
+      description: TV show manager
       href: https://sonarr.cecobask.com
       icon: sonarr
 - Platform:
   - Argo CD:
-      description: Declarative continuous delivery tool
+      description: Declarative continuous delivery platform
       href: https://argocd.cecobask.com
       icon: argo-cd
   - Grafana:
@@ -54,18 +54,18 @@
       href: https://haos.cecobask.com
       icon: home-assistant
   - Proxmox 1:
-      description: Virtualization platform
+      description: Server virtualization platform
       href: https://pve1.cecobask.com:8006
       icon: proxmox-light
   - Proxmox 2:
-      description: Virtualization platform
+      description: Server virtualization platform
       href: https://pve2.cecobask.com:8006
       icon: proxmox-light
   - Proxmox 3:
-      description: Virtualization platform
+      description: Server virtualization platform
       href: https://pve3.cecobask.com:8006
       icon: proxmox-light
   - UniFi:
-      description: Network management, surveillance, and storage solutions
+      description: Network, storage, and surveillance platform
       href: https://unifi.ui.com
       icon: unifi

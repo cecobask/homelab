@@ -1,10 +1,10 @@
 - Bookmarks:
   - Backblaze:
-    - description: Cloud storage used for backups
+    - description: S3 cloud storage
       href: https://backblaze.com
       icon: backblaze
-  - Homelab Repository:
-    - description: Repository containing the source code
+  - Homelab:
+    - description: Source code on GitHub
       href: https://github.com/cecobask/homelab
       icon: github-light
   - TorrentLeech:
