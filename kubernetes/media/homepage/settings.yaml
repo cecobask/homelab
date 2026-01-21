@@ -3,6 +3,7 @@ description: Homelab
 hideVersion: true
 quicklaunch:
   provider: google
+  searchDescriptions: true
   showSearchSuggestions: true
 target: _self
 theme: dark
