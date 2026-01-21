@@ -1,5 +1,9 @@
 color: stone
 description: Homelab
 hideVersion: true
+quicklaunch:
+  provider: google
+  showSearchSuggestions: true
+target: _self
 theme: dark
 title: Homelab
