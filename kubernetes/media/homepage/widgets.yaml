@@ -1,3 +1,8 @@
 - greeting:
     text: Homelab
     text_size: 3xl
+- search:
+    provider: google
+    focus: true
+    showSearchSuggestions: true
+    target: _self
