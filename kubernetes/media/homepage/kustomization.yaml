@@ -4,13 +4,13 @@ configMapGenerator:
 - name: homepage
   namespace: media
   files:
+  - bookmarks.yaml
   - custom.css
   - kubernetes.yaml
   - services.yaml
   - settings.yaml
   - widgets.yaml
   literals:
-  - bookmarks.yaml=
   - custom.js=
   - docker.yaml=
   - proxmox.yaml=

@@ -1,0 +1,13 @@
+- Bookmarks:
+  - Backblaze:
+    - description: Cloud storage used for backups
+      href: https://backblaze.com
+      icon: backblaze
+  - Homelab Repository:
+    - description: Repository containing the source code
+      href: https://github.com/cecobask/homelab
+      icon: github-light
+  - TorrentLeech:
+    - description: Private torrent tracker
+      href: https://torrentleech.org
+      icon: mdi-pirate

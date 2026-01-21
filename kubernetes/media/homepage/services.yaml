@@ -49,10 +49,6 @@
       href: https://prometheus.cecobask.com
       icon: prometheus
 - Miscellaneous:
-  - Backblaze:
-      description: S3 cloud storage used for backups
-      href: https://backblaze.com
-      icon: backblaze
   - Home Assistant:
       description: Home automation platform
       href: https://haos.cecobask.com
@@ -60,15 +56,15 @@
   - Proxmox 1:
       description: Virtualization platform
       href: https://pve1.cecobask.com:8006
-      icon: proxmox
+      icon: proxmox-light
   - Proxmox 2:
       description: Virtualization platform
       href: https://pve2.cecobask.com:8006
-      icon: proxmox
+      icon: proxmox-light
   - Proxmox 3:
       description: Virtualization platform
       href: https://pve3.cecobask.com:8006
-      icon: proxmox
+      icon: proxmox-light
   - UniFi:
       description: Network management, surveillance, and storage solutions
       href: https://unifi.ui.com
