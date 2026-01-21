@@ -7,6 +7,10 @@
     - description: Source code on GitHub
       href: https://github.com/cecobask/homelab
       icon: github-light
+  - Portfolio:
+    - description: Portfolio website
+      href: https://cecobask.com
+      icon: mdi-console
   - TorrentLeech:
     - description: Private torrent tracker
       href: https://torrentleech.org
