@@ -49,6 +49,10 @@
       href: https://prometheus.cecobask.com
       icon: prometheus
 - Miscellaneous:
+  - Backblaze:
+      description: S3 cloud storage used for backups
+      href: https://backblaze.com
+      icon: backblaze
   - Home Assistant:
       description: Home automation platform
       href: https://haos.cecobask.com
