@@ -11,14 +11,14 @@ resources:
     limits: ~
     requests:
       cpu: 10m
-      memory: 128Mi
+      memory: 100Mi
   operator:
     limits: ~
     requests:
       cpu: 10m
-      memory: 128Mi
+      memory: 150Mi
   webhooks:
     limits: ~
     requests:
       cpu: 10m
-      memory: 48Mi
+      memory: 50Mi

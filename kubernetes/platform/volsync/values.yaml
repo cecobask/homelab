@@ -1,6 +1,12 @@
+kube-rbac-proxy-resources:
+  limits: ~
+  requests:
+    cpu: 10m
+    memory: 100Mi
 metrics:
   disableAuth: true
 resources:
+  limits: ~
   requests:
     cpu: 10m
-    memory: 72Mi
+    memory: 100Mi

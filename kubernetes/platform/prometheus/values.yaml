@@ -44,7 +44,7 @@ kube-state-metrics:
   resources:
     requests:
       cpu: 10m
-      memory: 32Mi
+      memory: 100Mi
 prometheus:
   prometheusSpec:
     affinity:
@@ -57,8 +57,8 @@ prometheus:
               values: [ pve1 ]
     resources:
       requests:
-        cpu: 50m
-        memory: 768Mi
+        cpu: 200m
+        memory: 2Gi
     serviceMonitorSelectorNilUsesHelmValues: false
     storageSpec:
       volumeClaimTemplate:
@@ -76,7 +76,7 @@ prometheusOperator:
   resources:
     requests:
       cpu: 10m
-      memory: 32Mi
+      memory: 100Mi
 prometheus-node-exporter:
   fullnameOverride: prometheus-node-exporter
   prometheus:
@@ -86,4 +86,4 @@ prometheus-node-exporter:
   resources:
     requests:
       cpu: 10m
-      memory: 32Mi
+      memory: 50Mi

@@ -6,11 +6,11 @@ bitwarden-sdk-server:
   resources:
     requests:
       cpu: 10m
-      memory: 32Mi
+      memory: 30Mi
 resources:
   requests:
     cpu: 10m
-    memory: 128Mi
+    memory: 150Mi
 webhook:
   certManager:
     cert:
@@ -22,4 +22,4 @@ webhook:
   resources:
     requests:
       cpu: 10m
-      memory: 64Mi
+      memory: 200Mi

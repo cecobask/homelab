@@ -1,0 +1,18 @@
+gc:
+  resources:
+    limits: ~
+    requests:
+      cpu: 10m
+      memory: 50Mi
+master:
+  resources:
+    limits: ~
+    requests:
+      cpu: 10m
+      memory: 50Mi
+worker:
+  resources:
+    limits: ~
+    requests:
+      cpu: 10m
+      memory: 100Mi

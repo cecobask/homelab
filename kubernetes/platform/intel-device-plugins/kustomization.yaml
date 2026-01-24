@@ -13,6 +13,9 @@ helmCharts:
         gpu: true
     resources:
       limits: ~
+      requests:
+        cpu: 10m
+        memory: 100Mi
 - name: intel-device-plugins-gpu
   repo: https://intel.github.io/helm-charts
   version: 0.34.1

@@ -19,7 +19,7 @@ persistence:
 resources:
   requests:
     cpu: 40m
-    memory: 300Mi
+    memory: 200Mi
 service:
   targetPort: 9696
 volumeMounts:

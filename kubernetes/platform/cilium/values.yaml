@@ -5,8 +5,8 @@ cgroup:
 envoy:
   resources:
     requests:
-      cpu: 10m
-      memory: 64Mi
+      cpu: 20m
+      memory: 50Mi
 hubble:
   enabled: false
 ipam:
@@ -19,12 +19,12 @@ k8sServicePort: 7445
 operator:
   resources:
     requests:
-      cpu: 10m
-      memory: 128Mi
+      cpu: 100m
+      memory: 100Mi
 resources:
   requests:
-    cpu: 60m
-    memory: 320Mi
+    cpu: 200m
+    memory: 300Mi
 securityContext:
   capabilities:
     ciliumAgent:

@@ -2,7 +2,7 @@ cainjector:
   resources:
     requests:
       cpu: 10m
-      memory: 96Mi
+      memory: 100Mi
 crds:
   enabled: true
 global:
@@ -14,9 +14,9 @@ prometheus:
 resources:
   requests:
     cpu: 10m
-    memory: 96Mi
+    memory: 150Mi
 webhook:
   resources:
     requests:
       cpu: 10m
-      memory: 64Mi
+      memory: 80Mi

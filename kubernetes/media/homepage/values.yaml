@@ -21,8 +21,8 @@ livenessProbe:
 name: homepage
 resources:
   requests:
-    cpu: 100m
-    memory: 300Mi
+    cpu: 80m
+    memory: 150Mi
 securityContext:
   runAsUser: 1000
   runAsGroup: 1000

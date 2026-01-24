@@ -20,8 +20,8 @@ persistence:
   capacity: 10Gi
 resources:
   requests:
-    cpu: 150m
-    memory: 800Mi
+    cpu: 200m
+    memory: 1Gi
   limits:
     gpu.intel.com/i915: 1000m
 service:

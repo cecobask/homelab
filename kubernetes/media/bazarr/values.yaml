@@ -16,7 +16,7 @@ persistence:
   capacity: 1Gi
 resources:
   requests:
-    cpu: 10m
-    memory: 180Mi
+    cpu: 60m
+    memory: 300Mi
 service:
   targetPort: 6767

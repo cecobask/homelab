@@ -24695,6 +24695,7 @@ subjects:
 ---
 apiVersion: v1
 data:
+  accounts.readonly: apiKey
   admin.enabled: "true"
   application.instanceLabelKey: argocd.argoproj.io/instance
   application.resourceTrackingMethod: annotation+label
@@ -25427,7 +25428,7 @@ spec:
         resources:
           requests:
             cpu: 10m
-            memory: 62Mi
+            memory: 50Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -25553,7 +25554,7 @@ spec:
         resources:
           requests:
             cpu: 10m
-            memory: 32Mi
+            memory: 50Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -25602,7 +25603,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cm: 9ae4e64594ef143b161db456558ec8264f379f5327f3d29505ec69128ee63767
+        checksum/cm: bc30d569e5463212aad3e5eccafff3d9870234533101554a0189ffda8b1c8cdc
         checksum/cmd-params: 6d2297afff2a42b295522a38696efc5dfc7aaccd7b4d66f5a8c800c504b26d21
       labels:
         app.kubernetes.io/component: repo-server
@@ -25919,8 +25920,8 @@ spec:
           timeoutSeconds: 1
         resources:
           requests:
-            cpu: 80m
-            memory: 128Mi
+            cpu: 150m
+            memory: 200Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -25959,8 +25960,8 @@ spec:
         name: copyutil
         resources:
           requests:
-            cpu: 80m
-            memory: 128Mi
+            cpu: 150m
+            memory: 200Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -26032,7 +26033,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cm: 9ae4e64594ef143b161db456558ec8264f379f5327f3d29505ec69128ee63767
+        checksum/cm: bc30d569e5463212aad3e5eccafff3d9870234533101554a0189ffda8b1c8cdc
         checksum/cmd-params: 6d2297afff2a42b295522a38696efc5dfc7aaccd7b4d66f5a8c800c504b26d21
       labels:
         app.kubernetes.io/component: server
@@ -26397,8 +26398,8 @@ spec:
           timeoutSeconds: 1
         resources:
           requests:
-            cpu: 10m
-            memory: 96Mi
+            cpu: 20m
+            memory: 150Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -26497,7 +26498,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cm: 9ae4e64594ef143b161db456558ec8264f379f5327f3d29505ec69128ee63767
+        checksum/cm: bc30d569e5463212aad3e5eccafff3d9870234533101554a0189ffda8b1c8cdc
         checksum/cmd-params: 6d2297afff2a42b295522a38696efc5dfc7aaccd7b4d66f5a8c800c504b26d21
       labels:
         app.kubernetes.io/component: application-controller
@@ -26823,8 +26824,8 @@ spec:
           timeoutSeconds: 1
         resources:
           requests:
-            cpu: 150m
-            memory: 768Mi
+            cpu: 400m
+            memory: 700Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:

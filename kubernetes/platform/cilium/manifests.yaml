@@ -762,8 +762,8 @@ spec:
           timeoutSeconds: 3
         resources:
           requests:
-            cpu: 10m
-            memory: 128Mi
+            cpu: 100m
+            memory: 100Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -923,8 +923,8 @@ spec:
           timeoutSeconds: 5
         resources:
           requests:
-            cpu: 60m
-            memory: 320Mi
+            cpu: 200m
+            memory: 300Mi
         securityContext:
           capabilities:
             add:
@@ -1322,8 +1322,8 @@ spec:
           timeoutSeconds: 5
         resources:
           requests:
-            cpu: 10m
-            memory: 64Mi
+            cpu: 20m
+            memory: 50Mi
         securityContext:
           capabilities:
             add:

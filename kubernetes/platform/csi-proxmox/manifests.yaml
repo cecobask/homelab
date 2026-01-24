@@ -363,7 +363,7 @@ spec:
         resources:
           requests:
             cpu: 10m
-            memory: 16Mi
+            memory: 60Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -389,7 +389,7 @@ spec:
         resources:
           requests:
             cpu: 10m
-            memory: 16Mi
+            memory: 40Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -424,7 +424,7 @@ spec:
         resources:
           requests:
             cpu: 10m
-            memory: 16Mi
+            memory: 50Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -448,7 +448,7 @@ spec:
         resources:
           requests:
             cpu: 10m
-            memory: 16Mi
+            memory: 40Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -471,7 +471,7 @@ spec:
         resources:
           requests:
             cpu: 10m
-            memory: 16Mi
+            memory: 40Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -577,7 +577,7 @@ spec:
         resources:
           requests:
             cpu: 10m
-            memory: 96Mi
+            memory: 70Mi
         securityContext:
           capabilities:
             add:
@@ -609,7 +609,7 @@ spec:
         resources:
           requests:
             cpu: 10m
-            memory: 16Mi
+            memory: 30Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:

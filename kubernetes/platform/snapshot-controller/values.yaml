@@ -2,4 +2,4 @@ controller:
   resources:
     requests:
       cpu: 10m
-      memory: 64Mi
+      memory: 100Mi

@@ -6,15 +6,44 @@ affinity:
         - key: node-role.kubernetes.io/control-plane
           operator: Exists
 controller:
-  snapshotter:
-    enabled: true
-existingConfigSecret: csi-proxmox
-node:
+  attacher:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 40Mi
   plugin:
     resources:
       requests:
         cpu: 10m
-        memory: 96Mi
+        memory: 60Mi
+  provisioner:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 50Mi
+  resizer:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 40Mi
+  snapshotter:
+    enabled: true
+    resources:
+      requests:
+        cpu: 10m
+        memory: 40Mi
+existingConfigSecret: csi-proxmox
+node:
+  driverRegistrar:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 30Mi
+  plugin:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 70Mi
 tolerations:
 - key: node-role.kubernetes.io/control-plane
   effect: NoSchedule

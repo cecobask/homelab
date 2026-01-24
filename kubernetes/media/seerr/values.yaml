@@ -18,7 +18,7 @@ persistence:
   capacity: 5Gi
 resources:
   requests:
-    cpu: 40m
+    cpu: 50m
     memory: 300Mi
 securityContext:
   runAsUser: 1000

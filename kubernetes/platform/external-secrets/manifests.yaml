@@ -31359,7 +31359,7 @@ spec:
         resources:
           requests:
             cpu: 10m
-            memory: 32Mi
+            memory: 30Mi
         securityContext: {}
         volumeMounts:
         - mountPath: /certs
@@ -31422,7 +31422,7 @@ spec:
         resources:
           requests:
             cpu: 10m
-            memory: 128Mi
+            memory: 150Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -31496,7 +31496,7 @@ spec:
         resources:
           requests:
             cpu: 10m
-            memory: 64Mi
+            memory: 200Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:

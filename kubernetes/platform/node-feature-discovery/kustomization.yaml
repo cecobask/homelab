@@ -7,3 +7,4 @@ helmCharts:
   releaseName: nfd
   includeCRDs: true
   namespace: kube-system
+  valuesFile: values.yaml

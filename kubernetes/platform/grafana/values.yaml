@@ -76,7 +76,7 @@ persistence:
   type: sts
 resources:
   requests:
-    cpu: 40m
-    memory: 320Mi
+    cpu: 20m
+    memory: 500Mi
 serviceMonitor:
   enabled: true

@@ -17,8 +17,8 @@ persistence:
   capacity: 1Gi
 resources:
   requests:
-    cpu: 300m
-    memory: 500Mi
+    cpu: 600m
+    memory: 1Gi
 service:
   targetPort: 8080
 startupProbe:

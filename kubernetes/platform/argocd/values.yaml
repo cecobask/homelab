@@ -6,7 +6,7 @@ applicationSet:
   resources:
     requests:
       cpu: 10m
-      memory: 62Mi
+      memory: 50Mi
 configs:
   cm:
     accounts.readonly: apiKey
@@ -24,8 +24,8 @@ controller:
       enabled: true
   resources:
     requests:
-      cpu: 150m
-      memory: 768Mi
+      cpu: 400m
+      memory: 700Mi
 dex:
   enabled: false
 notifications:
@@ -38,7 +38,7 @@ redis:
   resources:
     requests:
       cpu: 10m
-      memory: 32Mi
+      memory: 50Mi
 repoServer:
   metrics:
     enabled: true
@@ -46,8 +46,8 @@ repoServer:
       enabled: true
   resources:
     requests:
-      cpu: 80m
-      memory: 128Mi
+      cpu: 150m
+      memory: 200Mi
 server:
   metrics:
     enabled: true
@@ -55,5 +55,5 @@ server:
       enabled: true
   resources:
     requests:
-      cpu: 10m
-      memory: 96Mi
+      cpu: 20m
+      memory: 150Mi
