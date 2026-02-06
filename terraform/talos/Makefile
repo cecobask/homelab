@@ -36,7 +36,7 @@ update-kubernetes-manifests:
 down: cleanup destroy
 
 .PHONY: cleanup
-cleanup:
+cleanup: create-argocd-sync-window
 	@bash hack/cleanup.sh
 
 .PHONY: destroy
@@ -46,3 +46,7 @@ destroy:
 .PHONY: unlock
 unlock:
 	@terraform force-unlock -force cecobask/talos
+
+.PHONY: create-argocd-sync-window
+create-argocd-sync-window:
+	@bash hack/create-argocd-sync-window.sh
