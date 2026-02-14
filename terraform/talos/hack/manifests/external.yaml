@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: external
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/cecobask/homelab.git
+    path: kubernetes/external
+    targetRevision: HEAD
+  destination:
+    name: in-cluster
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
