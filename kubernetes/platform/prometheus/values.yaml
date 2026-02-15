@@ -85,5 +85,5 @@ prometheus-node-exporter:
       - cluster
   resources:
     requests:
-      cpu: 10m
+      cpu: 30m
       memory: 50Mi

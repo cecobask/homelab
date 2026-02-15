@@ -7,7 +7,7 @@ metrics:
   enabled: true
 resources:
   requests:
-    cpu: 10m
+    cpu: 20m
     memory: 100Mi
 serviceMonitor:
   enabled: true

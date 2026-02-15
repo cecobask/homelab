@@ -24747,7 +24747,6 @@ data:
       - discovery.k8s.io
       kinds:
       - Endpoints
-      - EndpointSlice
     ### Internal Kubernetes resources excluded reduce the number of watched events
     - apiGroups:
       - coordination.k8s.io
@@ -25428,7 +25427,7 @@ spec:
         resources:
           requests:
             cpu: 10m
-            memory: 50Mi
+            memory: 100Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -25553,7 +25552,7 @@ spec:
           protocol: TCP
         resources:
           requests:
-            cpu: 10m
+            cpu: 20m
             memory: 50Mi
         securityContext:
           allowPrivilegeEscalation: false
@@ -25603,7 +25602,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cm: bc30d569e5463212aad3e5eccafff3d9870234533101554a0189ffda8b1c8cdc
+        checksum/cm: 7ee85c72993b332d6dad4c4538b533bc434bebdb1bfc3f3ce601ff0f5ce17dfa
         checksum/cmd-params: 6d2297afff2a42b295522a38696efc5dfc7aaccd7b4d66f5a8c800c504b26d21
       labels:
         app.kubernetes.io/component: repo-server
@@ -26033,7 +26032,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cm: bc30d569e5463212aad3e5eccafff3d9870234533101554a0189ffda8b1c8cdc
+        checksum/cm: 7ee85c72993b332d6dad4c4538b533bc434bebdb1bfc3f3ce601ff0f5ce17dfa
         checksum/cmd-params: 6d2297afff2a42b295522a38696efc5dfc7aaccd7b4d66f5a8c800c504b26d21
       labels:
         app.kubernetes.io/component: server
@@ -26498,7 +26497,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cm: bc30d569e5463212aad3e5eccafff3d9870234533101554a0189ffda8b1c8cdc
+        checksum/cm: 7ee85c72993b332d6dad4c4538b533bc434bebdb1bfc3f3ce601ff0f5ce17dfa
         checksum/cmd-params: 6d2297afff2a42b295522a38696efc5dfc7aaccd7b4d66f5a8c800c504b26d21
       labels:
         app.kubernetes.io/component: application-controller

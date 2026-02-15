@@ -10,15 +10,15 @@ resources:
   metricServer:
     limits: ~
     requests:
-      cpu: 10m
-      memory: 100Mi
+      cpu: 20m
+      memory: 150Mi
   operator:
     limits: ~
     requests:
-      cpu: 10m
+      cpu: 20m
       memory: 150Mi
   webhooks:
     limits: ~
     requests:
       cpu: 10m
-      memory: 50Mi
+      memory: 100Mi

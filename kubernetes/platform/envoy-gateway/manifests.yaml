@@ -42627,6 +42627,8 @@ spec:
   provider:
     kubernetes:
       envoyService:
+        annotations:
+          lbipam.cilium.io/ips: 192.168.40.3
         externalTrafficPolicy: Cluster
     type: Kubernetes
 ---

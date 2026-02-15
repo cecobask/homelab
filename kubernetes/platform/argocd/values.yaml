@@ -6,7 +6,7 @@ applicationSet:
   resources:
     requests:
       cpu: 10m
-      memory: 50Mi
+      memory: 100Mi
 configs:
   cm:
     accounts.readonly: apiKey
@@ -92,7 +92,7 @@ redis:
       enabled: true
   resources:
     requests:
-      cpu: 10m
+      cpu: 20m
       memory: 50Mi
 repoServer:
   metrics:

@@ -23,7 +23,7 @@ operator:
       memory: 100Mi
 resources:
   requests:
-    cpu: 200m
+    cpu: 300m
     memory: 300Mi
 securityContext:
   capabilities:

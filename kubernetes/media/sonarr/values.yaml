@@ -20,7 +20,7 @@ persistence:
   capacity: 5Gi
 resources:
   requests:
-    cpu: 100m
-    memory: 300Mi
+    cpu: 300m
+    memory: 350Mi
 service:
   targetPort: 8989
