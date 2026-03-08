@@ -1,0 +1,30 @@
+env:
+- name: PUID
+  value: "65534"
+- name: PGID
+  value: "65534"
+httpRoute:
+  enabled: true
+  hostname: shelfmark.cecobask.com
+image:
+  repository: ghcr.io/calibrain/shelfmark
+  tag: v1.2.0
+livenessProbe:
+  failureThreshold: 5
+  httpGet:
+    path: /api/health
+    port: 8084
+  initialDelaySeconds: 30
+  periodSeconds: 15
+  timeoutSeconds: 10
+name: shelfmark
+persistence:
+  enabled: true
+  capacity: 1Gi
+securityContext: ~
+resources:
+  requests:
+    cpu: 10m
+    memory: 300Mi
+service:
+  targetPort: 8084
