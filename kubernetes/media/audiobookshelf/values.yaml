@@ -20,5 +20,9 @@ resources:
   requests:
     cpu: 100m
     memory: 500Mi
+securityContext:
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
 service:
   targetPort: 13378
