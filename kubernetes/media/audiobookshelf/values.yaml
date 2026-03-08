@@ -8,7 +8,7 @@ livenessProbe:
   failureThreshold: 5
   httpGet:
     path: /healthcheck
-    port: 13378
+    port: 80
   initialDelaySeconds: 30
   periodSeconds: 15
   timeoutSeconds: 10
@@ -22,4 +22,4 @@ resources:
     memory: 500Mi
 securityContext: ~
 service:
-  targetPort: 13378
+  targetPort: 80
