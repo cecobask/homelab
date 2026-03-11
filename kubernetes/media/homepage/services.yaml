@@ -1,4 +1,8 @@
 - Media:
+  - Audiobookshelf:
+      description: Audiobook and podcast server
+      href: https://audiobookshelf.cecobask.com
+      icon: audiobookshelf
   - Bazarr:
       description: Subtitle manager
       href: https://bazarr.cecobask.com
@@ -15,6 +19,10 @@
       description: Indexer manager
       href: https://prowlarr.cecobask.com
       icon: prowlarr
+  - Shelfmark:
+      description: Book and audiobook request platform
+      href: https://shelfmark.cecobask.com
+      icon: shelfmark
   - qBittorrent:
       description: BitTorrent client
       href: https://qbit.cecobask.com
