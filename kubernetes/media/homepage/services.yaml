@@ -52,15 +52,14 @@
       description: Data visualization platform
       href: https://grafana.cecobask.com
       icon: grafana
-  - Prometheus:
-      description: Monitoring system
-      href: https://prometheus.cecobask.com
-      icon: prometheus
-- Miscellaneous:
   - Home Assistant:
       description: Home automation platform
       href: https://haos.cecobask.com
       icon: home-assistant
+  - Prometheus:
+      description: Monitoring system
+      href: https://prometheus.cecobask.com
+      icon: prometheus
   - Proxmox 1:
       description: Server virtualization platform
       href: https://pve1.cecobask.com:8006
