@@ -3,7 +3,7 @@ httpRoute:
   hostname: seerr.cecobask.com
 image:
   repository: ghcr.io/seerr-team/seerr
-  tag: sha-d0f029b
+  tag: v3.1.0
 livenessProbe:
   failureThreshold: 5
   httpGet:
