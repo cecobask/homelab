@@ -1,3 +1,22 @@
+- Torrents:
+  - Aither:
+    - href: https://aither.cc
+      abbr: AIT
+  - Anthelion:
+    - href: https://anthelion.me
+      abbr: ANT
+  - Bayflix:
+    - href: https://bayflix.is
+      abbr: BF
+  - Blutopia:
+    - href: https://blutopia.cc
+      abbr: BLU
+  - MyAnonaMouse:
+    - href: https://myanonamouse.net
+      abbr: MAM
+  - TorrentLeech:
+    - href: https://torrentleech.org
+      abbr: TL
 - Bookmarks:
   - Backblaze:
     - description: S3 cloud storage
@@ -11,15 +30,7 @@
     - description: Source code on GitHub
       href: https://github.com/cecobask/homelab
       icon: github-light
-  - MyAnonamouse:
-    - description: Private torrent tracker
-      href: https://myanonamouse.net
-      icon: mdi-pirate
   - Portfolio:
     - description: Portfolio website
       href: https://cecobask.com
       icon: mdi-console
-  - TorrentLeech:
-    - description: Private torrent tracker
-      href: https://torrentleech.org
-      icon: mdi-pirate
