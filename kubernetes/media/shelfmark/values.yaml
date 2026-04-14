@@ -8,7 +8,7 @@ httpRoute:
   hostname: shelfmark.cecobask.com
 image:
   repository: ghcr.io/calibrain/shelfmark
-  tag: v1.2.0
+  tag: v1.2.1
 livenessProbe:
   failureThreshold: 5
   httpGet:
