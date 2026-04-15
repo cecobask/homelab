@@ -5,7 +5,7 @@ httpRoute:
     request: 3h
 image:
   repository: ghcr.io/jellyfin/jellyfin
-  tag: 10.11.2
+  tag: 10.11.8
 livenessProbe:
   failureThreshold: 5
   httpGet:
