@@ -5,7 +5,7 @@ httpRoute:
     request: 3m
 image:
   repository: ghcr.io/home-operations/sonarr
-  tag: 4.0.16
+  tag: 4.0.17
 livenessProbe:
   failureThreshold: 5
   httpGet:
