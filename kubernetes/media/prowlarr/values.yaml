@@ -3,7 +3,7 @@ httpRoute:
   hostname: prowlarr.cecobask.com
 image:
   repository: ghcr.io/home-operations/prowlarr
-  tag: 2.3.0
+  tag: 2.3.6
 livenessProbe:
   failureThreshold: 5
   httpGet:
