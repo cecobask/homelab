@@ -3,7 +3,7 @@ httpRoute:
   hostname: qbit.cecobask.com
 image:
   repository: ghcr.io/home-operations/qbittorrent
-  tag: 5.1.3
+  tag: 5.1.4
 livenessProbe:
   failureThreshold: 6
   initialDelaySeconds: 10
