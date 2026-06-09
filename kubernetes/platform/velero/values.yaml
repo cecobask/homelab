@@ -1,0 +1,32 @@
+resources:
+  requests:
+    cpu: 200m
+    memory: 256Mi
+  limits: ~
+initContainers:
+- name: velero-plugin-for-aws
+  image: velero/velero-plugin-for-aws:v1.14.1
+  volumeMounts:
+  - mountPath: /target
+    name: plugins
+metrics:
+  serviceMonitor:
+    enabled: true
+upgradeCRDs: false
+snapshotsEnabled: false
+configuration:
+  backupStorageLocation:
+  - provider: aws
+    name: backblaze
+    default: true
+    bucket: homelab-5678b8898f
+    prefix: velero
+    config:
+      region: eu-central-003
+      s3Url: https://s3.eu-central-003.backblazeb2.com
+    credential:
+      name: credentials
+      key: cloud
+  features: EnableCSI
+credentials:
+  existingSecret: credentials
