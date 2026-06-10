@@ -1,3 +1,5 @@
+apiService:
+  insecureSkipTLSVerify: false
 args:
 - --kubelet-insecure-tls
 image:
