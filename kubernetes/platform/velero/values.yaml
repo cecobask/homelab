@@ -12,6 +12,7 @@ configuration:
     prefix: velero
     validationFrequency: 60m
     provider: aws
+  backupSyncPeriod: 60m
   features: EnableCSI
 credentials:
   existingSecret: credentials
