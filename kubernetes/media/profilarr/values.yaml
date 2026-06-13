@@ -3,7 +3,7 @@ httpRoute:
   hostname: profilarr.cecobask.com
 image:
   repository: santiagosayshey/profilarr
-  tag: v1.1.2
+  tag: v1.1.4
 livenessProbe:
   failureThreshold: 5
   httpGet:
