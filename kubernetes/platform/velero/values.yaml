@@ -17,7 +17,7 @@ configuration:
 credentials:
   existingSecret: credentials
 initContainers:
-- image: velero/velero-plugin-for-aws:v1.14.1
+- image: velero/velero-plugin-for-aws:v1.14.0 # pin v1.14.0 until https://github.com/velero-io/velero-plugin-for-aws/pull/299 is merged and released
   name: velero-plugin-for-aws
   volumeMounts:
   - mountPath: /target
