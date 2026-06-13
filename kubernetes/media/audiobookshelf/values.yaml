@@ -3,7 +3,7 @@ httpRoute:
   hostname: audiobookshelf.cecobask.com
 image:
   repository: ghcr.io/advplyr/audiobookshelf
-  tag: 2.32.1
+  tag: 2.35.1
 livenessProbe:
   failureThreshold: 5
   httpGet:
