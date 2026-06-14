@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: velero
 resources:
 - namespace.yaml
+- schedule.yaml
 - secret.yaml
 helmCharts:
 - repo: https://vmware-tanzu.github.io/helm-charts
