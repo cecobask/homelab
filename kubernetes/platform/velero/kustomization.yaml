@@ -3,8 +3,9 @@ kind: Kustomization
 namespace: velero
 resources:
 - namespace.yaml
-- schedule.yaml
 - secret.yaml
+helmGlobals:
+  chartHome: ../../helm
 helmCharts:
 - repo: https://vmware-tanzu.github.io/helm-charts
   name: velero
@@ -13,3 +14,6 @@ helmCharts:
   namespace: velero
   includeCRDs: true
   valuesFile: values.yaml
+- name: velero-schedules
+  namespace: velero
+  valuesFile: schedules.yaml

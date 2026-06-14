@@ -1,18 +1,21 @@
+{{- range .Values.apps }}
 apiVersion: velero.io/v1
 kind: Schedule
 metadata:
-  name: qui
+  name: {{ .name }}
 spec:
   schedule: CRON_TZ=Europe/Dublin 00 04 * * *
   template:
     includedNamespaces:
-    - media
+    - {{ .namespace }}
     includedResources:
     - persistentvolumeclaims
     labelSelector:
       matchLabels:
-        app: qui
+        app: {{ .name }}
     snapshotMoveData: true
     snapshotVolumes: true
     storageLocation: backblaze
     ttl: 72h
+---
+{{- end }}
