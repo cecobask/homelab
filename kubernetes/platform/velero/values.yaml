@@ -10,9 +10,10 @@ configuration:
     default: true
     name: backblaze
     prefix: velero
-    validationFrequency: 60m
+    validationFrequency: 24h
     provider: aws
-  backupSyncPeriod: 60m
+  backupSyncPeriod: 24h
+  defaultRepoMaintainFrequency: 24h
   features: EnableCSI
 credentials:
   existingSecret: credentials
