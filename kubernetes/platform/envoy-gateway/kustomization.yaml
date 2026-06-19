@@ -3,8 +3,8 @@ kind: Kustomization
 resources:
 - certificate.yaml
 - gateway.yaml
-- https://github.com/envoyproxy/gateway/releases/download/v1.6.0/envoy-gateway-crds.yaml
-- https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.4.0/standard-install.yaml
+- https://github.com/envoyproxy/gateway/releases/download/v1.8.1/envoy-gateway-crds.yaml
+- https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.5.1/standard-install.yaml
 - namespace.yaml
 helmCharts:
 - repo: oci://docker.io/envoyproxy
