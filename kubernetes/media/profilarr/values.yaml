@@ -1,9 +1,9 @@
 env:
 - name: ORIGIN
-  value: https://profilarr-v2.cecobask.com
+  value: https://profilarr.cecobask.com
 httpRoute:
   enabled: true
-  hostname: profilarr-v2.cecobask.com
+  hostname: profilarr.cecobask.com
 image:
   repository: ghcr.io/dictionarry-hub/profilarr
   tag: 2.0.8
@@ -15,7 +15,7 @@ livenessProbe:
   initialDelaySeconds: 30
   periodSeconds: 15
   timeoutSeconds: 10
-name: profilarr-v2
+name: profilarr
 persistence:
   enabled: true
   capacity: 1Gi
