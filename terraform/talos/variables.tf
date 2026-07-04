@@ -1,3 +1,18 @@
+variable "bitwarden_token" {
+  type      = string
+  sensitive = true
+}
+
+variable "cluster" {
+  type = object({
+    name               = string
+    bootstrap_node     = string
+    kubernetes_version = string
+    gateway            = string
+    vip                = string
+  })
+}
+
 variable "image" {
   type = object({
     version      = string
@@ -19,14 +34,4 @@ variable "vms" {
     machine_type = string
     gpu          = optional(bool, false)
   }))
-}
-
-variable "cluster" {
-  type = object({
-    name               = string
-    bootstrap_node     = string
-    kubernetes_version = string
-    gateway            = string
-    vip                = string
-  })
 }

@@ -44,10 +44,6 @@
       href: https://sonarr.cecobask.com
       icon: sonarr
 - Platform:
-  - Argo CD:
-      description: Declarative continuous delivery platform
-      href: https://argocd.cecobask.com
-      icon: argo-cd
   - Grafana:
       description: Data visualization platform
       href: https://grafana.cecobask.com

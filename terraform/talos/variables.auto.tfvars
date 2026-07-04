@@ -1,3 +1,11 @@
+cluster = {
+  name               = "homelab"
+  bootstrap_node     = "talos-ctrl-01"
+  kubernetes_version = "v1.35.0"
+  gateway            = "192.168.40.1"
+  vip                = "192.168.40.2"
+}
+
 image = {
   version      = "v1.12.0"
   platform     = "nocloud"
@@ -62,12 +70,4 @@ vms = {
     machine_type = "worker"
     gpu          = true
   }
-}
-
-cluster = {
-  name               = "homelab"
-  bootstrap_node     = "talos-ctrl-01"
-  kubernetes_version = "v1.35.0"
-  gateway            = "192.168.40.1"
-  vip                = "192.168.40.2"
 }

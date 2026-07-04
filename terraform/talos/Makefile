@@ -3,15 +3,11 @@ include ../Makefile
 .ONESHELL:
 
 .PHONY: up
-up: apply save bootstrap
+up: apply save
 
 .PHONY: apply
 apply:
 	@terraform apply -auto-approve
-
-.PHONY: bootstrap
-bootstrap:
-	@bash hack/bootstrap.sh
 
 .PHONY: save
 save: save/kubeconfig save/talosconfig
@@ -24,20 +20,8 @@ save/kubeconfig:
 save/talosconfig:
 	@terraform output -raw talosconfig > outputs/talosconfig
 
-.PHONY: update-argocd-creds
-update-argocd-creds:
-	@bash hack/update-argocd-creds.sh
-
-.PHONY: update-kubernetes-manifests
-update-kubernetes-manifests:
-	@bash hack/update-kubernetes-manifests.sh
-
 .PHONY: down
-down: cleanup destroy
-
-.PHONY: cleanup
-cleanup: create-argocd-sync-window
-	@bash hack/cleanup.sh
+down: destroy
 
 .PHONY: destroy
 destroy:
@@ -46,7 +30,3 @@ destroy:
 .PHONY: unlock
 unlock:
 	@terraform force-unlock -force cecobask/talos
-
-.PHONY: create-argocd-sync-window
-create-argocd-sync-window:
-	@bash hack/create-argocd-sync-window.sh

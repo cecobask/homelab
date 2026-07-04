@@ -15,6 +15,10 @@ terraform {
       source  = "integrations/github"
       version = "6.12.1"
     }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "3.2.1"
+    }
     proxmox = {
       source  = "bpg/proxmox"
       version = "0.84.1"
@@ -47,6 +51,13 @@ provider "flux" {
 }
 
 provider "github" {}
+
+provider "kubernetes" {
+  host                   = talos_cluster_kubeconfig.this.kubernetes_client_configuration.host
+  client_certificate     = base64decode(talos_cluster_kubeconfig.this.kubernetes_client_configuration.client_certificate)
+  client_key             = base64decode(talos_cluster_kubeconfig.this.kubernetes_client_configuration.client_key)
+  cluster_ca_certificate = base64decode(talos_cluster_kubeconfig.this.kubernetes_client_configuration.ca_certificate)
+}
 
 provider "proxmox" {}
 
