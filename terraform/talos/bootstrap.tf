@@ -23,8 +23,10 @@ resource "flux_bootstrap_git" "homelab" {
     "kustomize-controller",
     "helm-controller"
   ]
-  embedded_manifests = true
-  path               = "kubernetes/clusters/homelab"
+  delete_git_manifests   = false
+  embedded_manifests     = true
+  kustomization_override = file("${path.root}/config/flux-patches.yaml")
+  path                   = "kubernetes/clusters/homelab"
 }
 
 resource "kubernetes_namespace_v1" "eso" {
