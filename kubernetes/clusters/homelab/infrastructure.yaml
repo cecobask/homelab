@@ -1,0 +1,45 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cilium
+  namespace: flux-system
+spec:
+  interval: 10m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: kubernetes/infrastructure/cilium
+  prune: true
+  wait: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: controllers
+  namespace: flux-system
+spec:
+  dependsOn:
+  - name: cilium
+  interval: 10m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: kubernetes/infrastructure/controllers
+  prune: true
+  wait: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: resources
+  namespace: flux-system
+spec:
+  dependsOn:
+  - name: controllers
+  interval: 10m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: kubernetes/infrastructure/resources
+  prune: true
+  wait: true

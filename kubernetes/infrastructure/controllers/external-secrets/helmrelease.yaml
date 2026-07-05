@@ -1,0 +1,39 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: external-secrets
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: external-secrets
+      sourceRef:
+        kind: HelmRepository
+        name: external-secrets
+      version: v1.2.1
+  values:
+    bitwarden-sdk-server:
+      enabled: true
+      image:
+        tls:
+          secretName: bitwarden-sdk-server
+      resources:
+        requests:
+          cpu: 10m
+          memory: 30Mi
+    resources:
+      requests:
+        cpu: 10m
+        memory: 150Mi
+    webhook:
+      certManager:
+        cert:
+          issuerRef:
+            kind: ClusterIssuer
+            name: internal-ca
+        enabled: true
+      lookaheadInterval: 48h
+      resources:
+        requests:
+          cpu: 10m
+          memory: 200Mi
