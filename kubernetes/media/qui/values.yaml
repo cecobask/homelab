@@ -3,7 +3,7 @@ httpRoute:
   hostname: qui.cecobask.com
 image:
   repository: ghcr.io/autobrr/qui
-  tag: v1.7.0
+  tag: v1.22.0
 livenessProbe:
   failureThreshold: 5
   httpGet:
