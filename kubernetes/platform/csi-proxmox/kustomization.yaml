@@ -8,7 +8,7 @@ resources:
 helmCharts:
 - repo: oci://ghcr.io/sergelogvinov/charts
   name: proxmox-csi-plugin
-  version: 0.5.7
+  version: 0.5.9
   releaseName: csi-proxmox
   namespace: csi-proxmox
   valuesFile: values.yaml
