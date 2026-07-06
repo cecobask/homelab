@@ -1,0 +1,23 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: envoy-gateway
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: envoy-gateway
+  values:
+    deployment:
+      envoyGateway:
+        resources:
+          limits: ~
+          requests:
+            cpu: 10m
+            memory: 150Mi
+    crds:
+      envoyGateway:
+        enabled: true
+      gatewayAPI:
+        channel: standard
+        enabled: true
