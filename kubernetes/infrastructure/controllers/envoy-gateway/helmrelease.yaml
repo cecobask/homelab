@@ -16,8 +16,4 @@ spec:
             cpu: 10m
             memory: 150Mi
     crds:
-      envoyGateway:
-        enabled: true
-      gatewayAPI:
-        channel: standard
-        enabled: true
+      enabled: false
