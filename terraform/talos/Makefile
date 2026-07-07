@@ -2,6 +2,10 @@ include ../Makefile
 
 .ONESHELL:
 
+.PHONY: cilium
+cilium:
+	@bash hack/cilium.sh
+
 .PHONY: up
 up: apply save
 
