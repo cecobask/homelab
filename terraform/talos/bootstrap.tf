@@ -34,6 +34,12 @@ resource "kubernetes_namespace_v1" "eso" {
   metadata {
     name = "external-secrets"
   }
+  lifecycle {
+    ignore_changes = [
+      metadata[0].labels,
+      metadata[0].annotations,
+    ]
+  }
 }
 
 resource "kubernetes_secret_v1" "bitwarden" {
