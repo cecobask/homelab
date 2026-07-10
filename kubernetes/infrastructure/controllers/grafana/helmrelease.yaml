@@ -1,0 +1,99 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: grafana
+  namespace: grafana
+spec:
+  chart:
+    spec:
+      chart: grafana
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+      version: 10.5.15
+  dependsOn:
+  - name: csi-proxmox
+    namespace: csi-proxmox
+  - name: envoy-gateway
+    namespace: envoy-gateway
+  interval: 1h
+  values:
+    admin:
+      existingSecret: grafana
+      passwordKey: password
+      userKey: user
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: topology.kubernetes.io/zone
+              operator: In
+              values: [ pve1 ]
+    dashboardProviders:
+      dashboardproviders.yaml:
+        apiVersion: 1
+        providers:
+        - name: default
+          options:
+            path: /var/lib/grafana/dashboards/default
+          type: file
+    dashboards:
+      default:
+        apiserver:
+          url: https://raw.githubusercontent.com/cecobask/homelab/HEAD/kubernetes/infrastructure/controllers/grafana/dashboards/apiserver.json
+        cluster-total:
+          url: https://raw.githubusercontent.com/cecobask/homelab/HEAD/kubernetes/infrastructure/controllers/grafana/dashboards/cluster-total.json
+        controller-manager:
+          url: https://raw.githubusercontent.com/cecobask/homelab/HEAD/kubernetes/infrastructure/controllers/grafana/dashboards/controller-manager.json
+        kubelet:
+          url: https://raw.githubusercontent.com/cecobask/homelab/HEAD/kubernetes/infrastructure/controllers/grafana/dashboards/kubelet.json
+        k8s-resources-cluster:
+          url: https://raw.githubusercontent.com/cecobask/homelab/HEAD/kubernetes/infrastructure/controllers/grafana/dashboards/k8s-resources-cluster.json
+        k8s-resources-namespace:
+          url: https://raw.githubusercontent.com/cecobask/homelab/HEAD/kubernetes/infrastructure/controllers/grafana/dashboards/k8s-resources-namespace.json
+        k8s-resources-node:
+          url: https://raw.githubusercontent.com/cecobask/homelab/HEAD/kubernetes/infrastructure/controllers/grafana/dashboards/k8s-resources-node.json
+        k8s-resources-pod:
+          url: https://raw.githubusercontent.com/cecobask/homelab/HEAD/kubernetes/infrastructure/controllers/grafana/dashboards/k8s-resources-pod.json
+        k8s-resources-workload:
+          url: https://raw.githubusercontent.com/cecobask/homelab/HEAD/kubernetes/infrastructure/controllers/grafana/dashboards/k8s-resources-workload.json
+        k8s-resources-workloads-namespace:
+          url: https://raw.githubusercontent.com/cecobask/homelab/HEAD/kubernetes/infrastructure/controllers/grafana/dashboards/k8s-resources-workloads-namespace.json
+        namespace-by-pod:
+          url: https://raw.githubusercontent.com/cecobask/homelab/HEAD/kubernetes/infrastructure/controllers/grafana/dashboards/namespace-by-pod.json
+        namespace-by-workload:
+          url: https://raw.githubusercontent.com/cecobask/homelab/HEAD/kubernetes/infrastructure/controllers/grafana/dashboards/namespace-by-workload.json
+        node-exporter:
+          gnetId: 1860
+          revision: 42
+        persistentvolumesusage:
+          url: https://raw.githubusercontent.com/cecobask/homelab/HEAD/kubernetes/infrastructure/controllers/grafana/dashboards/persistentvolumesusage.json
+        pod-total:
+          url: https://raw.githubusercontent.com/cecobask/homelab/HEAD/kubernetes/infrastructure/controllers/grafana/dashboards/pod-total.json
+        scheduler:
+          url: https://raw.githubusercontent.com/cecobask/homelab/HEAD/kubernetes/infrastructure/controllers/grafana/dashboards/scheduler.json
+        workload-total:
+          url: https://raw.githubusercontent.com/cecobask/homelab/HEAD/kubernetes/infrastructure/controllers/grafana/dashboards/workload-total.json
+    datasources:
+      datasources.yaml:
+        apiVersion: 1
+        datasources:
+        - access: proxy
+          isDefault: true
+          name: Prometheus
+          type: prometheus
+          url: http://prometheus-prometheus.prometheus.svc.cluster.local:9090
+    persistence:
+      accessModes:
+      - ReadWriteOnce
+      enabled: true
+      size: 10Gi
+      storageClassName: proxmox
+      type: sts
+    resources:
+      requests:
+        cpu: 20m
+        memory: 500Mi
+    serviceMonitor:
+      enabled: true
