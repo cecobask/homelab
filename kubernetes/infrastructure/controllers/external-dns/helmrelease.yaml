@@ -1,0 +1,34 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: external-dns
+  namespace: external-dns
+spec:
+  chart:
+    spec:
+      chart: external-dns
+      sourceRef:
+        kind: HelmRepository
+        name: external-dns
+      version: 1.20.0
+  dependsOn:
+  - name: envoy-gateway
+    namespace: envoy-gateway
+  interval: 1h
+  values:
+    env:
+    - name: CF_API_TOKEN
+      valueFrom:
+        secretKeyRef:
+          name: cloudflare
+          key: token
+    extraArgs:
+      zone-id-filter: e8bcf096e850ddfa73d5ff9e0be256d7
+    provider:
+      name: cloudflare
+    resources:
+      requests:
+        cpu: 10m
+        memory: 150Mi
+    sources:
+    - gateway-httproute
