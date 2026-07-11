@@ -5,3 +5,4 @@ resources:
 - https://github.com/envoyproxy/gateway/releases/download/v1.8.1/envoy-gateway-crds.yaml
 - https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.5.1/standard-install.yaml
 - https://raw.githubusercontent.com/external-secrets/external-secrets/refs/tags/v1.2.1/deploy/crds/bundle.yaml
+- https://raw.githubusercontent.com/kubernetes-sigs/node-feature-discovery/refs/tags/v0.18.3/deployment/base/nfd-crds/nfd-api-crds.yaml

@@ -5,11 +5,11 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
+  path: kubernetes/infrastructure/crds
+  prune: false
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: kubernetes/infrastructure/crds
-  prune: true
   wait: true
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -21,9 +21,9 @@ spec:
   dependsOn:
   - name: crds
   interval: 10m
+  path: kubernetes/infrastructure/controllers
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: kubernetes/infrastructure/controllers
-  prune: true
   wait: true
