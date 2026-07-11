@@ -1,0 +1,120 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: prometheus-crds
+  namespace: prometheus
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: prometheus-operator-crds
+  interval: 1h
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: prometheus
+  namespace: prometheus
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: kube-prometheus-stack
+  dependsOn:
+  - name: csi-proxmox
+    namespace: csi-proxmox
+  - name: envoy-gateway
+    namespace: envoy-gateway
+  - name: prometheus-crds
+    namespace: prometheus
+  interval: 1h
+  values:
+    alertmanager:
+      enabled: false
+    cleanPrometheusOperatorObjectNames: true
+    commonLabels:
+      cluster: homelab
+    coreDns:
+      serviceMonitor:
+        targetLabels:
+        - cluster
+    crds:
+      enabled: false
+    defaultRules:
+      create: false
+    fullnameOverride: prometheus
+    grafana:
+      enabled: false
+    kubeControllerManager:
+      serviceMonitor:
+        targetLabels:
+        - cluster
+    kubeEtcd:
+      service:
+        selector:
+          component: kube-scheduler
+      serviceMonitor:
+        targetLabels:
+        - cluster
+    kubelet:
+      serviceMonitor:
+        targetLabels:
+        - cluster
+    kubeProxy:
+      enabled: false
+    kubeScheduler:
+      serviceMonitor:
+        targetLabels:
+        - cluster
+    kube-state-metrics:
+      fullnameOverride: kube-state-metrics
+      customLabels:
+        cluster: homelab
+      prometheus:
+        monitor:
+          targetLabels:
+          - cluster
+      resources:
+        requests:
+          cpu: 10m
+          memory: 100Mi
+    prometheus:
+      prometheusSpec:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: topology.kubernetes.io/zone
+                  operator: In
+                  values: [ pve1 ]
+        resources:
+          requests:
+            cpu: 200m
+            memory: 2Gi
+        serviceMonitorSelectorNilUsesHelmValues: false
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              accessModes:
+              - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 30Gi
+              storageClassName: proxmox
+    prometheusOperator:
+      extraArgs:
+      - --labels=cluster=homelab
+      fullnameOverride: prometheus-operator
+      resources:
+        requests:
+          cpu: 10m
+          memory: 100Mi
+    prometheus-node-exporter:
+      fullnameOverride: prometheus-node-exporter
+      prometheus:
+        monitor:
+          targetLabels:
+          - cluster
+      resources:
+        requests:
+          cpu: 30m
+          memory: 50Mi
