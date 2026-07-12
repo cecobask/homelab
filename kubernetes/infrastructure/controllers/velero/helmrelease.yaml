@@ -1,0 +1,105 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: velero
+  namespace: velero
+spec:
+  chart:
+    spec:
+      chart: velero
+      sourceRef:
+        kind: HelmRepository
+        name: vmware-tanzu
+      version: 12.0.2
+  dependsOn:
+  - name: external-secrets
+    namespace: external-secrets
+  - name: prometheus
+    namespace: prometheus
+  interval: 1h
+  values:
+    configuration:
+      backupStorageLocation:
+      - bucket: homelab-5678b8898f
+        config:
+          region: eu-central-003
+          s3Url: https://s3.eu-central-003.backblazeb2.com
+        credential:
+          key: cloud
+          name: credentials
+        default: true
+        name: backblaze
+        prefix: velero
+        validationFrequency: 24h
+        provider: aws
+      backupSyncPeriod: 24h
+      defaultRepoMaintainFrequency: 24h
+      features: EnableCSI
+    credentials:
+      existingSecret: credentials
+    deployNodeAgent: true
+    initContainers:
+    - image: velero/velero-plugin-for-aws:v1.14.0 # pin v1.14.0 until https://github.com/velero-io/velero-plugin-for-aws/pull/299 is merged and released
+      name: velero-plugin-for-aws
+      volumeMounts:
+      - mountPath: /target
+        name: plugins
+    metrics:
+      serviceMonitor:
+        enabled: true
+    nodeAgent:
+      disableHostPath: true
+      resources:
+        limits: ~
+        requests:
+          cpu: 500m
+          memory: 512Mi
+    resources:
+      limits: ~
+      requests:
+        cpu: 200m
+        memory: 256Mi
+    snapshotsEnabled: false
+    upgradeCRDs: false
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: velero-schedules
+  namespace: velero
+spec:
+  chart:
+    spec:
+      chart: kubernetes/helm/velero-schedules
+      sourceRef:
+        kind: GitRepository
+        name: flux-system
+        namespace: flux-system
+  dependsOn:
+  - name: velero
+    namespace: velero
+  interval: 1h
+  values:
+    apps:
+    - name: audiobookshelf
+      namespace: media
+    - name: bazarr
+      namespace: media
+    - name: jellyfin
+      namespace: media
+    - name: profilarr
+      namespace: media
+    - name: prowlarr
+      namespace: media
+    - name: qbittorrent
+      namespace: media
+    - name: qui
+      namespace: media
+    - name: radarr
+      namespace: media
+    - name: seerr
+      namespace: media
+    - name: shelfmark
+      namespace: media
+    - name: sonarr
+      namespace: media
