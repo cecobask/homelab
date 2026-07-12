@@ -1,0 +1,12 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmChart
+metadata:
+  name: media-app
+  namespace: flux-system
+spec:
+  chart: kubernetes/helm/media-app
+  interval: 24h
+  reconcileStrategy: Revision
+  sourceRef:
+    kind: GitRepository
+    name: flux-system

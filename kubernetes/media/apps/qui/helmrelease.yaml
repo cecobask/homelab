@@ -1,0 +1,36 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: qui
+  namespace: media
+spec:
+  chartRef:
+    kind: HelmChart
+    name: media-app
+    namespace: flux-system
+  interval: 1h
+  values:
+    httpRoute:
+      enabled: true
+      hostname: qui.cecobask.com
+    image:
+      repository: ghcr.io/autobrr/qui
+      tag: v1.7.0
+    livenessProbe:
+      failureThreshold: 5
+      httpGet:
+        path: /healthz/liveness
+        port: 7476
+      initialDelaySeconds: 30
+      periodSeconds: 15
+      timeoutSeconds: 10
+    name: qui
+    persistence:
+      enabled: true
+      capacity: 1Gi
+    resources:
+      requests:
+        cpu: 10m
+        memory: 100Mi
+    service:
+      targetPort: 7476

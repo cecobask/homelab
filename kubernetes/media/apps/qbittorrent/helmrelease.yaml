@@ -1,0 +1,44 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: qbittorrent
+  namespace: media
+spec:
+  chartRef:
+    kind: HelmChart
+    name: media-app
+    namespace: flux-system
+  interval: 1h
+  values:
+    httpRoute:
+      enabled: true
+      hostname: qbit.cecobask.com
+    image:
+      repository: ghcr.io/home-operations/qbittorrent
+      tag: 5.1.4
+    livenessProbe:
+      failureThreshold: 6
+      initialDelaySeconds: 10
+      periodSeconds: 15
+      tcpSocket:
+        port: 8080
+      timeoutSeconds: 5
+    name: qbittorrent
+    persistence:
+      enabled: true
+      capacity: 1Gi
+    resources:
+      requests:
+        cpu: 700m
+        memory: 1Gi
+    service:
+      targetPort: 8080
+    startupProbe:
+      exec:
+        command:
+        - pidof
+        - qbittorrent-nox
+      failureThreshold: 6
+      initialDelaySeconds: 30
+      periodSeconds: 15
+      timeoutSeconds: 10

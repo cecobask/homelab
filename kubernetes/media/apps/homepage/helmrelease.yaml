@@ -1,0 +1,55 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: homepage
+  namespace: media
+spec:
+  chartRef:
+    kind: HelmChart
+    name: media-app
+    namespace: flux-system
+  interval: 1h
+  values:
+    env:
+    - name: HOMEPAGE_ALLOWED_HOSTS
+      value: homelab.cecobask.com
+    httpRoute:
+      enabled: true
+      hostname: homelab.cecobask.com
+    image:
+      repository: ghcr.io/gethomepage/homepage
+      tag: v1.9.0
+    livenessProbe:
+      failureThreshold: 5
+      httpGet:
+        httpHeaders:
+        - name: Host
+          value: homelab.cecobask.com
+        path: /api/healthcheck
+        port: 3000
+      initialDelaySeconds: 30
+      periodSeconds: 15
+      timeoutSeconds: 10
+    name: homepage
+    resources:
+      requests:
+        cpu: 80m
+        memory: 150Mi
+    securityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+    service:
+      targetPort: 3000
+    volumeMounts:
+    - mountPath: /app/config
+      name: config
+    - mountPath: /app/config/logs
+      name: logs
+    volumes:
+    - name: config
+      configMap:
+        name: homepage
+    - name: logs
+      emptyDir:
+        sizeLimit: 500Mi

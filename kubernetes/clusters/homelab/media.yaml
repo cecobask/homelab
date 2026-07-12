@@ -1,12 +1,15 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: crds
+  name: media-config
   namespace: flux-system
 spec:
+  dependsOn:
+  - name: controllers
+    namespace: flux-system
   interval: 10m
-  path: kubernetes/infrastructure/crds
-  prune: false
+  path: kubernetes/media/config
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -15,14 +18,14 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: controllers
+  name: media-apps
   namespace: flux-system
 spec:
   dependsOn:
-  - name: crds
+  - name: media-config
     namespace: flux-system
   interval: 10m
-  path: kubernetes/infrastructure/controllers
+  path: kubernetes/media/apps
   prune: true
   sourceRef:
     kind: GitRepository
