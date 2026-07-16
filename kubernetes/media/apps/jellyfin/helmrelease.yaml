@@ -38,3 +38,17 @@ spec:
         gpu.intel.com/i915: 1000m
     service:
       targetPort: 8096
+    volumeMounts:
+    - mountPath: /config
+      name: config
+    - mountPath: /metadata
+      subPath: jellyfin/metadata
+      name: media
+    - mountPath: /movies
+      readOnly: true
+      subPath: movies
+      name: media
+    - mountPath: /shows
+      readOnly: true
+      subPath: shows
+      name: media
