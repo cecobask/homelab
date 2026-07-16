@@ -45,6 +45,6 @@ spec:
     - mountPath: /movies
       subPath: movies
       name: media
-    - mountPath: /torrents
+    - mountPath: /torrents/movies
       subPath: torrents/movies
       name: media

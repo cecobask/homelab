@@ -42,3 +42,9 @@ spec:
       initialDelaySeconds: 30
       periodSeconds: 15
       timeoutSeconds: 10
+    volumeMounts:
+    - name: config
+      mountPath: /config
+    - name: media
+      subPath: torrents
+      mountPath: /torrents

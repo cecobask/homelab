@@ -45,6 +45,6 @@ spec:
     - mountPath: /shows
       subPath: shows
       name: media
-    - mountPath: /torrents
+    - mountPath: /torrents/shows
       subPath: torrents/shows
       name: media
