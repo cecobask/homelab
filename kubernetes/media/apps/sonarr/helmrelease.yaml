@@ -36,3 +36,15 @@ spec:
         memory: 350Mi
     service:
       targetPort: 8989
+    volumeMounts:
+    - mountPath: /config
+      name: config
+    - mountPath: /config/MediaCover
+      subPath: sonarr/MediaCover
+      name: media
+    - mountPath: /shows
+      subPath: shows
+      name: media
+    - mountPath: /torrents
+      subPath: torrents/shows
+      name: media

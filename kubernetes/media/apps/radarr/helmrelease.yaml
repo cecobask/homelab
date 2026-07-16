@@ -36,3 +36,15 @@ spec:
         memory: 300Mi
     service:
       targetPort: 7878
+    volumeMounts:
+    - mountPath: /config
+      name: config
+    - mountPath: /config/MediaCover
+      subPath: radarr/MediaCover
+      name: media
+    - mountPath: /movies
+      subPath: movies
+      name: media
+    - mountPath: /torrents
+      subPath: torrents/movies
+      name: media
