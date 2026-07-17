@@ -42,13 +42,13 @@ spec:
     - mountPath: /config
       name: config
     - mountPath: /metadata
-      subPath: jellyfin/metadata
       name: media
+      subPath: jellyfin/metadata
     - mountPath: /movies
+      name: media
       readOnly: true
       subPath: movies
-      name: media
     - mountPath: /shows
+      name: media
       readOnly: true
       subPath: shows
-      name: media

@@ -34,3 +34,9 @@ spec:
         memory: 100Mi
     service:
       targetPort: 7476
+    volumeMounts:
+    - mountPath: /config
+      name: config
+    - mountPath: /torrents
+      name: media
+      subPath: torrents

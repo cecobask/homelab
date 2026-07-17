@@ -43,8 +43,8 @@ spec:
       periodSeconds: 15
       timeoutSeconds: 10
     volumeMounts:
-    - name: config
-      mountPath: /config
-    - name: media
+    - mountPath: /config
+      name: config
+    - mountPath: /torrents
+      name: media
       subPath: torrents
-      mountPath: /torrents

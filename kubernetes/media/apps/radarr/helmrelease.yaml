@@ -40,11 +40,11 @@ spec:
     - mountPath: /config
       name: config
     - mountPath: /config/MediaCover
+      name: media
       subPath: radarr/MediaCover
-      name: media
     - mountPath: /movies
+      name: media
       subPath: movies
-      name: media
     - mountPath: /torrents/movies
-      subPath: torrents/movies
       name: media
+      subPath: torrents/movies

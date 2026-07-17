@@ -40,11 +40,11 @@ spec:
     - mountPath: /config
       name: config
     - mountPath: /config/MediaCover
+      name: media
       subPath: sonarr/MediaCover
-      name: media
     - mountPath: /shows
+      name: media
       subPath: shows
-      name: media
     - mountPath: /torrents/shows
-      subPath: torrents/shows
       name: media
+      subPath: torrents/shows
