@@ -43,3 +43,18 @@ spec:
         memory: 300Mi
     service:
       targetPort: 8084
+    volumeMounts:
+    - mountPath: /audiobooks
+      name: media
+      subPath: audiobooks
+    - mountPath: /books
+      name: media
+      subPath: books
+    - mountPath: /config
+      name: config
+    - mountPath: /torrents/audiobooks
+      name: media
+      subPath: torrents/audiobooks
+    - mountPath: /torrents/books
+      name: media
+      subPath: torrents/books
