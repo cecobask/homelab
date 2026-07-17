@@ -32,3 +32,12 @@ spec:
         memory: 350Mi
     service:
       targetPort: 6767
+    volumeMounts:
+    - mountPath: /config
+      name: config
+    - mountPath: /movies
+      name: media
+      subPath: movies
+    - mountPath: /shows
+      name: media
+      subPath: shows
