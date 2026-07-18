@@ -1,13 +1,13 @@
 cluster = {
   name               = "homelab"
   bootstrap_node     = "talos-ctrl-01"
-  kubernetes_version = "v1.35.0"
+  kubernetes_version = "v1.36.2"
   gateway            = "192.168.40.1"
   vip                = "192.168.40.2"
 }
 
 image = {
-  version      = "v1.12.0"
+  version      = "v1.13.6"
   platform     = "nocloud"
   architecture = "amd64"
   extensions = [

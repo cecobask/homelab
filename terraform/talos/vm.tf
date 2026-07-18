@@ -33,7 +33,6 @@ resource "proxmox_virtual_environment_vm" "this" {
     datastore_id = "local-lvm"
     file_id      = proxmox_virtual_environment_download_file.this[each.value.node_name].id
     interface    = "scsi0"
-    iothread     = true
     discard      = "on"
     size         = each.value.disk_gb
   }
