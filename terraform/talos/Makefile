@@ -25,7 +25,11 @@ save/talosconfig:
 	@terraform output -raw talosconfig > outputs/talosconfig
 
 .PHONY: down
-down: destroy
+down: cleanup destroy
+
+.PHONY: cleanup
+cleanup:
+	@bash hack/cleanup.sh
 
 .PHONY: destroy
 destroy:

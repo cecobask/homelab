@@ -1,12 +1,29 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: infra-core
+  name: infra-crds
   namespace: flux-system
 spec:
   interval: 10m
-  path: kubernetes/infra/core
+  path: kubernetes/infra/crds
   prune: false
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  wait: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: infra-core
+  namespace: flux-system
+spec:
+  dependsOn:
+  - name: infra-crds
+    namespace: flux-system
+  interval: 10m
+  path: kubernetes/infra/core
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system

@@ -1,0 +1,62 @@
+#
+# Wait for the creation of a config map with name `gate` in the `media` namespace.
+# This is needed to give Velero time to restore persistent volume claims that are
+# needed by the workloads in the media namespace. Once the config map exists, flux
+# will start/continue reconciling the media apps.
+#
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: gate
+  namespace: media
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: gate
+  namespace: media
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  resourceNames:
+  - gate
+  verbs:
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: gate
+  namespace: media
+subjects:
+- kind: ServiceAccount
+  name: gate
+  namespace: media
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: gate
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: gate
+  namespace: media
+spec:
+  backoffLimit: 10
+  template:
+    spec:
+      serviceAccountName: gate
+      restartPolicy: OnFailure
+      containers:
+      - name: wait
+        image: registry.k8s.io/kubectl:v1.36.2
+        args:
+        - get
+        - configmap
+        - gate
+        - --namespace
+        - media

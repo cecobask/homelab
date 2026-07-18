@@ -12,10 +12,8 @@ spec:
         name: vmware-tanzu
       version: 12.0.2
   dependsOn:
-  - name: external-secrets
-    namespace: external-secrets
-  - name: prometheus
-    namespace: prometheus
+  - name: csi-proxmox
+    namespace: csi-proxmox
   interval: 1h
   values:
     configuration:
