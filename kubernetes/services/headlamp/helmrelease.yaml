@@ -16,6 +16,8 @@ spec:
     clusterRoleBinding:
       clusterRoleName: headlamp
     config:
+      staticPlugins:
+        enabled: false
       unsafeUseServiceAccountToken: true
     httpRoute:
       enabled: true
