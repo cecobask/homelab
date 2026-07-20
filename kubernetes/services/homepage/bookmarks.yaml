@@ -26,6 +26,10 @@
     - description: Password and secret manager
       href: https://vault.bitwarden.com
       icon: bitwarden
+  - Cloudflare:
+    - description: Domain Name System management
+      href: https://www.cloudflare.com
+      icon: cloudflare
   - Homelab:
     - description: Source code on GitHub
       href: https://github.com/cecobask/homelab
