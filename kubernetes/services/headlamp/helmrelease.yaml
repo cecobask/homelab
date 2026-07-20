@@ -13,6 +13,8 @@ spec:
       version: 0.43.0
   interval: 1h
   values:
+    clusterRoleBinding:
+      clusterRoleName: headlamp
     config:
       unsafeUseServiceAccountToken: true
     httpRoute:
