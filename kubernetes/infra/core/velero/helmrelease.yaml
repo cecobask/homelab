@@ -50,13 +50,13 @@ spec:
       resources:
         limits: ~
         requests:
-          cpu: 500m
-          memory: 512Mi
+          cpu: 100m
+          memory: 200Mi
     resources:
       limits: ~
       requests:
         cpu: 200m
-        memory: 256Mi
+        memory: 350Mi
     snapshotsEnabled: false
     upgradeCRDs: false
 ---

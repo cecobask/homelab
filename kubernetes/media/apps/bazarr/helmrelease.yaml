@@ -28,8 +28,8 @@ spec:
       capacity: 1Gi
     resources:
       requests:
-        cpu: 100m
-        memory: 350Mi
+        cpu: 300m
+        memory: 400Mi
     service:
       targetPort: 6767
     volumeMounts:

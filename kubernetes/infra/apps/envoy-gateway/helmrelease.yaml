@@ -18,6 +18,6 @@ spec:
           limits: ~
           requests:
             cpu: 10m
-            memory: 150Mi
+            memory: 200Mi
     crds:
       enabled: false

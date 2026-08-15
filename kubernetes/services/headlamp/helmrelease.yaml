@@ -45,7 +45,7 @@ spec:
       limits: ~
       requests:
         cpu: 100m
-        memory: 150Mi
+        memory: 100Mi
     volumeMounts:
     - mountPath: /headlamp/plugins
       name: plugins

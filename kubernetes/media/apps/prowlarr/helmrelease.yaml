@@ -30,8 +30,8 @@ spec:
       capacity: 1Gi
     resources:
       requests:
-        cpu: 40m
-        memory: 200Mi
+        cpu: 50m
+        memory: 250Mi
     service:
       targetPort: 9696
     volumeMounts:

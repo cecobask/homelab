@@ -75,8 +75,8 @@ spec:
                   values: [ pve1 ]
         resources:
           requests:
-            cpu: 200m
-            memory: 2Gi
+            cpu: 250m
+            memory: 2.5Gi
         serviceMonitorSelectorNilUsesHelmValues: false
         storageSpec:
           volumeClaimTemplate:
@@ -103,5 +103,5 @@ spec:
           - cluster
       resources:
         requests:
-          cpu: 30m
+          cpu: 50m
           memory: 50Mi
