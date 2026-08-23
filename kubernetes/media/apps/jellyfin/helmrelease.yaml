@@ -34,8 +34,11 @@ spec:
       requests:
         cpu: 200m
         memory: 1Gi
-      limits:
-        gpu.intel.com/i915: 1000m
+      claims:
+      - name: gpu
+    resourceClaims:
+    - name: gpu
+      deviceClassName: gpu.intel.com
     service:
       targetPort: 8096
     volumeMounts:

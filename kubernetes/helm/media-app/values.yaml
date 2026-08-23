@@ -20,6 +20,7 @@ persistence:
   name: config
   storageClassName: proxmox
 readinessProbe: ~
+resourceClaims: ~
 resources: ~
 securityContext:
   runAsUser: 65534

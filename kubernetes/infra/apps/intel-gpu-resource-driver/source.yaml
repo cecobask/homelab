@@ -1,13 +1,13 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: OCIRepository
 metadata:
-  name: node-feature-discovery
-  namespace: kube-system
+  name: intel-gpu-resource-driver
+  namespace: intel-gpu-resource-driver
 spec:
   interval: 24h
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
-  url: oci://registry.k8s.io/nfd/charts/node-feature-discovery
+  url: oci://ghcr.io/intel/intel-resource-drivers-for-kubernetes/intel-gpu-resource-driver-chart
   ref:
-    tag: 0.18.3
+    tag: 0.11.0
