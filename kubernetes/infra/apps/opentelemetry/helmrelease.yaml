@@ -1,0 +1,54 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: opentelemetry
+  namespace: opentelemetry
+spec:
+  chart:
+    spec:
+      chart: opentelemetry-kube-stack
+      sourceRef:
+        kind: HelmRepository
+        name: opentelemetry
+      version: 0.20.5
+  dependsOn:
+  - name: cert-manager
+    namespace: cert-manager
+  interval: 1h
+  values:
+    clusterName: homelab
+    collectors:
+      agent:
+        config:
+          exporters:
+            debug:
+              verbosity: detailed
+          service:
+            pipelines:
+              logs:
+                receivers:
+                - file_log
+                processors:
+                - k8s_attributes
+                exporters:
+                - debug
+        enabled: true
+        fullnameOverride: opentelemetry-agent
+        mode: daemonset
+        presets:
+          kubernetesAttributes:
+            enabled: true
+          logsCollection:
+            enabled: true
+            includeCollectorLogs: false
+      daemon:
+        enabled: false
+    crds:
+      installPrometheus: false
+    opentelemetry-operator:
+      admissionWebhooks:
+        certManager:
+          issuerRef:
+            name: internal-ca
+            kind: ClusterIssuer
+      fullnameOverride: opentelemetry-operator
