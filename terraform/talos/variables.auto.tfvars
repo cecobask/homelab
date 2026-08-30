@@ -7,7 +7,7 @@ cluster = {
 }
 
 image = {
-  version      = "v1.13.6"
+  version      = "v1.13.9"
   platform     = "nocloud"
   architecture = "amd64"
   extensions = [
@@ -39,7 +39,7 @@ vms = {
     machine_type = "controlplane"
   }
   talos-ctrl-03 = {
-    node_name    = "pve2"
+    node_name    = "pve3"
     vm_id        = 203
     cpu_cores    = 4
     ram_mb       = 1024 * 5
