@@ -274,6 +274,7 @@ data:
 
 # Extra config allows adding arbitrary properties to the cilium config.
 # By putting it at the end of the ConfigMap, it's also possible to override existing properties.
+
 ---
 # Source: cilium/templates/cilium-envoy/configmap.yaml
 apiVersion: v1
@@ -702,6 +703,7 @@ rules:
   - get
   - list
   - watch
+
 ---
 # Source: cilium/templates/cilium-agent/role.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -758,6 +760,7 @@ subjects:
   - kind: ServiceAccount
     name: "cilium"
     namespace: cilium
+
 ---
 # Source: cilium/templates/cilium-agent/rolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -962,7 +965,7 @@ spec:
         resources:
           requests:
             cpu: 300m
-            memory: 300Mi
+            memory: 350Mi
         securityContext:
           seLinuxOptions:
             level: s0
@@ -1382,7 +1385,7 @@ spec:
           value: "7445"
         resources:
           requests:
-            cpu: 20m
+            cpu: 30m
             memory: 50Mi
         ports:
         - name: envoy-metrics
@@ -1572,7 +1575,7 @@ spec:
         resources:
           requests:
             cpu: 100m
-            memory: 100Mi
+            memory: 150Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
