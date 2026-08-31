@@ -1,0 +1,31 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: victoria-metrics-operator
+  namespace: victoria-metrics
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: victoria-metrics-operator
+  dependsOn:
+  - name: cert-manager
+    namespace: cert-manager
+  interval: 1h
+  values:
+    fullNameOverride: victoria-metrics-operator
+    operator:
+      disable_prometheus_converter: true
+    resources:
+      limits: ~
+      requests:
+        cpu: 80m
+        memory: 120Mi
+    admissionWebhooks:
+      certManager:
+        enabled: true
+        issuer:
+          name: internal-ca
+          kind: ClusterIssuer
+    serviceMonitor:
+      enabled: true
+      vm: false
