@@ -12,6 +12,14 @@ spec:
     namespace: cert-manager
   interval: 1h
   values:
+    admissionWebhooks:
+      certManager:
+        enabled: true
+        issuer:
+          name: internal-ca
+          kind: ClusterIssuer
+    crds:
+      enabled: false
     fullNameOverride: victoria-metrics-operator
     operator:
       disable_prometheus_converter: true
@@ -20,12 +28,6 @@ spec:
       requests:
         cpu: 80m
         memory: 120Mi
-    admissionWebhooks:
-      certManager:
-        enabled: true
-        issuer:
-          name: internal-ca
-          kind: ClusterIssuer
     serviceMonitor:
       enabled: true
       vm: false
