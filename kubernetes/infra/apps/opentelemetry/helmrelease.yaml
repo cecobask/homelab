@@ -21,8 +21,11 @@ spec:
       agent:
         config:
           exporters:
-            debug:
-              verbosity: detailed
+            otlphttp/vlogs:
+              logs_endpoint: http://vlsingle-victoria-logs.victoria-metrics.svc.cluster.local:9428/insert/opentelemetry/v1/logs
+          processors:
+            batch:
+              send_batch_size: 10000
           service:
             pipelines:
               logs:
@@ -30,8 +33,9 @@ spec:
                 - file_log
                 processors:
                 - k8s_attributes
+                - batch
                 exporters:
-                - debug
+                - otlphttp/vlogs
         enabled: true
         fullnameOverride: opentelemetry-agent
         mode: daemonset
@@ -40,7 +44,6 @@ spec:
             enabled: true
           logsCollection:
             enabled: true
-            includeCollectorLogs: false
       daemon:
         enabled: false
     crds:

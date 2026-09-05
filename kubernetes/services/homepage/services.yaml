@@ -76,3 +76,7 @@
       description: Network, storage, and surveillance platform
       href: https://unifi.ui.com
       icon: unifi
+  - Victoria Logs:
+      description: Centralized logging platform
+      href: https://logs.cecobask.com
+      icon: victorialogs
