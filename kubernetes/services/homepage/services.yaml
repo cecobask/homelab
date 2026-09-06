@@ -78,5 +78,5 @@
       icon: unifi
   - Victoria Logs:
       description: Centralized logging platform
-      href: https://logs.cecobask.com
+      href: https://logs.cecobask.com/select/vmui
       icon: victorialogs
