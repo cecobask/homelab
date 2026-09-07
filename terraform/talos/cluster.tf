@@ -60,20 +60,15 @@ resource "talos_cluster_kubeconfig" "this" {
   depends_on           = [talos_machine_bootstrap.this]
   node                 = var.cluster.vip
   client_configuration = talos_machine_secrets.this.client_configuration
-  timeouts = {
-    read = "5m"
-  }
 }
 
 # tflint-ignore: terraform_unused_declarations
-data "talos_cluster_health" "this" {
+ephemeral "talos_cluster_health" "this" {
   depends_on             = [talos_cluster_kubeconfig.this]
   client_configuration   = data.talos_client_configuration.this.client_configuration
   control_plane_nodes    = local.controlplane_ips
   worker_nodes           = local.worker_ips
   endpoints              = data.talos_client_configuration.this.endpoints
   skip_kubernetes_checks = true
-  timeouts = {
-    read = "5m"
-  }
+  timeout                = "5m"
 }

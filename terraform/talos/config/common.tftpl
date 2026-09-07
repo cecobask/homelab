@@ -10,11 +10,17 @@ machine:
   install:
     disk: /dev/sda
     image: ${installer_url}
-  network:
-    hostname: ${hostname}
-    nameservers:
-    - 1.1.1.1
-    - 8.8.8.8
   nodeLabels:
     topology.kubernetes.io/region: ${cluster_name}
     topology.kubernetes.io/zone: ${node_name}
+---
+apiVersion: v1alpha1
+kind: HostnameConfig
+hostname: ${hostname}
+auto: off
+---
+apiVersion: v1alpha1
+kind: ResolverConfig
+nameservers:
+- address: 1.1.1.1
+- address: 8.8.8.8
