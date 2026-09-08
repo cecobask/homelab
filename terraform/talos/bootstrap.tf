@@ -15,7 +15,7 @@ resource "github_repository_deploy_key" "flux" {
 
 resource "flux_bootstrap_git" "homelab" {
   depends_on = [
-    data.talos_cluster_health.this,
+    ephemeral.talos_cluster_health.this,
     github_repository_deploy_key.flux
   ]
   components = [
@@ -30,7 +30,7 @@ resource "flux_bootstrap_git" "homelab" {
 }
 
 resource "kubernetes_namespace_v1" "eso" {
-  depends_on = [data.talos_cluster_health.this]
+  depends_on = [ephemeral.talos_cluster_health.this]
   metadata {
     name = "external-secrets"
   }
