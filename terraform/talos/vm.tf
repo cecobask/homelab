@@ -1,4 +1,4 @@
-resource "proxmox_virtual_environment_download_file" "this" {
+resource "proxmox_download_file" "this" {
   for_each     = toset(values(var.vms)[*].node_name)
   node_name    = each.value
   content_type = "iso"
@@ -31,7 +31,7 @@ resource "proxmox_virtual_environment_vm" "this" {
   }
   disk {
     datastore_id = "local-lvm"
-    file_id      = proxmox_virtual_environment_download_file.this[each.value.node_name].id
+    file_id      = proxmox_download_file.this[each.value.node_name].id
     interface    = "scsi0"
     discard      = "on"
     size         = each.value.disk_gb

@@ -1,13 +1,13 @@
 cluster = {
   name               = "homelab"
   bootstrap_node     = "talos-ctrl-01"
-  kubernetes_version = "v1.36.2"
+  kubernetes_version = "v1.37.0"
   gateway            = "192.168.40.1"
   vip                = "192.168.40.2"
 }
 
 image = {
-  version      = "v1.13.9"
+  version      = "v1.14.0"
   platform     = "nocloud"
   architecture = "amd64"
   extensions = [
@@ -67,6 +67,17 @@ vms = {
     disk_gb      = 200
     ipv4         = "192.168.40.212"
     mac_address  = "00:00:00:00:02:12"
+    machine_type = "worker"
+    gpu          = true
+  }
+  talos-work-03 = {
+    node_name    = "pve3"
+    vm_id        = 213
+    cpu_cores    = 6
+    ram_mb       = 1024 * 22
+    disk_gb      = 200
+    ipv4         = "192.168.40.213"
+    mac_address  = "00:00:00:00:02:13"
     machine_type = "worker"
     gpu          = true
   }

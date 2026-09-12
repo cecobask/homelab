@@ -31,20 +31,17 @@ data "talos_machine_configuration" "this" {
   ])
 }
 
-resource "talos_machine_configuration_apply" "this" {
-  for_each                    = data.talos_machine_configuration.this
-  node                        = var.vms[each.key].ipv4
-  client_configuration        = talos_machine_secrets.this.client_configuration
-  machine_configuration_input = each.value.machine_configuration
-  lifecycle {
-    replace_triggered_by = [
-      proxmox_virtual_environment_vm.this[each.key]
-    ]
-  }
+resource "talos_machine" "this" {
+  for_each              = data.talos_machine_configuration.this
+  node                  = var.vms[each.key].ipv4
+  client_configuration  = talos_machine_secrets.this.client_configuration
+  machine_configuration = each.value.machine_configuration
+  image                 = data.talos_image_factory_urls.this.urls.installer
+  drain_on_upgrade      = false
 }
 
 resource "talos_machine_bootstrap" "this" {
-  depends_on           = [talos_machine_configuration_apply.this]
+  depends_on           = [talos_machine.this]
   node                 = local.bootstrap_node_ip
   client_configuration = talos_machine_secrets.this.client_configuration
 }

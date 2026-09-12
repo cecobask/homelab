@@ -1,18 +1,10 @@
-cluster:
-  extraManifests:
-  - https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/terraform/talos/config/cilium.yaml
-  network:
-    cni:
-      name: none
-  proxy:
-    disabled: true
-machine:
-  install:
-    disk: /dev/sda
-    image: ${installer_url}
-  nodeLabels:
-    topology.kubernetes.io/region: ${cluster_name}
-    topology.kubernetes.io/zone: ${node_name}
+apiVersion: v1alpha1
+kind: UnattendedInstallConfig
+installer:
+  image: ${installer_url}
+provisioning:
+  diskSelector:
+    match: disk.dev_path == "/dev/sda"
 ---
 apiVersion: v1alpha1
 kind: HostnameConfig
@@ -24,3 +16,18 @@ kind: ResolverConfig
 nameservers:
 - address: 1.1.1.1
 - address: 8.8.8.8
+---
+apiVersion: v1alpha1
+kind: KubeNodeConfig
+labels:
+  topology.kubernetes.io/region: ${cluster_name}
+  topology.kubernetes.io/zone: ${node_name}
+---
+apiVersion: v1alpha1
+kind: KubeFlannelCNIConfig
+$patch: delete
+---
+apiVersion: v1alpha1
+kind: KubeExternalManifestConfig
+name: cilium
+url: https://raw.githubusercontent.com/cecobask/homelab/refs/heads/main/terraform/talos/config/cilium.yaml

@@ -9,11 +9,11 @@ terraform {
   required_providers {
     flux = {
       source  = "fluxcd/flux"
-      version = "1.9.0"
+      version = "1.9.5"
     }
     github = {
       source  = "integrations/github"
-      version = "6.12.1"
+      version = "6.13.0"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
@@ -21,15 +21,15 @@ terraform {
     }
     proxmox = {
       source  = "bpg/proxmox"
-      version = "0.84.1"
+      version = "0.112.0"
     }
     talos = {
       source  = "siderolabs/talos"
-      version = "0.11.0"
+      version = "0.12.0-beta.0"
     }
     tls = {
       source  = "hashicorp/tls"
-      version = "4.3.0"
+      version = "4.4.0"
     }
   }
 }
