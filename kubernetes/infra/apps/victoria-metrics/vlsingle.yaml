@@ -19,6 +19,9 @@ spec:
       requests:
         storage: 100Gi
     storageClassName: proxmox
+  storageMetadata:
+    labels:
+      cluster-destroy-delete: "true"
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute

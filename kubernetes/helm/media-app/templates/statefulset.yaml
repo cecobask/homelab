@@ -63,6 +63,8 @@ spec:
   volumeClaimTemplates:
   - metadata:
       name: {{ .Values.persistence.name }}
+      labels:
+        cluster-destroy-delete: "true"
     spec:
       {{- with .Values.persistence.accessModes }}
       accessModes:

@@ -18,6 +18,7 @@ metadata:
   name: infra-core
   namespace: flux-system
 spec:
+  deletionPolicy: WaitForTermination
   dependsOn:
   - name: infra-crds
     namespace: flux-system
@@ -35,6 +36,7 @@ metadata:
   name: infra-apps
   namespace: flux-system
 spec:
+  deletionPolicy: WaitForTermination
   dependsOn:
   - name: infra-core
     namespace: flux-system

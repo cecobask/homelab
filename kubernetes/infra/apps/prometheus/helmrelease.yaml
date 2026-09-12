@@ -80,6 +80,9 @@ spec:
         serviceMonitorSelectorNilUsesHelmValues: false
         storageSpec:
           volumeClaimTemplate:
+            metadata:
+              labels:
+                cluster-destroy-delete: "true"
             spec:
               accessModes:
               - ReadWriteOnce

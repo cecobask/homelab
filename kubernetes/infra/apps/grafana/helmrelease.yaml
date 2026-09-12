@@ -88,6 +88,8 @@ spec:
       accessModes:
       - ReadWriteOnce
       enabled: true
+      extraPvcLabels:
+        cluster-destroy-delete: "true"
       size: 10Gi
       storageClassName: proxmox
       type: sts

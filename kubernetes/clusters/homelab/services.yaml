@@ -4,6 +4,7 @@ metadata:
   name: services
   namespace: flux-system
 spec:
+  deletionPolicy: WaitForTermination
   dependsOn:
   - name: infra-apps
     namespace: flux-system
