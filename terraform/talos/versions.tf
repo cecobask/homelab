@@ -21,15 +21,15 @@ terraform {
     }
     proxmox = {
       source  = "bpg/proxmox"
-      version = "0.112.0"
+      version = "0.113.1"
     }
     talos = {
       source  = "siderolabs/talos"
-      version = "0.12.0-beta.0"
+      version = "0.12.0-rc.0"
     }
     tls = {
       source  = "hashicorp/tls"
-      version = "4.4.0"
+      version = "4.4.1"
     }
   }
 }

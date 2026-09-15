@@ -1,35 +1,19 @@
-resource "terraform_data" "this" {
-  input = {
-    url      = var.haos_download_url
-    filename = "haos.qcow2"
-  }
-  provisioner "local-exec" {
-    when    = create
-    command = format("curl -sL %s | xz -d > %s", self.input.url, self.input.filename)
-  }
-  provisioner "local-exec" {
-    when    = destroy
-    command = format("rm -f %q", self.input.filename)
-  }
-}
-
-resource "proxmox_virtual_environment_file" "this" {
-  node_name    = var.proxmox_node_name
-  datastore_id = "local"
-  content_type = "import"
-  source_file {
-    path = terraform_data.this.output.filename
-  }
+resource "proxmox_download_file" "this" {
+  node_name               = var.proxmox_node_name
+  datastore_id            = "local"
+  content_type            = "iso"
+  url                     = var.haos_download_url
+  file_name               = "haos.qcow2.img"
+  decompression_algorithm = "zst"
 }
 
 resource "proxmox_virtual_environment_vm" "this" {
-  name          = "haos"
-  node_name     = var.proxmox_node_name
-  vm_id         = var.proxmox_vm_id
-  machine       = "q35"
-  scsi_hardware = "virtio-scsi-single"
-  bios          = "ovmf"
-  tags          = ["haos"]
+  name      = "haos"
+  node_name = var.proxmox_node_name
+  vm_id     = var.proxmox_vm_id
+  machine   = "q35"
+  bios      = "ovmf"
+  tags      = ["haos"]
   agent {
     enabled = true
   }
@@ -51,9 +35,8 @@ resource "proxmox_virtual_environment_vm" "this" {
   }
   disk {
     datastore_id = "local-lvm"
-    import_from  = proxmox_virtual_environment_file.this.id
+    import_from  = proxmox_download_file.this.id
     interface    = "scsi0"
-    iothread     = true
     discard      = "on"
     size         = 64
   }
