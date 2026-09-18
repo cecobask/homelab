@@ -5,56 +5,94 @@ metadata:
   namespace: media
 spec:
   chartRef:
-    kind: HelmChart
-    name: media-app
-    namespace: flux-system
+    kind: OCIRepository
+    name: app-template
   interval: 1h
   values:
-    env:
-    - name: PUID
-      value: "0"
-    - name: PGID
-      value: "0"
-    httpRoute:
-      enabled: true
-      hostname: shelfmark.cecobask.com
-    image:
-      repository: ghcr.io/calibrain/shelfmark
-      tag: v1.3.2
-    livenessProbe:
-      failureThreshold: 5
-      httpGet:
-        path: /api/health
-        port: 8084
-      initialDelaySeconds: 30
-      periodSeconds: 15
-      timeoutSeconds: 10
-    name: shelfmark
+    global:
+      createDefaultServiceAccount: false
+    controllers:
+      shelfmark:
+        type: statefulset
+        containers:
+          shelfmark:
+            image:
+              repository: ghcr.io/calibrain/shelfmark
+              tag: v1.3.2
+            env:
+              # PGID: "0"
+              # PUID: "0"
+              TZ: Europe/Dublin
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/health
+                    port: 8084
+            resources:
+              requests:
+                cpu: 50m
+                memory: 300Mi
+        statefulset:
+          volumeClaimTemplates:
+          - name: config
+            size: 1Gi
+            storageClass: proxmox
+            accessMode: ReadWriteOnce
+            labels:
+              cluster-destroy-delete: "true"
+            globalMounts:
+            - path: /config
     persistence:
-      enabled: true
-      capacity: 1Gi
-    securityContext:
-      runAsUser: 0
-      runAsGroup: 0
-      fsGroup: 0
-    resources:
-      requests:
-        cpu: 50m
-        memory: 300Mi
+      media:
+        type: persistentVolumeClaim
+        existingClaim: media
+        globalMounts:
+        - path: /audiobooks
+          subPath: audiobooks
+        - path: /books
+          subPath: books
+        - path: /torrents/audiobooks
+          subPath: torrents/audiobooks
+        - path: /torrents/books
+          subPath: torrents/books
+    rawResources:
+      scaledObject:
+        manifest:
+          apiVersion: keda.sh/v1alpha1
+          kind: ScaledObject
+          metadata:
+            name: shelfmark
+          spec:
+            scaleTargetRef:
+              kind: StatefulSet
+              name: shelfmark
+            triggers:
+            - type: cron
+              metadata:
+                timezone: Europe/Dublin
+                start: 10 04 * * *
+                end: 50 03 * * *
+                desiredReplicas: "1"
+    route:
+      shelfmark:
+        hostnames:
+        - shelfmark.cecobask.com
+        parentRefs:
+        - name: envoy
+          namespace: envoy-gateway
+        rules:
+        - backendRefs:
+          - port: 80
+          timeouts:
+            request: 3h
     service:
-      targetPort: 8084
-    volumeMounts:
-    - mountPath: /audiobooks
-      name: media
-      subPath: audiobooks
-    - mountPath: /books
-      name: media
-      subPath: books
-    - mountPath: /config
-      name: config
-    - mountPath: /torrents/audiobooks
-      name: media
-      subPath: torrents/audiobooks
-    - mountPath: /torrents/books
-      name: media
-      subPath: torrents/books
+      shelfmark:
+        controller: shelfmark
+        clusterIP: None
+        ports:
+          http:
+            port: 80
+            targetPort: 8084

@@ -5,51 +5,65 @@ metadata:
   namespace: homepage
 spec:
   chartRef:
-    kind: HelmChart
-    name: media-app
-    namespace: flux-system
+    kind: OCIRepository
+    name: app-template
+    namespace: media
   interval: 1h
   values:
-    env:
-    - name: HOMEPAGE_ALLOWED_HOSTS
-      value: homelab.cecobask.com
-    httpRoute:
-      enabled: true
-      hostname: homelab.cecobask.com
-    image:
-      repository: ghcr.io/gethomepage/homepage
-      tag: v1.9.0
-    livenessProbe:
-      failureThreshold: 5
-      httpGet:
-        httpHeaders:
-        - name: Host
-          value: homelab.cecobask.com
-        path: /api/healthcheck
-        port: 3000
-      initialDelaySeconds: 30
-      periodSeconds: 15
-      timeoutSeconds: 10
-    name: homepage
-    resources:
-      requests:
-        cpu: 80m
-        memory: 150Mi
-    securityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-    service:
-      targetPort: 3000
-    volumeMounts:
-    - mountPath: /app/config
-      name: config
-    - mountPath: /app/config/logs
-      name: logs
-    volumes:
-    - name: config
-      configMap:
+    global:
+      createDefaultServiceAccount: false
+    controllers:
+      homepage:
+        containers:
+          homepage:
+            image:
+              repository: ghcr.io/gethomepage/homepage
+              tag: v1.9.0
+            env:
+              HOMEPAGE_ALLOWED_HOSTS: homelab.cecobask.com
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    httpHeaders:
+                    - name: Host
+                      value: homelab.cecobask.com
+                    path: /api/healthcheck
+                    port: 3000
+            resources:
+              requests:
+                cpu: 80m
+                memory: 150Mi
+    persistence:
+      config:
+        type: configMap
         name: homepage
-    - name: logs
-      emptyDir:
+        globalMounts:
+        - path: /app/config
+      logs:
+        type: emptyDir
         sizeLimit: 500Mi
+        globalMounts:
+        - path: /app/config/logs
+    route:
+      homepage:
+        hostnames:
+        - homelab.cecobask.com
+        parentRefs:
+        - name: envoy
+          namespace: envoy-gateway
+        rules:
+        - backendRefs:
+          - port: 80
+          timeouts:
+            request: 30s
+    service:
+      homepage:
+        controller: homepage
+        clusterIP: None
+        ports:
+          http:
+            port: 80
+            targetPort: 3000

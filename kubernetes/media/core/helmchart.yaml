@@ -1,12 +1,13 @@
 apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmChart
+kind: OCIRepository
 metadata:
-  name: media-app
-  namespace: flux-system
+  name: app-template
+  namespace: media
 spec:
-  chart: kubernetes/helm/media-app
   interval: 24h
-  reconcileStrategy: Revision
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy
+  url: oci://ghcr.io/bjw-s-labs/helm/app-template
+  ref:
+    tag: 5.2.1

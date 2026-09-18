@@ -5,46 +5,90 @@ metadata:
   namespace: media
 spec:
   chartRef:
-    kind: HelmChart
-    name: media-app
-    namespace: flux-system
+    kind: OCIRepository
+    name: app-template
   interval: 1h
   values:
-    httpRoute:
-      enabled: true
-      hostname: radarr.cecobask.com
-      timeouts:
-        request: 3m
-    image:
-      repository: ghcr.io/home-operations/radarr
-      tag: 6.0.3
-    livenessProbe:
-      failureThreshold: 5
-      httpGet:
-        path: /ping
-        port: 7878
-      initialDelaySeconds: 30
-      periodSeconds: 15
-      timeoutSeconds: 10
-    name: radarr
+    global:
+      createDefaultServiceAccount: false
+    controllers:
+      radarr:
+        type: statefulset
+        containers:
+          radarr:
+            image:
+              repository: ghcr.io/home-operations/radarr
+              tag: 6.0.3
+            env:
+              TZ: Europe/Dublin
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /ping
+                    port: 7878
+            resources:
+              requests:
+                cpu: 150m
+                memory: 1Gi
+        statefulset:
+          volumeClaimTemplates:
+          - name: config
+            size: 5Gi
+            storageClass: proxmox
+            accessMode: ReadWriteOnce
+            labels:
+              cluster-destroy-delete: "true"
+            globalMounts:
+            - path: /config
     persistence:
-      enabled: true
-      capacity: 5Gi
-    resources:
-      requests:
-        cpu: 150m
-        memory: 1Gi
+      media:
+        type: persistentVolumeClaim
+        existingClaim: media
+        globalMounts:
+        - path: /config/MediaCover
+          subPath: radarr/MediaCover
+        - path: /movies
+          subPath: movies
+        - path: /torrents/movies
+          subPath: torrents/movies
+    rawResources:
+      scaledObject:
+        manifest:
+          apiVersion: keda.sh/v1alpha1
+          kind: ScaledObject
+          metadata:
+            name: radarr
+          spec:
+            scaleTargetRef:
+              kind: StatefulSet
+              name: radarr
+            triggers:
+            - type: cron
+              metadata:
+                timezone: Europe/Dublin
+                start: 10 04 * * *
+                end: 50 03 * * *
+                desiredReplicas: "1"
+    route:
+      radarr:
+        hostnames:
+        - radarr.cecobask.com
+        parentRefs:
+        - name: envoy
+          namespace: envoy-gateway
+        rules:
+        - backendRefs:
+          - port: 80
+          timeouts:
+            request: 3h
     service:
-      targetPort: 7878
-    volumeMounts:
-    - mountPath: /config
-      name: config
-    - mountPath: /config/MediaCover
-      name: media
-      subPath: radarr/MediaCover
-    - mountPath: /movies
-      name: media
-      subPath: movies
-    - mountPath: /torrents/movies
-      name: media
-      subPath: torrents/movies
+      radarr:
+        controller: radarr
+        clusterIP: None
+        ports:
+          http:
+            port: 80
+            targetPort: 7878
