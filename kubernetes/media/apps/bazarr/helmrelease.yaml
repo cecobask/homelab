@@ -5,39 +5,88 @@ metadata:
   namespace: media
 spec:
   chartRef:
-    kind: HelmChart
-    name: media-app
-    namespace: flux-system
+    kind: OCIRepository
+    name: app-template
   interval: 1h
   values:
-    httpRoute:
-      enabled: true
-      hostname: bazarr.cecobask.com
-    image:
-      repository: ghcr.io/home-operations/bazarr
-      tag: 1.5.6
-    livenessProbe:
-      httpGet:
-        path: /api/system/ping
-        port: 6767
-      initialDelaySeconds: 30
-      timeoutSeconds: 10
-    name: bazarr
+    global:
+      createDefaultServiceAccount: false
+    controllers:
+      bazarr:
+        type: statefulset
+        containers:
+          bazarr:
+            image:
+              repository: ghcr.io/home-operations/bazarr
+              tag: 1.5.6
+            env:
+              TZ: Europe/Dublin
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/system/ping
+                    port: 6767
+            resources:
+              requests:
+                cpu: 300m
+                memory: 400Mi
+        statefulset:
+          volumeClaimTemplates:
+          - name: config
+            size: 1Gi
+            storageClass: proxmox
+            accessMode: ReadWriteOnce
+            labels:
+              cluster-destroy-delete: "true"
+            globalMounts:
+            - path: /config
     persistence:
-      enabled: true
-      capacity: 1Gi
-    resources:
-      requests:
-        cpu: 300m
-        memory: 400Mi
+      media:
+        type: persistentVolumeClaim
+        existingClaim: media
+        globalMounts:
+        - path: /movies
+          subPath: movies
+        - path: /shows
+          subPath: shows
+    rawResources:
+      scaledObject:
+        manifest:
+          apiVersion: keda.sh/v1alpha1
+          kind: ScaledObject
+          metadata:
+            name: bazarr
+          spec:
+            scaleTargetRef:
+              kind: StatefulSet
+              name: bazarr
+            triggers:
+            - type: cron
+              metadata:
+                timezone: Europe/Dublin
+                start: 10 04 * * *
+                end: 50 03 * * *
+                desiredReplicas: "1"
+    route:
+      bazarr:
+        hostnames:
+        - bazarr.cecobask.com
+        parentRefs:
+        - name: envoy
+          namespace: envoy-gateway
+        rules:
+        - backendRefs:
+          - port: 80
+          timeouts:
+            request: 30s
     service:
-      targetPort: 6767
-    volumeMounts:
-    - mountPath: /config
-      name: config
-    - mountPath: /movies
-      name: media
-      subPath: movies
-    - mountPath: /shows
-      name: media
-      subPath: shows
+      bazarr:
+        controller: bazarr
+        clusterIP: None
+        ports:
+          http:
+            port: 80
+            targetPort: 6767

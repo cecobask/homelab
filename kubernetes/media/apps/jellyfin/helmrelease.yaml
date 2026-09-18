@@ -5,53 +5,111 @@ metadata:
   namespace: media
 spec:
   chartRef:
-    kind: HelmChart
-    name: media-app
-    namespace: flux-system
+    kind: OCIRepository
+    name: app-template
   interval: 1h
   values:
-    httpRoute:
-      enabled: true
-      hostname: jellyfin.cecobask.com
-      timeouts:
-        request: 3h
-    image:
-      repository: ghcr.io/jellyfin/jellyfin
-      tag: 10.11.2
-    livenessProbe:
-      failureThreshold: 5
-      httpGet:
-        path: /health
-        port: 8096
-      initialDelaySeconds: 30
-      periodSeconds: 15
-      timeoutSeconds: 10
-    name: jellyfin
+    global:
+      createDefaultServiceAccount: false
+    controllers:
+      jellyfin:
+        type: statefulset
+        containers:
+          jellyfin:
+            image:
+              repository: ghcr.io/jellyfin/jellyfin
+              tag: 10.11.2
+            env:
+              TZ: Europe/Dublin
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: 8096
+            resources:
+              claims:
+              - name: gpu
+              requests:
+                cpu: 200m
+                memory: 1Gi
+        pod:
+          resourceClaims:
+          - name: gpu
+            resourceClaimTemplateName: gpu
+        statefulset:
+          volumeClaimTemplates:
+          - name: config
+            size: 10Gi
+            storageClass: proxmox
+            accessMode: ReadWriteOnce
+            labels:
+              cluster-destroy-delete: "true"
+            globalMounts:
+            - path: /config
     persistence:
-      enabled: true
-      capacity: 10Gi
-    resources:
-      requests:
-        cpu: 200m
-        memory: 1Gi
-      claims:
-      - name: gpu
-    resourceClaims:
-    - name: gpu
-      deviceClassName: gpu.intel.com
+      media:
+        type: persistentVolumeClaim
+        existingClaim: media
+        globalMounts:
+        - path: /metadata
+          subPath: jellyfin/metadata
+        - path: /movies
+          readOnly: true
+          subPath: movies
+        - path: /shows
+          readOnly: true
+          subPath: shows
+    rawResources:
+      resourceClaimTemplate:
+        manifest:
+          apiVersion: resource.k8s.io/v1
+          kind: ResourceClaimTemplate
+          metadata:
+            name: gpu
+          spec:
+            spec:
+              devices:
+                requests:
+                - name: gpu
+                  exactly:
+                    deviceClassName: gpu.intel.com
+      scaledObject:
+        manifest:
+          apiVersion: keda.sh/v1alpha1
+          kind: ScaledObject
+          metadata:
+            name: jellyfin
+          spec:
+            scaleTargetRef:
+              kind: StatefulSet
+              name: jellyfin
+            triggers:
+            - type: cron
+              metadata:
+                timezone: Europe/Dublin
+                start: 10 04 * * *
+                end: 50 03 * * *
+                desiredReplicas: "1"
+    route:
+      jellyfin:
+        hostnames:
+        - jellyfin.cecobask.com
+        parentRefs:
+        - name: envoy
+          namespace: envoy-gateway
+        rules:
+        - backendRefs:
+          - port: 80
+          timeouts:
+            request: 3h
     service:
-      targetPort: 8096
-    volumeMounts:
-    - mountPath: /config
-      name: config
-    - mountPath: /metadata
-      name: media
-      subPath: jellyfin/metadata
-    - mountPath: /movies
-      name: media
-      readOnly: true
-      subPath: movies
-    - mountPath: /shows
-      name: media
-      readOnly: true
-      subPath: shows
+      jellyfin:
+        controller: jellyfin
+        clusterIP: None
+        ports:
+          http:
+            port: 80
+            targetPort: 8096
