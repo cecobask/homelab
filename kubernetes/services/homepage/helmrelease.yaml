@@ -18,7 +18,7 @@ spec:
           homepage:
             image:
               repository: ghcr.io/gethomepage/homepage
-              tag: v1.9.0
+              tag: v1.13.2
             env:
               HOMEPAGE_ALLOWED_HOSTS: homelab.cecobask.com
             probes:
