@@ -18,7 +18,7 @@ spec:
           jellyfin:
             image:
               repository: ghcr.io/jellyfin/jellyfin
-              tag: 10.11.2
+              tag: 10.11.11
             env:
               TZ: Europe/Dublin
             probes:
