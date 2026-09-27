@@ -24,6 +24,7 @@ spec:
           key: token
     extraArgs:
       zone-id-filter: e8bcf096e850ddfa73d5ff9e0be256d7
+    policy: upsert-only
     provider:
       name: cloudflare
     resources:
