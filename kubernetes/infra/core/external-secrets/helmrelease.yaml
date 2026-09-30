@@ -4,13 +4,9 @@ metadata:
   name: external-secrets
   namespace: external-secrets
 spec:
-  chart:
-    spec:
-      chart: external-secrets
-      sourceRef:
-        kind: HelmRepository
-        name: external-secrets
-      version: 1.3.2
+  chartRef:
+    kind: OCIRepository
+    name: external-secrets
   interval: 1h
   values:
     bitwarden-sdk-server:
