@@ -1,8 +1,13 @@
 apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
+kind: OCIRepository
 metadata:
   name: external-secrets
   namespace: external-secrets
 spec:
   interval: 24h
-  url: https://charts.external-secrets.io
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy
+  url: oci://ghcr.io/external-secrets/charts/external-secrets
+  ref:
+    tag: 2.11.0
