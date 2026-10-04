@@ -4,13 +4,9 @@ metadata:
   name: grafana
   namespace: grafana
 spec:
-  chart:
-    spec:
-      chart: grafana
-      sourceRef:
-        kind: HelmRepository
-        name: grafana
-      version: 10.5.15
+  chartRef:
+    kind: OCIRepository
+    name: grafana
   dependsOn:
   - name: csi-proxmox
     namespace: csi-proxmox
