@@ -10,7 +10,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: opentelemetry
-      version: 0.24.0
+      version: 0.24.3
   dependsOn:
   - name: cert-manager
     namespace: cert-manager
