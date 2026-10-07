@@ -5,6 +5,7 @@ resource "proxmox_download_file" "this" {
   url                     = var.haos_download_url
   file_name               = "haos.qcow2.img"
   decompression_algorithm = "zst"
+  overwrite               = false
 }
 
 resource "proxmox_virtual_environment_vm" "this" {
@@ -35,7 +36,7 @@ resource "proxmox_virtual_environment_vm" "this" {
   }
   disk {
     datastore_id = "local-lvm"
-    import_from  = proxmox_download_file.this.id
+    file_id      = proxmox_download_file.this.id
     interface    = "scsi0"
     discard      = "on"
     size         = 64

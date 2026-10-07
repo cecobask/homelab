@@ -5,7 +5,7 @@ variable "haos_download_url" {
 
 variable "proxmox_node_name" {
   type    = string
-  default = "pve1"
+  default = "pve2"
 }
 
 variable "proxmox_vm_id" {
