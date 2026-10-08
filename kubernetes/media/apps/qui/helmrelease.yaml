@@ -18,7 +18,7 @@ spec:
           qui:
             image:
               repository: ghcr.io/autobrr/qui
-              tag: v1.30.0
+              tag: v1.31.1
             env:
               TZ: Europe/Dublin
             probes:
