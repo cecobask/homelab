@@ -1,5 +1,3 @@
-*.crt
-*.key
-bitwarden-token
-kubernetes/**/charts
 terraform/**/*.qcow2
+terraform/talos/vendor/
+terraform/talos/mixins-output/

@@ -38,3 +38,7 @@ destroy:
 .PHONY: unlock
 unlock:
 	@terraform force-unlock -force cecobask/talos
+
+.PHONY: mixins
+mixins:
+	@bash hack/mixins.sh
