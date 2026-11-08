@@ -44,6 +44,10 @@
       href: https://sonarr.cecobask.com
       icon: sonarr
 - Platform:
+  - Alertmanager:
+      description: Alert routing and notification manager
+      href: https://alertmanager.cecobask.com
+      icon: alertmanager
   - Grafana:
       description: Data visualization platform
       href: https://grafana.cecobask.com

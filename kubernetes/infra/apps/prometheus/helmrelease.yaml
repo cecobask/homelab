@@ -15,7 +15,28 @@ spec:
   interval: 1h
   values:
     alertmanager:
-      enabled: false
+      alertmanagerSpec:
+        externalUrl: https://alertmanager.cecobask.com
+        storage:
+          volumeClaimTemplate:
+            metadata:
+              labels:
+                cluster-destroy-delete: "true"
+            spec:
+              accessModes:
+              - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 10Gi
+              storageClassName: proxmox
+      route:
+        main:
+          enabled: true
+          hostnames:
+          - alertmanager.cecobask.com
+          parentRefs:
+          - name: envoy
+            namespace: envoy-gateway
     cleanPrometheusOperatorObjectNames: true
     commonLabels:
       cluster: homelab
@@ -73,6 +94,7 @@ spec:
                 - key: topology.kubernetes.io/zone
                   operator: In
                   values: [ pve1 ]
+        externalUrl: https://prometheus.cecobask.com
         resources:
           requests:
             cpu: 250m
