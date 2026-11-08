@@ -50,6 +50,8 @@ spec:
           url: https://raw.githubusercontent.com/cecobask/homelab/HEAD/kubernetes/infra/apps/grafana/dashboards/k8s-resources-namespace.json
         k8s-resources-node:
           url: https://raw.githubusercontent.com/cecobask/homelab/HEAD/kubernetes/infra/apps/grafana/dashboards/k8s-resources-node.json
+        k8s-resources-nodes-overview:
+          url: https://raw.githubusercontent.com/cecobask/homelab/HEAD/kubernetes/infra/apps/grafana/dashboards/k8s-resources-nodes-overview.json
         k8s-resources-pod:
           url: https://raw.githubusercontent.com/cecobask/homelab/HEAD/kubernetes/infra/apps/grafana/dashboards/k8s-resources-pod.json
         k8s-resources-workload:

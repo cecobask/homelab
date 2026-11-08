@@ -69,6 +69,49 @@
                         }
                      }
                   ]
+               },
+               {
+                  "matcher": {
+                     "id": "byName",
+                     "options": "max allocatable"
+                  },
+                  "properties": [
+                     {
+                        "id": "color",
+                        "value": {
+                           "fixedColor": "super-light-red",
+                           "mode": "fixed"
+                        }
+                     },
+                     {
+                        "id": "custom.stacking",
+                        "value": {
+                           "mode": "none"
+                        }
+                     },
+                     {
+                        "id": "custom.hideFrom",
+                        "value": {
+                           "legend": false,
+                           "tooltip": true,
+                           "viz": false
+                        }
+                     },
+                     {
+                        "id": "custom.lineStyle",
+                        "value": {
+                           "dash": [
+                              10,
+                              10
+                           ],
+                           "fill": "dash"
+                        }
+                     },
+                     {
+                        "id": "custom.fillOpacity",
+                        "value": 0
+                     }
+                  ]
                }
             ]
          },
@@ -94,7 +137,7 @@
                "mode": "single"
             }
          },
-         "pluginVersion": "v11.1.0",
+         "pluginVersion": "v13.0.0",
          "targets": [
             {
                "datasource": {
@@ -103,6 +146,14 @@
                },
                "expr": "sum(kube_node_status_capacity{cluster=\"$cluster\", job=\"kube-state-metrics\", node=~\"$node\", resource=\"cpu\"})",
                "legendFormat": "max capacity"
+            },
+            {
+               "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+               },
+               "expr": "sum(kube_node_status_allocatable{cluster=\"$cluster\", job=\"kube-state-metrics\", node=~\"$node\", resource=\"cpu\"})",
+               "legendFormat": "max allocatable"
             },
             {
                "datasource": {
@@ -146,7 +197,7 @@
                         "value": [
                            {
                               "title": "Drill down to pods",
-                              "url": "/d/6581e46e4e5c7ba40a07646395ef7b23/k8s-resources-pod?${datasource:queryparam}&var-cluster=$cluster&var-namespace=$namespace&var-pod=${__data.fields.Pod}"
+                              "url": "/d/6581e46e4e5c7ba40a07646395ef7b23?${datasource:queryparam}&var-cluster=$cluster&var-namespace=$namespace&var-pod=${__data.fields.Pod}"
                            }
                         ]
                      }
@@ -161,7 +212,7 @@
             "y": 6
          },
          "id": 2,
-         "pluginVersion": "v11.1.0",
+         "pluginVersion": "v13.0.0",
          "targets": [
             {
                "datasource": {
@@ -298,6 +349,49 @@
                         }
                      }
                   ]
+               },
+               {
+                  "matcher": {
+                     "id": "byName",
+                     "options": "max allocatable"
+                  },
+                  "properties": [
+                     {
+                        "id": "color",
+                        "value": {
+                           "fixedColor": "super-light-red",
+                           "mode": "fixed"
+                        }
+                     },
+                     {
+                        "id": "custom.stacking",
+                        "value": {
+                           "mode": "none"
+                        }
+                     },
+                     {
+                        "id": "custom.hideFrom",
+                        "value": {
+                           "legend": false,
+                           "tooltip": true,
+                           "viz": false
+                        }
+                     },
+                     {
+                        "id": "custom.lineStyle",
+                        "value": {
+                           "dash": [
+                              10,
+                              10
+                           ],
+                           "fill": "dash"
+                        }
+                     },
+                     {
+                        "id": "custom.fillOpacity",
+                        "value": 0
+                     }
+                  ]
                }
             ]
          },
@@ -323,7 +417,7 @@
                "mode": "single"
             }
          },
-         "pluginVersion": "v11.1.0",
+         "pluginVersion": "v13.0.0",
          "targets": [
             {
                "datasource": {
@@ -332,6 +426,14 @@
                },
                "expr": "sum(kube_node_status_capacity{cluster=\"$cluster\", job=\"kube-state-metrics\", node=~\"$node\", resource=\"memory\"})",
                "legendFormat": "max capacity"
+            },
+            {
+               "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+               },
+               "expr": "sum(kube_node_status_allocatable{cluster=\"$cluster\", job=\"kube-state-metrics\", node=~\"$node\", resource=\"memory\"})",
+               "legendFormat": "max allocatable"
             },
             {
                "datasource": {
@@ -401,6 +503,49 @@
                         }
                      }
                   ]
+               },
+               {
+                  "matcher": {
+                     "id": "byName",
+                     "options": "max allocatable"
+                  },
+                  "properties": [
+                     {
+                        "id": "color",
+                        "value": {
+                           "fixedColor": "super-light-red",
+                           "mode": "fixed"
+                        }
+                     },
+                     {
+                        "id": "custom.stacking",
+                        "value": {
+                           "mode": "none"
+                        }
+                     },
+                     {
+                        "id": "custom.hideFrom",
+                        "value": {
+                           "legend": false,
+                           "tooltip": true,
+                           "viz": false
+                        }
+                     },
+                     {
+                        "id": "custom.lineStyle",
+                        "value": {
+                           "dash": [
+                              10,
+                              10
+                           ],
+                           "fill": "dash"
+                        }
+                     },
+                     {
+                        "id": "custom.fillOpacity",
+                        "value": 0
+                     }
+                  ]
                }
             ]
          },
@@ -426,7 +571,7 @@
                "mode": "single"
             }
          },
-         "pluginVersion": "v11.1.0",
+         "pluginVersion": "v13.0.0",
          "targets": [
             {
                "datasource": {
@@ -435,6 +580,14 @@
                },
                "expr": "sum(kube_node_status_capacity{cluster=\"$cluster\", job=\"kube-state-metrics\", node=~\"$node\", resource=\"memory\"})",
                "legendFormat": "max capacity"
+            },
+            {
+               "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+               },
+               "expr": "sum(kube_node_status_allocatable{cluster=\"$cluster\", job=\"kube-state-metrics\", node=~\"$node\", resource=\"memory\"})",
+               "legendFormat": "max allocatable"
             },
             {
                "datasource": {
@@ -481,7 +634,7 @@
                         "value": [
                            {
                               "title": "Drill down to pods",
-                              "url": "/d/6581e46e4e5c7ba40a07646395ef7b23/k8s-resources-pod?${datasource:queryparam}&var-cluster=$cluster&var-namespace=$namespace&var-pod=${__data.fields.Pod}"
+                              "url": "/d/6581e46e4e5c7ba40a07646395ef7b23?${datasource:queryparam}&var-cluster=$cluster&var-namespace=$namespace&var-pod=${__data.fields.Pod}"
                            }
                         ]
                      }
@@ -496,7 +649,7 @@
             "y": 24
          },
          "id": 5,
-         "pluginVersion": "v11.1.0",
+         "pluginVersion": "v13.0.0",
          "targets": [
             {
                "datasource": {
@@ -664,6 +817,6 @@
       "to": "now"
    },
    "timezone": "UTC",
-   "title": "Kubernetes / Compute Resources / Node (Pods)",
+   "title": "Compute Resources / Node (Pods)",
    "uid": "200ac8fdbfbb74b39aff88118e4d1c2c"
 }
