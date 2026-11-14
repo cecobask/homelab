@@ -1,8 +1,13 @@
 apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
+kind: OCIRepository
 metadata:
   name: opentelemetry
   namespace: opentelemetry
 spec:
   interval: 24h
-  url: https://open-telemetry.github.io/opentelemetry-helm-charts
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy
+  url: oci://ghcr.io/open-telemetry/opentelemetry-helm-charts/opentelemetry-kube-stack
+  ref:
+    tag: 0.27.1

@@ -4,13 +4,9 @@ metadata:
   name: opentelemetry
   namespace: opentelemetry
 spec:
-  chart:
-    spec:
-      chart: opentelemetry-kube-stack
-      sourceRef:
-        kind: HelmRepository
-        name: opentelemetry
-      version: 0.27.1
+  chartRef:
+    kind: OCIRepository
+    name: opentelemetry
   dependsOn:
   - name: cert-manager
     namespace: cert-manager
