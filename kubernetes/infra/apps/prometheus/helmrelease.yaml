@@ -16,6 +16,7 @@ spec:
   values:
     alertmanager:
       alertmanagerSpec:
+        configSecret: alertmanager
         externalUrl: https://alertmanager.cecobask.com
         storage:
           volumeClaimTemplate:
@@ -29,6 +30,7 @@ spec:
                 requests:
                   storage: 10Gi
               storageClassName: proxmox
+        useExistingSecret: true
       route:
         main:
           enabled: true
