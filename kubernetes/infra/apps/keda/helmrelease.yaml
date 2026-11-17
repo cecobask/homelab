@@ -10,7 +10,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: keda
-      version: 2.21.0
+      version: 2.21.1
   dependsOn:
   - name: cert-manager
     namespace: cert-manager
