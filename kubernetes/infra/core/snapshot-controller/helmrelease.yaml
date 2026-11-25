@@ -10,7 +10,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: piraeus
-      version: 5.4.0
+      version: 5.4.1
   interval: 1h
   values:
     controller:
